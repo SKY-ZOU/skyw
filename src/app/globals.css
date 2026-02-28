@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colors - Navy */
+  --color-navy-950: #070B14;
+  --color-navy-900: #0C1425;
+  --color-navy-800: #111D35;
+  --color-navy-700: #1A2A4A;
+  --color-navy-600: #243760;
+
+  /* Colors - Brand Gold */
+  --color-gold-50: #FBF7E8;
+  --color-gold-100: #F5ECCC;
+  --color-gold-200: #EBDA9A;
+  --color-gold-300: #E2C868;
+  --color-gold-400: #D4AF37;
+  --color-gold-500: #C49B2A;
+  --color-gold-600: #A6821E;
+  --color-gold-700: #886A18;
+  --color-gold-800: #6A5213;
+  --color-gold-900: #4C3A0E;
+
+  /* Font Family */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-slide-up: slide-up 0.6s ease-out forwards;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: #1a1a2e;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gold accent line */
+.gold-divider {
+  width: 48px;
+  height: 2px;
+  background: #D4AF37;
+}
+
+/* Custom scrollbar - minimal */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* KKR-style large display numbers */
+.display-number {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+/* Hero overlay gradient */
+.hero-overlay {
+  background: linear-gradient(to right, rgba(7,11,20,0.92) 0%, rgba(7,11,20,0.6) 60%, rgba(7,11,20,0.3) 100%);
+}
+
+/* Subtle section separator */
+.section-separator {
+  border-top: 1px solid #e5e7eb;
 }
