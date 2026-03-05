@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Menu, ChevronDown } from 'lucide-react';
@@ -8,20 +8,34 @@ import { useSiteData } from '@/components/providers/SiteDataProvider';
 import LanguageSwitcher from './LanguageSwitcher';
 import MobileNav from './MobileNav';
 import { loc } from '@/lib/locale-utils';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 
 export default function Header() {
   const t = useTranslations('Nav');
   const locale = useLocale();
   const { divisions } = useSiteData();
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [bizDropdown, setBizDropdown] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > 50) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+
+    // Hide header when scrolling down, show when scrolling up
+    if (latest > 150 && latest > previous) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
 
   const navLinkClass = scrolled
     ? 'text-[#1a1a2e] hover:text-gold-500'
@@ -29,18 +43,22 @@ export default function Header() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 right-0 left-0 z-40 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white shadow-[0_1px_0_rgba(0,0,0,0.08)]'
+      <motion.header
+        variants={{
+          visible: { y: 0 },
+          hidden: { y: "-100%" },
+        }}
+        animate={hidden ? "hidden" : "visible"}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 right-0 left-0 z-50 transition-colors duration-500 ${scrolled
+            ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.08)]'
             : 'bg-transparent'
-        }`}
+          }`}
       >
         {/* Top bar - secondary links */}
         <div
-          className={`hidden border-b transition-colors duration-300 lg:block ${
-            scrolled ? 'border-[#f0f0f0]' : 'border-white/10'
-          }`}
+          className={`hidden border-b transition-colors duration-500 lg:block ${scrolled ? 'border-[#f0f0f0]' : 'border-white/10'
+            }`}
         >
           <div className="mx-auto flex h-9 max-w-[1400px] items-center justify-end gap-6 px-8">
             <LanguageSwitcher light={!scrolled} />
@@ -52,9 +70,8 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-baseline gap-1.5">
             <span
-              className={`text-2xl font-bold tracking-[0.15em] transition-colors duration-300 ${
-                scrolled ? 'text-navy-900' : 'text-white'
-              }`}
+              className={`text-2xl font-bold tracking-[0.15em] transition-colors duration-300 ${scrolled ? 'text-navy-900' : 'text-white'
+                }`}
             >
               SKYW
             </span>
@@ -131,14 +148,13 @@ export default function Header() {
               aria-label="Open menu"
             >
               <Menu
-                className={`h-6 w-6 transition-colors ${
-                  scrolled ? 'text-navy-900' : 'text-white'
-                }`}
+                className={`h-6 w-6 transition-colors ${scrolled ? 'text-navy-900' : 'text-white'
+                  }`}
               />
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {mobileOpen && <MobileNav onClose={() => setMobileOpen(false)} />}
     </>

@@ -2,11 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { 
-  Coins, 
-  Shield, 
-  Building2, 
-  Globe2, 
+import {
+  Coins,
+  Shield,
+  Building2,
+  Globe2,
   ArrowRight,
   TrendingUp,
   Lock,
@@ -64,52 +64,62 @@ const features = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function Business() {
   return (
     <section className="py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 1.2, ease }}
+          className="text-center mb-20"
         >
-          <h2 className="section-title text-gold-gradient">核心业务</h2>
-          <div className="gold-divider"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            1个核心驱动 + 3个增长引擎 + 1个战略布局，构建黄金产业完整生态链
+          <h2 className="text-sm tracking-[0.2em] text-gold uppercase mb-4">核心业务 | Core Business</h2>
+          <h3 className="text-4xl md:text-5xl font-display text-white mb-6">构建黄金产业完整生态链</h3>
+          <div className="w-12 h-[1px] bg-gold/50 mx-auto mb-8"></div>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+            1个核心驱动 + 3个增长引擎 + 1个战略布局
           </p>
         </motion.div>
 
         {/* Business Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
           {businesses.map((business, index) => (
             <motion.div
               key={business.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1, delay: index * 0.15, ease }}
+              className="group h-full"
             >
-              <Link href={business.href}>
-                <div className={`card-gold h-full ${business.featured ? 'border-gold/50 ring-1 ring-gold/30' : ''}`}>
-                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${
-                    business.featured 
-                      ? 'bg-gold-gradient' 
-                      : 'bg-dark-600 border border-gold/20'
-                  }`}>
-                    <business.icon className={`w-7 h-7 ${business.featured ? 'text-dark-900' : 'text-gold'}`} />
+              <Link href={business.href} className="block h-full">
+                <div className={`card-gold h-full p-8 transition-all duration-700 bg-dark-800/30 hover:bg-dark-800/80 border ${business.featured ? 'border-gold/40 shadow-[0_0_30px_rgba(212,175,55,0.1)]' : 'border-white/5 hover:border-gold/30'}`}>
+                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-8 transition-transform duration-700 group-hover:scale-110 ${business.featured
+                    ? 'bg-gold'
+                    : 'bg-dark-900 border border-white/10 group-hover:border-gold/30'
+                    }`}>
+                    <business.icon className={`w-6 h-6 ${business.featured ? 'text-dark-900' : 'text-gold'}`} />
                   </div>
+
                   {business.featured && (
-                    <span className="inline-block px-3 py-1 bg-gold/20 text-gold text-xs rounded-full mb-3">
-                      重点业务
-                    </span>
+                    <div className="mb-4">
+                      <span className="inline-block px-3 py-1 bg-gold/10 border border-gold/20 text-gold text-[10px] tracking-widest uppercase rounded-full">
+                        重点业务 Priority
+                      </span>
+                    </div>
                   )}
-                  <h3 className="text-xl font-semibold text-white mb-3">{business.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-4">{business.description}</p>
-                  <div className="flex items-center text-gold text-sm font-medium">
-                    了解更多 <ArrowRight className="ml-1 w-4 h-4" />
+
+                  <h3 className="text-xl font-display text-white mb-4 group-hover:text-gold transition-colors duration-500">{business.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-8 font-light">{business.description}</p>
+
+                  <div className="flex items-center text-gold text-xs tracking-widest uppercase font-medium mt-auto pt-4 border-t border-white/5 group-hover:border-gold/20 transition-colors duration-500">
+                    了解更多
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-500 group-hover:translate-x-2" />
                   </div>
                 </div>
               </Link>
@@ -119,47 +129,57 @@ export default function Business() {
 
         {/* G-COIN Features */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-dark-800/50 border border-gold/20 rounded-2xl p-8 md:p-12"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 1.5, ease }}
+          className="relative overflow-hidden bg-dark-900 border border-gold/20 rounded-sm p-10 md:p-16 lg:p-20"
         >
-          <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-4">
+          {/* Subtle background glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-2xl bg-gold/5 blur-[100px] pointer-events-none rounded-full"></div>
+
+          <div className="relative z-10 text-center mb-16">
+            <h3 className="text-3xl md:text-5xl font-display text-white mb-6">
               G-COIN 数字黄金
             </h3>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
               香港黄金代币化标杆项目，推动黄金交易数字化转型
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
+                transition={{ duration: 1, delay: 0.3 + (index * 0.15), ease }}
+                className="text-center group"
               >
-                <div className="w-16 h-16 mx-auto rounded-full bg-dark-700 border border-gold/20 flex items-center justify-center mb-4">
-                  <feature.icon className="w-8 h-8 text-gold" />
+                <div className="w-16 h-16 mx-auto rounded-full bg-dark-800 border-2 border-dark-700 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:border-gold/50">
+                  <feature.icon className="w-6 h-6 text-gold transition-transform duration-500 group-hover:scale-110" />
                 </div>
-                <h4 className="text-white font-semibold mb-2">{feature.title}</h4>
-                <p className="text-gray-400 text-sm">{feature.description}</p>
+                <h4 className="text-white text-lg font-display mb-3 group-hover:text-gold transition-colors duration-500">{feature.title}</h4>
+                <p className="text-gray-400 text-sm font-light leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
 
-          <div className="text-center mt-10">
-            <Link href="/gcoin" className="btn-gold inline-flex items-center">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 1, ease }}
+            className="relative z-10 text-center mt-20"
+          >
+            <Link href="/gcoin" className="inline-flex items-center px-8 py-4 bg-transparent border border-gold text-gold text-sm tracking-widest uppercase hover:bg-gold hover:text-dark-900 transition-all duration-500">
               详细了解 G-COIN
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="ml-3 w-4 h-4" />
             </Link>
-          </div>
+          </motion.div>
         </motion.div>
-      </div>
-    </section>
+      </div >
+    </section >
   );
 }
