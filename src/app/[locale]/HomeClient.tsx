@@ -67,6 +67,55 @@ function AnimatedCounter({ valueStr }: { valueStr: string }) {
 
 // --- Sections ---
 
+function HeroRibbon() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <motion.div
+        initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)", opacity: 0, scale: 1.1 }}
+        animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", opacity: 0.6, scale: 1 }}
+        transition={{ duration: 3, ease: KKR_EASE, delay: 0.2 }}
+        className="absolute inset-0 w-full h-full"
+      >
+        <motion.div
+          animate={{ y: ["-1.5%", "1.5%", "-1.5%"], rotate: [0, 1, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 w-full h-full"
+        >
+          <svg
+            viewBox="0 0 1440 800"
+            preserveAspectRatio="none"
+            className="w-[120%] h-[120%] -left-[10%] -top-[10%] absolute text-gold-500"
+          >
+            <defs>
+              <linearGradient id="ribbon-main" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+                <stop offset="30%" stopColor="currentColor" stopOpacity="0.8" />
+                <stop offset="70%" stopColor="currentColor" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="ribbon-secondary" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+                <stop offset="50%" stopColor="currentColor" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M-200,450 C200,850 500,100 900,400 C1200,600 1300,200 1600,300 L1600,500 C1300,400 1200,800 900,600 C500,300 200,1050 -200,650 Z"
+              fill="url(#ribbon-main)"
+              className="mix-blend-screen"
+            />
+            <path
+              d="M-200,550 C300,950 600,-50 1000,450 C1200,750 1400,250 1600,450 L1600,600 C1400,400 1200,900 1000,600 C600,100 300,1100 -200,700 Z"
+              fill="url(#ribbon-secondary)"
+              className="mix-blend-screen opacity-80"
+            />
+          </svg>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+
 function HomeHero() {
   const t = useTranslations('Home');
   const ref = useRef<HTMLDivElement>(null);
@@ -90,6 +139,8 @@ function HomeHero() {
         {/* Subtle grid pattern overlay */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
       </motion.div>
+
+      <HeroRibbon />
 
       <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-24 lg:px-12 lg:pb-32 2xl:px-24">
         <div className="max-w-[75rem]">
