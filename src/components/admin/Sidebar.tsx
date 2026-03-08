@@ -9,11 +9,13 @@ import {
   Briefcase,
   Settings,
   ExternalLink,
+  Inbox,
 } from 'lucide-react';
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/articles', label: 'Articles', icon: FileText },
+  { href: '/admin/inbox', label: 'Inbox', icon: Inbox },
   { href: '/admin/offices', label: 'Offices', icon: Building2 },
   { href: '/admin/business', label: 'Business', icon: Briefcase },
   { href: '/admin/settings', label: 'Settings', icon: Settings },

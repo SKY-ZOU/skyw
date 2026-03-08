@@ -10,6 +10,7 @@ interface ArticleData {
   category: string;
   published: boolean;
   date: string;
+  coverImage: string;
   titleZhCN: string;
   titleZhTW: string;
   titleEn: string;
@@ -26,6 +27,7 @@ const emptyArticle: ArticleData = {
   category: 'news',
   published: true,
   date: new Date().toISOString().slice(0, 10),
+  coverImage: '',
   titleZhCN: '', titleZhTW: '', titleEn: '',
   excerptZhCN: '', excerptZhTW: '', excerptEn: '',
   contentZhCN: '', contentZhTW: '', contentEn: '',
@@ -99,6 +101,20 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
             required
           />
         </div>
+      </div>
+
+      {/* Cover Image */}
+      <div>
+        <label className="mb-1 block text-body-sm font-medium text-[#1a1a2e]">Cover Image URL</label>
+        <input
+          className={inputClass}
+          placeholder="https://example.com/image.jpg"
+          value={form.coverImage}
+          onChange={(e) => update('coverImage', e.target.value)}
+        />
+        {form.coverImage && (
+          <img src={form.coverImage} alt="Cover preview" className="mt-2 h-32 w-full rounded-lg object-cover" />
+        )}
       </div>
 
       <div className="flex items-center gap-2">

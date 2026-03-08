@@ -14,7 +14,6 @@ async function main() {
       companyFull: 'Skyward Holding Group',
       email: 'sky@skyw.group',
       phone: '+852 68199909',
-      website: 'www.skyw.group',
     },
   });
 
