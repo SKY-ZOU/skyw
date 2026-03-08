@@ -25,7 +25,7 @@ export default function TrilingualTabs({ children }: TrilingualTabsProps) {
             key={tab.key}
             type="button"
             onClick={() => setActive(tab.key)}
-            className={`flex-1 rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors ${
+            className={`flex-1 rounded-md px-3 py-1.5 text-body-sm font-medium transition-colors ${
               active === tab.key
                 ? 'bg-white text-[#1a1a2e] shadow-sm'
                 : 'text-[#6c757d] hover:text-[#1a1a2e]'

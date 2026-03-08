@@ -34,7 +34,7 @@ export default function LanguageSwitcher({ light = false }: { light?: boolean })
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className={`flex items-center gap-1.5 px-2 py-1 text-[13px] font-medium tracking-wide transition-colors ${
+        className={`flex items-center gap-1.5 px-2 py-1 text-body-sm font-medium tracking-wide transition-colors ${
           light
             ? 'text-white/70 hover:text-white'
             : 'text-[#6C757D] hover:text-[#212529]'
@@ -54,7 +54,7 @@ export default function LanguageSwitcher({ light = false }: { light?: boolean })
                 router.replace(pathname, { locale: l.code as 'zh-CN' | 'zh-TW' | 'en' });
                 setOpen(false);
               }}
-              className={`block w-full px-4 py-2 text-left text-[13px] transition-colors hover:bg-[#f8f9fa] ${
+              className={`block w-full px-4 py-2 text-left text-body-sm transition-colors hover:bg-[#f8f9fa] ${
                 locale === l.code
                   ? 'font-semibold text-navy-900'
                   : 'text-[#495057]'

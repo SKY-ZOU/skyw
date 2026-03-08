@@ -108,7 +108,7 @@ export default function Business() {
 
                   {business.featured && (
                     <div className="mb-4">
-                      <span className="inline-block px-3 py-1 bg-gold/10 border border-gold/20 text-gold text-[10px] tracking-widest uppercase rounded-full">
+                      <span className="inline-block px-3 py-1 bg-gold/10 border border-gold/20 text-gold text-micro tracking-widest uppercase rounded-full">
                         重点业务 Priority
                       </span>
                     </div>

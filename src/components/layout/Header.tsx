@@ -60,13 +60,13 @@ export default function Header() {
           className={`hidden border-b transition-colors duration-500 lg:block ${scrolled ? 'border-[#f0f0f0]' : 'border-white/10'
             }`}
         >
-          <div className="mx-auto flex h-9 max-w-[1400px] items-center justify-end gap-6 px-8">
+          <div className="mx-auto flex h-7 max-w-[1400px] items-center justify-end gap-6 px-8">
             <LanguageSwitcher light={!scrolled} />
           </div>
         </div>
 
         {/* Main nav */}
-        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 lg:h-[72px] lg:px-8">
+        <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between px-6 lg:h-16 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-baseline gap-1.5">
             <span
@@ -81,13 +81,13 @@ export default function Header() {
           <nav className="hidden items-center gap-1 lg:flex">
             <Link
               href="/"
-              className={`px-4 py-2 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
+              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
             >
               {t('home')}
             </Link>
             <Link
               href="/about"
-              className={`px-4 py-2 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
+              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
             >
               {t('about')}
             </Link>
@@ -100,7 +100,7 @@ export default function Header() {
             >
               <Link
                 href="/business"
-                className={`flex items-center gap-1 px-4 py-2 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
+                className={`flex items-center gap-1 px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
               >
                 {t('business')}
                 <ChevronDown className="h-3.5 w-3.5 opacity-60" />
@@ -112,7 +112,7 @@ export default function Header() {
                     <Link
                       key={div.divisionId}
                       href={`/business/${div.slug}`}
-                      className="block px-5 py-3 text-[13px] text-[#495057] transition-colors hover:bg-[#f8f9fa] hover:text-navy-900"
+                      className="block px-5 py-3 text-body-sm text-[#495057] transition-colors hover:bg-[#f8f9fa] hover:text-navy-900"
                     >
                       {loc(div, 'title', locale)}
                     </Link>
@@ -123,13 +123,13 @@ export default function Header() {
 
             <Link
               href="/insights"
-              className={`px-4 py-2 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
+              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
             >
               {t('insights')}
             </Link>
             <Link
               href="/contact"
-              className={`px-4 py-2 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
+              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
             >
               {t('contact')}
             </Link>

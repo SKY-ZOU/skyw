@@ -30,11 +30,11 @@ export default function BusinessPage() {
                     <h3 className="text-xl font-semibold text-[#1a1a2e] lg:text-2xl">
                       {loc(div, 'title', locale)}
                     </h3>
-                    <p className="mt-3 text-[15px] leading-relaxed text-[#6c757d]">
+                    <p className="mt-3 text-body leading-relaxed text-[#6c757d]">
                       {loc(div, 'shortDesc', locale)}
                     </p>
                   </div>
-                  <div className="mt-6 flex items-center gap-1.5 text-[13px] font-medium uppercase tracking-[0.08em] text-gold-500 transition-colors group-hover:text-navy-900">
+                  <div className="mt-6 flex items-center gap-1.5 text-body-sm font-medium uppercase tracking-[0.08em] text-gold-500 transition-colors group-hover:text-navy-900">
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </Link>

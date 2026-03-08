@@ -21,14 +21,14 @@ export default function Footer() {
             <span className="text-2xl font-bold tracking-[0.15em] text-white">
               SKYW
             </span>
-            <p className="mt-4 max-w-sm text-[15px] font-light leading-relaxed text-white/40">
+            <p className="mt-4 max-w-sm text-body font-light leading-relaxed text-white/40">
               {t('companyDesc')}
             </p>
           </div>
 
           {/* Company links */}
           <div>
-            <h4 className="text-[12px] font-semibold uppercase tracking-[0.15em] text-white/40">
+            <h4 className="text-caption font-semibold uppercase tracking-[0.15em] text-white/40">
               {t('company')}
             </h4>
             <ul className="mt-5 space-y-3">
@@ -41,7 +41,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[14px] text-white/60 transition-colors hover:text-white"
+                    className="text-body-md text-white/60 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -52,7 +52,7 @@ export default function Footer() {
 
           {/* Business links */}
           <div>
-            <h4 className="text-[12px] font-semibold uppercase tracking-[0.15em] text-white/40">
+            <h4 className="text-caption font-semibold uppercase tracking-[0.15em] text-white/40">
               {t('businessCol')}
             </h4>
             <ul className="mt-5 space-y-3">
@@ -60,7 +60,7 @@ export default function Footer() {
                 <li key={div.divisionId}>
                   <Link
                     href={`/business/${div.slug}`}
-                    className="text-[14px] text-white/60 transition-colors hover:text-white"
+                    className="text-body-md text-white/60 transition-colors hover:text-white"
                   >
                     {loc(div, 'title', locale)}
                   </Link>
@@ -71,7 +71,7 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="text-[12px] font-semibold uppercase tracking-[0.15em] text-white/40">
+            <h4 className="text-caption font-semibold uppercase tracking-[0.15em] text-white/40">
               {t('legal')}
             </h4>
             <ul className="mt-5 space-y-3">
@@ -83,7 +83,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[14px] text-white/60 transition-colors hover:text-white"
+                    className="text-body-md text-white/60 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -97,13 +97,13 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-[1400px] px-6 py-6 lg:px-8">
-          <p className="text-[12px] leading-relaxed text-white/30">
+          <p className="text-caption leading-relaxed text-white/30">
             {t('licenseNote')}
           </p>
-          <p className="mt-1 text-[12px] text-white/30">
+          <p className="mt-1 text-caption text-white/30">
             {t('riskWarning')}
           </p>
-          <p className="mt-3 text-[12px] text-white/30">
+          <p className="mt-3 text-caption text-white/30">
             {t('copyright')}
           </p>
         </div>
