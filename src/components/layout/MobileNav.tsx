@@ -71,6 +71,9 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
         <Link href="/contact" onClick={onClose} className="block border-b border-[#E9ECEF] py-4 text-lg font-medium text-[#212529]">
           {t('contact')}
         </Link>
+        <Link href="/partnership" onClick={onClose} className="block border-b border-[#E9ECEF] py-4 text-lg font-medium text-[#212529]">
+          {t('partnership')}
+        </Link>
 
         {/* Language selector */}
         <div className="mt-8">

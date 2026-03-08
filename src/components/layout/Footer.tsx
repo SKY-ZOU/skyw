@@ -37,6 +37,7 @@ export default function Footer() {
                 { href: '/business', label: tNav('business') },
                 { href: '/insights', label: tNav('insights') },
                 { href: '/contact', label: tNav('contact') },
+                { href: '/partnership', label: tNav('partnership') },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
