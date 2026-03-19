@@ -30,7 +30,7 @@ function OfficeCard({
   return (
     <div className="border-l-2 border-gold-400 py-2 pl-6">
       <h3 className="text-lg font-semibold text-[#1a1a2e]">{name}</h3>
-      <div className="mt-3 space-y-2 text-[14px] text-[#6c757d]">
+      <div className="mt-3 space-y-2 text-body-md text-[#6c757d]">
         <p className="flex items-start gap-2">
           <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#adb5bd]" />
           {address}
@@ -67,7 +67,7 @@ export default function ContactClient({ offices }: { offices: OfficeRow[] }) {
           <div className="grid gap-16 lg:grid-cols-5">
             <div className="lg:col-span-2">
               <AnimatedSection>
-                <p className="text-[13px] font-medium uppercase tracking-[0.15em] text-gold-500">
+                <p className="text-body-sm font-medium uppercase tracking-[0.15em] text-gold-500">
                   {t('officesTitle')}
                 </p>
               </AnimatedSection>

@@ -10,6 +10,7 @@ interface ArticleData {
   category: string;
   published: boolean;
   date: string;
+  coverImage: string;
   titleZhCN: string;
   titleZhTW: string;
   titleEn: string;
@@ -26,6 +27,7 @@ const emptyArticle: ArticleData = {
   category: 'news',
   published: true,
   date: new Date().toISOString().slice(0, 10),
+  coverImage: '',
   titleZhCN: '', titleZhTW: '', titleEn: '',
   excerptZhCN: '', excerptZhTW: '', excerptEn: '',
   contentZhCN: '', contentZhTW: '', contentEn: '',
@@ -62,14 +64,14 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
   }
 
   const inputClass =
-    'w-full rounded-lg border border-[#e5e7eb] px-4 py-2.5 text-[14px] outline-none focus:border-[#070B14] focus:ring-1 focus:ring-[#070B14]';
+    'w-full rounded-lg border border-[#e5e7eb] px-4 py-2.5 text-body-md outline-none focus:border-[#070B14] focus:ring-1 focus:ring-[#070B14]';
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Meta row */}
       <div className="grid gap-4 sm:grid-cols-3">
         <div>
-          <label className="mb-1 block text-[13px] font-medium text-[#1a1a2e]">Slug</label>
+          <label className="mb-1 block text-body-sm font-medium text-[#1a1a2e]">Slug</label>
           <input
             className={inputClass}
             value={form.slug}
@@ -78,7 +80,7 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
           />
         </div>
         <div>
-          <label className="mb-1 block text-[13px] font-medium text-[#1a1a2e]">Category</label>
+          <label className="mb-1 block text-body-sm font-medium text-[#1a1a2e]">Category</label>
           <select
             className={inputClass}
             value={form.category}
@@ -90,7 +92,7 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
           </select>
         </div>
         <div>
-          <label className="mb-1 block text-[13px] font-medium text-[#1a1a2e]">Date</label>
+          <label className="mb-1 block text-body-sm font-medium text-[#1a1a2e]">Date</label>
           <input
             type="date"
             className={inputClass}
@@ -101,6 +103,20 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
         </div>
       </div>
 
+      {/* Cover Image */}
+      <div>
+        <label className="mb-1 block text-body-sm font-medium text-[#1a1a2e]">Cover Image URL</label>
+        <input
+          className={inputClass}
+          placeholder="https://example.com/image.jpg"
+          value={form.coverImage}
+          onChange={(e) => update('coverImage', e.target.value)}
+        />
+        {form.coverImage && (
+          <img src={form.coverImage} alt="Cover preview" className="mt-2 h-32 w-full rounded-lg object-cover" />
+        )}
+      </div>
+
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
@@ -109,7 +125,7 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
           onChange={(e) => update('published', e.target.checked)}
           className="h-4 w-4 rounded border-[#e5e7eb]"
         />
-        <label htmlFor="published" className="text-[13px] font-medium text-[#1a1a2e]">
+        <label htmlFor="published" className="text-body-sm font-medium text-[#1a1a2e]">
           Published
         </label>
       </div>
@@ -119,7 +135,7 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
         {(lang: Lang) => (
           <div className="space-y-4">
             <div>
-              <label className="mb-1 block text-[13px] font-medium text-[#1a1a2e]">Title</label>
+              <label className="mb-1 block text-body-sm font-medium text-[#1a1a2e]">Title</label>
               <input
                 className={inputClass}
                 value={form[`title${lang.charAt(0).toUpperCase() + lang.slice(1)}` as keyof ArticleData] as string}
@@ -128,7 +144,7 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
               />
             </div>
             <div>
-              <label className="mb-1 block text-[13px] font-medium text-[#1a1a2e]">Excerpt</label>
+              <label className="mb-1 block text-body-sm font-medium text-[#1a1a2e]">Excerpt</label>
               <textarea
                 className={inputClass + ' h-24 resize-none'}
                 value={form[`excerpt${lang.charAt(0).toUpperCase() + lang.slice(1)}` as keyof ArticleData] as string}
@@ -137,7 +153,7 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
               />
             </div>
             <div>
-              <label className="mb-1 block text-[13px] font-medium text-[#1a1a2e]">Content</label>
+              <label className="mb-1 block text-body-sm font-medium text-[#1a1a2e]">Content</label>
               <textarea
                 className={inputClass + ' h-64 resize-y'}
                 value={form[`content${lang.charAt(0).toUpperCase() + lang.slice(1)}` as keyof ArticleData] as string}
@@ -153,14 +169,14 @@ export default function ArticleForm({ initial }: { initial?: ArticleData }) {
         <button
           type="submit"
           disabled={saving}
-          className="rounded-lg bg-[#070B14] px-6 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-[#1A2A4A] disabled:opacity-50"
+          className="rounded-lg bg-[#070B14] px-6 py-2.5 text-body-sm font-medium text-white transition-colors hover:bg-[#1A2A4A] disabled:opacity-50"
         >
           {saving ? 'Saving...' : isEdit ? 'Update Article' : 'Create Article'}
         </button>
         <button
           type="button"
           onClick={() => router.push('/admin/articles')}
-          className="rounded-lg border border-[#e5e7eb] px-6 py-2.5 text-[13px] font-medium text-[#6c757d] transition-colors hover:bg-[#f8f9fa]"
+          className="rounded-lg border border-[#e5e7eb] px-6 py-2.5 text-body-sm font-medium text-[#6c757d] transition-colors hover:bg-[#f8f9fa]"
         >
           Cancel
         </button>

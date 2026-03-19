@@ -10,7 +10,7 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
 
   const inputClass =
-    'w-full border-b border-[#dee2e6] bg-transparent px-0 py-3 text-[15px] text-[#1a1a2e] outline-none transition-colors placeholder:text-[#adb5bd] focus:border-navy-900';
+    'w-full border-b border-[#dee2e6] bg-transparent px-0 py-3 text-body text-[#1a1a2e] outline-none transition-colors placeholder:text-[#adb5bd] focus:border-navy-900';
 
   const inquiryTypes = [
     { value: 'lp-subscription', label: t('inquiryLP') },
@@ -33,7 +33,7 @@ export default function ContactForm() {
 
   return (
     <div>
-      <p className="text-[13px] font-medium uppercase tracking-[0.15em] text-gold-500">
+      <p className="text-body-sm font-medium uppercase tracking-[0.15em] text-gold-500">
         {t('formTitle')}
       </p>
 
@@ -100,7 +100,7 @@ export default function ContactForm() {
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </button>
 
-        <p className="text-[12px] text-[#adb5bd]">{t('formDisclaimer')}</p>
+        <p className="text-caption text-[#adb5bd]">{t('formDisclaimer')}</p>
       </form>
     </div>
   );

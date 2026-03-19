@@ -12,6 +12,8 @@ interface Division {
   sortOrder: number;
   titleZhCN: string; titleZhTW: string; titleEn: string;
   shortDescZhCN: string; shortDescZhTW: string; shortDescEn: string;
+  bodyZhCN: string; bodyZhTW: string; bodyEn: string;
+  coverImage: string;
 }
 
 const ICONS = ['TrendingUp', 'Landmark', 'Coins', 'ShieldCheck', 'Zap', 'Globe', 'BarChart3', 'Building2'];
@@ -102,9 +104,31 @@ export default function BusinessPage() {
                           onChange={(e) => updateField(langKey('shortDesc', lang), e.target.value)}
                         />
                       </div>
+                      <div>
+                        <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">Detail Page Content (Markdown)</label>
+                        <textarea
+                          className={inputClass + ' h-48 resize-y font-mono text-[13px]'}
+                          placeholder="详情页正文内容，支持 Markdown 格式..."
+                          value={(form as any)[langKey('body', lang)] as string}
+                          onChange={(e) => updateField(langKey('body', lang), e.target.value)}
+                        />
+                      </div>
                     </div>
                   )}
                 </TrilingualTabs>
+
+                <div>
+                  <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">Cover Image URL</label>
+                  <input
+                    className={inputClass}
+                    placeholder="https://example.com/image.jpg"
+                    value={form.coverImage}
+                    onChange={(e) => updateField('coverImage', e.target.value)}
+                  />
+                  {form.coverImage && (
+                    <img src={form.coverImage} alt="Cover" className="mt-2 h-24 w-full rounded-lg object-cover" />
+                  )}
+                </div>
 
                 <div className="flex gap-2">
                   <button onClick={save} className="flex items-center gap-1 rounded-lg bg-[#070B14] px-4 py-2 text-[13px] font-medium text-white hover:bg-[#1A2A4A]">

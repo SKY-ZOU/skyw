@@ -9,11 +9,13 @@ import {
   Briefcase,
   Settings,
   ExternalLink,
+  Inbox,
 } from 'lucide-react';
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/articles', label: 'Articles', icon: FileText },
+  { href: '/admin/inbox', label: 'Inbox', icon: Inbox },
   { href: '/admin/offices', label: 'Offices', icon: Building2 },
   { href: '/admin/business', label: 'Business', icon: Briefcase },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
@@ -33,7 +35,7 @@ export default function Sidebar() {
         <span className="text-xl font-bold tracking-[0.15em] text-white">
           SKYW
         </span>
-        <span className="ml-2 rounded bg-gold-400/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gold-400">
+        <span className="ml-2 rounded bg-gold-400/20 px-1.5 py-0.5 text-micro font-semibold uppercase tracking-wider text-gold-400">
           Admin
         </span>
       </div>
@@ -46,7 +48,7 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium transition-colors ${
+              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-body-sm font-medium transition-colors ${
                 active
                   ? 'bg-white/10 text-white'
                   : 'text-white/40 hover:bg-white/5 hover:text-white/70'
@@ -62,7 +64,7 @@ export default function Sidebar() {
       <div className="border-t border-white/10 px-3 py-4">
         <Link
           href="/"
-          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium text-white/40 transition-colors hover:bg-white/5 hover:text-white/70"
+          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-body-sm font-medium text-white/40 transition-colors hover:bg-white/5 hover:text-white/70"
         >
           <ExternalLink className="h-4 w-4" />
           View Site

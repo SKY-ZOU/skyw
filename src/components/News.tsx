@@ -28,63 +28,70 @@ const news = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function News() {
   return (
     <section className="py-24 bg-dark-800/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between mb-12"
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 1.2, ease }}
+          className="flex flex-col md:flex-row md:items-end md:justify-between mb-16"
         >
           <div>
-            <h2 className="section-title text-gold-gradient">新闻中心</h2>
-            <div className="gold-divider md:mx-0"></div>
+            <h2 className="text-sm tracking-[0.2em] text-gold uppercase mb-4">新闻中心 | News & Insights</h2>
+            <h3 className="text-4xl md:text-5xl font-display text-white mb-6">最新动态</h3>
+            <div className="w-12 h-[1px] bg-gold/50 md:mx-0"></div>
           </div>
-          <Link 
-            href="/news" 
-            className="mt-4 md:mt-0 inline-flex items-center text-gold hover:text-gold-light transition-colors"
+          <Link
+            href="/news"
+            className="mt-8 md:mt-0 inline-flex items-center text-gray-400 hover:text-gold transition-colors duration-500 text-sm tracking-widest uppercase"
           >
-            查看全部 <ArrowRight className="ml-1 w-4 h-4" />
+            查看全部 <ArrowRight className="ml-2 w-4 h-4" />
           </Link>
         </motion.div>
 
         {/* News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {news.map((item, index) => (
-            <motion.article
+            <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="card-gold group cursor-pointer"
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1, delay: index * 0.15, ease }}
             >
-              {/* Date & Category */}
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-gold text-sm">{item.date}</span>
-                <span className="px-3 py-1 bg-gold/10 text-gold text-xs rounded-full">
-                  {item.category}
-                </span>
-              </div>
+              <Link href={item.href} className="block h-full">
+                <article className="card-gold group cursor-pointer h-full p-8 transition-all duration-700 bg-dark-800/30 hover:bg-dark-800/80 border border-white/5 hover:border-gold/30">
+                  {/* Date & Category */}
+                  <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4 group-hover:border-gold/20 transition-colors duration-500">
+                    <span className="text-gold/80 text-sm font-light tracking-wide">{item.date}</span>
+                    <span className="text-white/50 text-xs tracking-widest uppercase">
+                      {item.category}
+                    </span>
+                  </div>
 
-              {/* Title */}
-              <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-gold transition-colors line-clamp-2">
-                {item.title}
-              </h3>
+                  {/* Title */}
+                  <h3 className="text-xl font-display text-white mb-4 group-hover:text-gold transition-colors duration-500 line-clamp-2 leading-snug">
+                    {item.title}
+                  </h3>
 
-              {/* Excerpt */}
-              <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2">
-                {item.excerpt}
-              </p>
+                  {/* Excerpt */}
+                  <p className="text-gray-400 text-sm font-light leading-relaxed mb-8 line-clamp-3">
+                    {item.excerpt}
+                  </p>
 
-              {/* Read More */}
-              <div className="flex items-center text-gold text-sm font-medium">
-                阅读全文 <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </motion.article>
+                  {/* Read More */}
+                  <div className="flex items-center text-gold text-xs tracking-widest uppercase font-medium mt-auto group-hover:text-gold-light transition-colors duration-500">
+                    阅读全文 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform duration-500" />
+                  </div>
+                </article>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>

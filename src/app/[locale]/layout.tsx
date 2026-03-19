@@ -7,6 +7,7 @@ import { routing } from '@/i18n/routing';
 import { Inter } from 'next/font/google';
 import { getDivisions } from '@/lib/data';
 import { SiteDataProvider } from '@/components/providers/SiteDataProvider';
+import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import '../globals.css';
@@ -62,9 +63,11 @@ export default async function LocaleLayout({
       <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
           <SiteDataProvider divisions={divisions}>
-            <Header />
-            <main>{children}</main>
-            <Footer />
+            <SmoothScrollProvider>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+            </SmoothScrollProvider>
           </SiteDataProvider>
         </NextIntlClientProvider>
       </body>

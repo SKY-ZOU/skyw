@@ -33,17 +33,17 @@ export default async function InsightArticlePage({
         <div className="mx-auto max-w-[1400px] px-6 lg:px-8">
           <Link
             href="/insights"
-            className="mb-8 inline-flex items-center gap-1.5 text-[13px] uppercase tracking-[0.08em] text-white/40 transition-colors hover:text-white"
+            className="mb-8 inline-flex items-center gap-1.5 text-body-sm uppercase tracking-[0.08em] text-white/40 transition-colors hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             {t('backToList')}
           </Link>
 
           <div className="mb-4 flex items-center gap-3">
-            <span className="text-[12px] font-medium uppercase tracking-wider text-gold-400">
+            <span className="text-caption font-medium uppercase tracking-wider text-gold-400">
               {categoryLabels[article.category]}
             </span>
-            <span className="text-[12px] text-white/40">
+            <span className="text-caption text-white/40">
               {t('publishedOn')} {article.date}
             </span>
           </div>
@@ -60,7 +60,7 @@ export default async function InsightArticlePage({
             {content.split('\n\n').map((para, i) => (
               <p
                 key={i}
-                className="text-[clamp(1rem,1.8vw,1.125rem)] font-light leading-relaxed text-[#495057]"
+                className="text-lead font-light leading-relaxed text-[#495057]"
               >
                 {para}
               </p>

@@ -34,13 +34,13 @@ export default function BusinessDetail({
         <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-8 lg:py-32">
           <AnimatedSection>
             <div className="max-w-3xl">
-              <p className="text-[13px] font-medium uppercase tracking-[0.15em] text-gold-500">
+              <p className="text-body-sm font-medium uppercase tracking-[0.15em] text-gold-500">
                 {overviewTitle}
               </p>
-              <p className="mt-6 text-[clamp(1rem,1.8vw,1.25rem)] font-light leading-relaxed text-[#495057]">
+              <p className="mt-6 text-lead font-light leading-relaxed text-[#495057]">
                 {overviewP1}
               </p>
-              <p className="mt-4 text-[clamp(1rem,1.8vw,1.25rem)] font-light leading-relaxed text-[#495057]">
+              <p className="mt-4 text-lead font-light leading-relaxed text-[#495057]">
                 {overviewP2}
               </p>
             </div>
@@ -52,7 +52,7 @@ export default function BusinessDetail({
                 <div className="bg-[#fafafa] p-8 lg:p-12">
                   <div className="mb-4 h-[2px] w-8 bg-gold-400" />
                   <h3 className="text-xl font-semibold text-[#1a1a2e]">{feat.title}</h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-[#6c757d]">
+                  <p className="mt-3 text-body leading-relaxed text-[#6c757d]">
                     {feat.description}
                   </p>
                 </div>

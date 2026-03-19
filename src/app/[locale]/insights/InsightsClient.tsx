@@ -49,7 +49,7 @@ export default function InsightsClient({ articles }: { articles: ArticleRow[] })
               <button
                 key={cat.key}
                 onClick={() => setFilter(cat.key)}
-                className={`px-5 py-2 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${
+                className={`px-5 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${
                   filter === cat.key
                     ? 'border-b-2 border-navy-900 text-navy-900'
                     : 'text-[#adb5bd] hover:text-[#495057]'
@@ -69,19 +69,19 @@ export default function InsightsClient({ articles }: { articles: ArticleRow[] })
                 >
                   <div>
                     <div className="flex items-center gap-3">
-                      <span className="text-[12px] font-medium uppercase tracking-wider text-gold-500">
+                      <span className="text-caption font-medium uppercase tracking-wider text-gold-500">
                         {categoryLabels[article.category]}
                       </span>
-                      <span className="text-[12px] text-[#adb5bd]">{article.date}</span>
+                      <span className="text-caption text-[#adb5bd]">{article.date}</span>
                     </div>
                     <h3 className="mt-4 text-lg font-semibold leading-snug text-[#1a1a2e] group-hover:text-navy-700">
                       {loc(article, 'title', locale)}
                     </h3>
-                    <p className="mt-3 line-clamp-3 text-[15px] text-[#6c757d]">
+                    <p className="mt-3 line-clamp-3 text-body text-[#6c757d]">
                       {loc(article, 'excerpt', locale)}
                     </p>
                   </div>
-                  <div className="mt-6 flex items-center gap-1.5 text-[13px] font-medium uppercase tracking-[0.08em] text-gold-500 group-hover:text-navy-900">
+                  <div className="mt-6 flex items-center gap-1.5 text-body-sm font-medium uppercase tracking-[0.08em] text-gold-500 group-hover:text-navy-900">
                     {t('readMore')}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
