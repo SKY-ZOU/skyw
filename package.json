@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "TURBOPACK=0 next dev --port 3030",
-    "build": "TURBOPACK=0 prisma generate && next build",
-    "postinstall": "prisma generate",
+    "build": "TURBOPACK=0 next build",
+    "postinstall": "echo 'prisma generated files committed to repo'",
     "start": "next start",
     "lint": "eslint"
   },
