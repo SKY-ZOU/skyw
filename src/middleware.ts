@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import createIntlMiddleware from 'next-intl/middleware';
+import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 import { verifyToken } from './lib/auth';
 
-const intlMiddleware = createIntlMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
