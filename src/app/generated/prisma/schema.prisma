@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Setting {
+  id          Int    @id @default(autoincrement())
+  companyName String @default("SKYW Group")
+  companyFull String @default("Skyward Holding Group")
+  email       String @default("info@skywgroup.com")
+  phone       String @default("+852 2888 8888")
+}
+
+model Metric {
+  id        Int    @id @default(autoincrement())
+  sortOrder Int    @default(0)
+  valueZhCN String
+  valueZhTW String
+  valueEn   String
+  labelZhCN String
+  labelZhTW String
+  labelEn   String
+}
+
+model Office {
+  id          Int    @id @default(autoincrement())
+  slug        String @unique
+  sortOrder   Int    @default(0)
+  nameZhCN    String
+  nameZhTW    String
+  nameEn      String
+  typeZhCN    String
+  typeZhTW    String
+  typeEn      String
+  addressZhCN String @default("")
+  addressZhTW String @default("")
+  addressEn   String @default("")
+  phone       String
+  email       String
+}
+
+model BusinessDivision {
+  id            Int    @id @default(autoincrement())
+  divisionId    String @unique
+  slug          String @unique
+  icon          String
+  sortOrder     Int    @default(0)
+  titleZhCN     String
+  titleZhTW     String
+  titleEn       String
+  shortDescZhCN String
+  shortDescZhTW String
+  shortDescEn   String
+  // 详情页长文内容
+  bodyZhCN      String @default("")
+  bodyZhTW      String @default("")
+  bodyEn        String @default("")
+  // 封面图 URL
+  coverImage    String @default("")
+}
+
+model Article {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  category    String
+  published   Boolean  @default(true)
+  date        String
+  // 封面图 URL（留空则不显示图片）
+  coverImage  String   @default("")
+  titleZhCN   String
+  titleZhTW   String
+  titleEn     String
+  excerptZhCN String
+  excerptZhTW String
+  excerptEn   String
+  contentZhCN String
+  contentZhTW String
+  contentEn   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  company   String   @default("")
+  subject   String   @default("")
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
