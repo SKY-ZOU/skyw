@@ -187,23 +187,6 @@
     "coopCtaTitle": "Start Cooperation",
     "coopCtaDesc": "Ready to create value together with us?",
     "coopCtaButton": "Contact Now",
-    "fund": {
-      "title": "Fund Management",
-      "shortDesc": "Professional fund management services for institutional investors and HNW clients, with strategies spanning equity, fixed income, and alternative assets.",
-      "heroTitle": "Fund Management",
-      "heroSubtitle": "Professional asset management with diversified investment strategies",
-      "overviewTitle": "Overview",
-      "overviewP1": "Skyward Holding's Fund Management division, licensed under SFC Type 9, provides professional fund management and asset allocation services for global institutional investors and high-net-worth clients.",
-      "overviewP2": "Our investment team brings deep industry experience and an extensive global network, pursuing long-term stable returns through rigorous investment processes and risk management systems.",
-      "strategy1Title": "Equity Investments",
-      "strategy1Desc": "Focused on equity opportunities in high-growth sectors including technology, healthcare, and consumer",
-      "strategy2Title": "Fixed Income",
-      "strategy2Desc": "Investing in quality bonds and credit assets for stable cash flow returns",
-      "strategy3Title": "Alternative Assets",
-      "strategy3Desc": "Covering real estate, infrastructure, commodities, and other alternative asset classes",
-      "strategy4Title": "Cross-Border Allocation",
-      "strategy4Desc": "Leveraging our global office network for cross-border asset allocation solutions"
-    },
     "ipo": {
       "title": "HK Capital Markets — Primary & Secondary",
       "shortDesc": "Full-cycle participation in Hong Kong's capital markets through IPO cornerstone allocation and secondary market strategy, backed by SFC Type 6 and Type 9 licenses.",
@@ -237,23 +220,6 @@
       "feature3Desc": "Integrated operations across trading, refining, tokenization and vault custody",
       "feature4Title": "LBMA Compliant",
       "feature4Desc": "Hong Kong LBMA-recognized clearing, directly connected to London and New York markets"
-    },
-    "credit": {
-      "title": "Commercial Credit Guarantee",
-      "shortDesc": "Professional credit guarantee and credit enhancement services for SMEs, facilitating enterprise financing and serving the real economy.",
-      "heroTitle": "Commercial Credit Guarantee",
-      "heroSubtitle": "Facilitating SME financing and development",
-      "overviewTitle": "Overview",
-      "overviewP1": "Skyward Holding's Commercial Credit Guarantee division is dedicated to providing professional credit guarantee and credit enhancement services for small and medium enterprises. Through our scientific credit assessment system and efficient business processes, we help quality SMEs overcome financing challenges.",
-      "overviewP2": "As a bridge between financial institutions and real economy enterprises, our credit guarantee business effectively reduces information asymmetry between banks and enterprises, driving efficient allocation of financial resources to the real economy.",
-      "service1Title": "Financing Guarantee",
-      "service1Desc": "Credit guarantee for bank loans, bond issuance, and other financing activities",
-      "service2Title": "Performance Guarantee",
-      "service2Desc": "Guarantees for commercial contract performance, reducing counterparty risk",
-      "service3Title": "Credit Assessment",
-      "service3Desc": "Professional enterprise credit assessment system for scientific credit evaluation",
-      "service4Title": "Credit Enhancement",
-      "service4Desc": "Various credit enhancement measures to improve overall enterprise creditworthiness"
     },
     "energy": {
       "title": "Green Energy & Sustainable Investment",
