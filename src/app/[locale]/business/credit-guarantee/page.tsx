@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
 
-export default function CreditGuaranteeRedirect() {
-  redirect('/business');
+export default function CreditGuaranteePage() {
+  redirect('/business/digital-trade');
 }
