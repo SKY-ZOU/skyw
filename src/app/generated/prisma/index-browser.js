@@ -164,7 +164,11 @@ exports.Prisma.BusinessDivisionScalarFieldEnum = {
   titleEn: 'titleEn',
   shortDescZhCN: 'shortDescZhCN',
   shortDescZhTW: 'shortDescZhTW',
-  shortDescEn: 'shortDescEn'
+  shortDescEn: 'shortDescEn',
+  bodyZhCN: 'bodyZhCN',
+  bodyZhTW: 'bodyZhTW',
+  bodyEn: 'bodyEn',
+  coverImage: 'coverImage'
 };
 
 exports.Prisma.ArticleScalarFieldEnum = {
@@ -173,6 +177,7 @@ exports.Prisma.ArticleScalarFieldEnum = {
   category: 'category',
   published: 'published',
   date: 'date',
+  coverImage: 'coverImage',
   titleZhCN: 'titleZhCN',
   titleZhTW: 'titleZhTW',
   titleEn: 'titleEn',
@@ -186,6 +191,17 @@ exports.Prisma.ArticleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ContactSubmissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  company: 'company',
+  subject: 'subject',
+  message: 'message',
+  read: 'read',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -197,7 +213,8 @@ exports.Prisma.ModelName = {
   Metric: 'Metric',
   Office: 'Office',
   BusinessDivision: 'BusinessDivision',
-  Article: 'Article'
+  Article: 'Article',
+  ContactSubmission: 'ContactSubmission'
 };
 
 /**

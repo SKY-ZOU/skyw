@@ -55,6 +55,12 @@ model BusinessDivision {
   shortDescZhCN String
   shortDescZhTW String
   shortDescEn   String
+  // 详情页长文内容
+  bodyZhCN      String @default("")
+  bodyZhTW      String @default("")
+  bodyEn        String @default("")
+  // 封面图 URL
+  coverImage    String @default("")
 }
 
 model Article {
@@ -63,6 +69,8 @@ model Article {
   category    String
   published   Boolean  @default(true)
   date        String
+  // 封面图 URL（留空则不显示图片）
+  coverImage  String   @default("")
   titleZhCN   String
   titleZhTW   String
   titleEn     String
@@ -74,4 +82,15 @@ model Article {
   contentEn   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  company   String   @default("")
+  subject   String   @default("")
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
 }

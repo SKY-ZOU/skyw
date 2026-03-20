@@ -38,6 +38,11 @@ export type BusinessDivision = $Result.DefaultSelection<Prisma.$BusinessDivision
  * 
  */
 export type Article = $Result.DefaultSelection<Prisma.$ArticlePayload>
+/**
+ * Model ContactSubmission
+ * 
+ */
+export type ContactSubmission = $Result.DefaultSelection<Prisma.$ContactSubmissionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -209,6 +214,16 @@ export class PrismaClient<
     * ```
     */
   get article(): Prisma.ArticleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contactSubmission`: Exposes CRUD operations for the **ContactSubmission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContactSubmissions
+    * const contactSubmissions = await prisma.contactSubmission.findMany()
+    * ```
+    */
+  get contactSubmission(): Prisma.ContactSubmissionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -647,7 +662,8 @@ export namespace Prisma {
     Metric: 'Metric',
     Office: 'Office',
     BusinessDivision: 'BusinessDivision',
-    Article: 'Article'
+    Article: 'Article',
+    ContactSubmission: 'ContactSubmission'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -663,7 +679,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "setting" | "metric" | "office" | "businessDivision" | "article"
+      modelProps: "setting" | "metric" | "office" | "businessDivision" | "article" | "contactSubmission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1037,6 +1053,80 @@ export namespace Prisma {
           }
         }
       }
+      ContactSubmission: {
+        payload: Prisma.$ContactSubmissionPayload<ExtArgs>
+        fields: Prisma.ContactSubmissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContactSubmissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContactSubmissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload>
+          }
+          findFirst: {
+            args: Prisma.ContactSubmissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContactSubmissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload>
+          }
+          findMany: {
+            args: Prisma.ContactSubmissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload>[]
+          }
+          create: {
+            args: Prisma.ContactSubmissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload>
+          }
+          createMany: {
+            args: Prisma.ContactSubmissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContactSubmissionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload>[]
+          }
+          delete: {
+            args: Prisma.ContactSubmissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload>
+          }
+          update: {
+            args: Prisma.ContactSubmissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContactSubmissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContactSubmissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContactSubmissionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContactSubmissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactSubmissionPayload>
+          }
+          aggregate: {
+            args: Prisma.ContactSubmissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContactSubmission>
+          }
+          groupBy: {
+            args: Prisma.ContactSubmissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContactSubmissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContactSubmissionCountArgs<ExtArgs>
+            result: $Utils.Optional<ContactSubmissionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1150,6 +1240,7 @@ export namespace Prisma {
     office?: OfficeOmit
     businessDivision?: BusinessDivisionOmit
     article?: ArticleOmit
+    contactSubmission?: ContactSubmissionOmit
   }
 
   /* Types for Logging */
@@ -4509,6 +4600,10 @@ export namespace Prisma {
     shortDescZhCN: string | null
     shortDescZhTW: string | null
     shortDescEn: string | null
+    bodyZhCN: string | null
+    bodyZhTW: string | null
+    bodyEn: string | null
+    coverImage: string | null
   }
 
   export type BusinessDivisionMaxAggregateOutputType = {
@@ -4523,6 +4618,10 @@ export namespace Prisma {
     shortDescZhCN: string | null
     shortDescZhTW: string | null
     shortDescEn: string | null
+    bodyZhCN: string | null
+    bodyZhTW: string | null
+    bodyEn: string | null
+    coverImage: string | null
   }
 
   export type BusinessDivisionCountAggregateOutputType = {
@@ -4537,6 +4636,10 @@ export namespace Prisma {
     shortDescZhCN: number
     shortDescZhTW: number
     shortDescEn: number
+    bodyZhCN: number
+    bodyZhTW: number
+    bodyEn: number
+    coverImage: number
     _all: number
   }
 
@@ -4563,6 +4666,10 @@ export namespace Prisma {
     shortDescZhCN?: true
     shortDescZhTW?: true
     shortDescEn?: true
+    bodyZhCN?: true
+    bodyZhTW?: true
+    bodyEn?: true
+    coverImage?: true
   }
 
   export type BusinessDivisionMaxAggregateInputType = {
@@ -4577,6 +4684,10 @@ export namespace Prisma {
     shortDescZhCN?: true
     shortDescZhTW?: true
     shortDescEn?: true
+    bodyZhCN?: true
+    bodyZhTW?: true
+    bodyEn?: true
+    coverImage?: true
   }
 
   export type BusinessDivisionCountAggregateInputType = {
@@ -4591,6 +4702,10 @@ export namespace Prisma {
     shortDescZhCN?: true
     shortDescZhTW?: true
     shortDescEn?: true
+    bodyZhCN?: true
+    bodyZhTW?: true
+    bodyEn?: true
+    coverImage?: true
     _all?: true
   }
 
@@ -4692,6 +4807,10 @@ export namespace Prisma {
     shortDescZhCN: string
     shortDescZhTW: string
     shortDescEn: string
+    bodyZhCN: string
+    bodyZhTW: string
+    bodyEn: string
+    coverImage: string
     _count: BusinessDivisionCountAggregateOutputType | null
     _avg: BusinessDivisionAvgAggregateOutputType | null
     _sum: BusinessDivisionSumAggregateOutputType | null
@@ -4725,6 +4844,10 @@ export namespace Prisma {
     shortDescZhCN?: boolean
     shortDescZhTW?: boolean
     shortDescEn?: boolean
+    bodyZhCN?: boolean
+    bodyZhTW?: boolean
+    bodyEn?: boolean
+    coverImage?: boolean
   }, ExtArgs["result"]["businessDivision"]>
 
   export type BusinessDivisionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4739,6 +4862,10 @@ export namespace Prisma {
     shortDescZhCN?: boolean
     shortDescZhTW?: boolean
     shortDescEn?: boolean
+    bodyZhCN?: boolean
+    bodyZhTW?: boolean
+    bodyEn?: boolean
+    coverImage?: boolean
   }, ExtArgs["result"]["businessDivision"]>
 
   export type BusinessDivisionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4753,6 +4880,10 @@ export namespace Prisma {
     shortDescZhCN?: boolean
     shortDescZhTW?: boolean
     shortDescEn?: boolean
+    bodyZhCN?: boolean
+    bodyZhTW?: boolean
+    bodyEn?: boolean
+    coverImage?: boolean
   }, ExtArgs["result"]["businessDivision"]>
 
   export type BusinessDivisionSelectScalar = {
@@ -4767,9 +4898,13 @@ export namespace Prisma {
     shortDescZhCN?: boolean
     shortDescZhTW?: boolean
     shortDescEn?: boolean
+    bodyZhCN?: boolean
+    bodyZhTW?: boolean
+    bodyEn?: boolean
+    coverImage?: boolean
   }
 
-  export type BusinessDivisionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "divisionId" | "slug" | "icon" | "sortOrder" | "titleZhCN" | "titleZhTW" | "titleEn" | "shortDescZhCN" | "shortDescZhTW" | "shortDescEn", ExtArgs["result"]["businessDivision"]>
+  export type BusinessDivisionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "divisionId" | "slug" | "icon" | "sortOrder" | "titleZhCN" | "titleZhTW" | "titleEn" | "shortDescZhCN" | "shortDescZhTW" | "shortDescEn" | "bodyZhCN" | "bodyZhTW" | "bodyEn" | "coverImage", ExtArgs["result"]["businessDivision"]>
 
   export type $BusinessDivisionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "BusinessDivision"
@@ -4786,6 +4921,10 @@ export namespace Prisma {
       shortDescZhCN: string
       shortDescZhTW: string
       shortDescEn: string
+      bodyZhCN: string
+      bodyZhTW: string
+      bodyEn: string
+      coverImage: string
     }, ExtArgs["result"]["businessDivision"]>
     composites: {}
   }
@@ -5220,6 +5359,10 @@ export namespace Prisma {
     readonly shortDescZhCN: FieldRef<"BusinessDivision", 'String'>
     readonly shortDescZhTW: FieldRef<"BusinessDivision", 'String'>
     readonly shortDescEn: FieldRef<"BusinessDivision", 'String'>
+    readonly bodyZhCN: FieldRef<"BusinessDivision", 'String'>
+    readonly bodyZhTW: FieldRef<"BusinessDivision", 'String'>
+    readonly bodyEn: FieldRef<"BusinessDivision", 'String'>
+    readonly coverImage: FieldRef<"BusinessDivision", 'String'>
   }
     
 
@@ -5610,6 +5753,7 @@ export namespace Prisma {
     category: string | null
     published: boolean | null
     date: string | null
+    coverImage: string | null
     titleZhCN: string | null
     titleZhTW: string | null
     titleEn: string | null
@@ -5629,6 +5773,7 @@ export namespace Prisma {
     category: string | null
     published: boolean | null
     date: string | null
+    coverImage: string | null
     titleZhCN: string | null
     titleZhTW: string | null
     titleEn: string | null
@@ -5648,6 +5793,7 @@ export namespace Prisma {
     category: number
     published: number
     date: number
+    coverImage: number
     titleZhCN: number
     titleZhTW: number
     titleEn: number
@@ -5677,6 +5823,7 @@ export namespace Prisma {
     category?: true
     published?: true
     date?: true
+    coverImage?: true
     titleZhCN?: true
     titleZhTW?: true
     titleEn?: true
@@ -5696,6 +5843,7 @@ export namespace Prisma {
     category?: true
     published?: true
     date?: true
+    coverImage?: true
     titleZhCN?: true
     titleZhTW?: true
     titleEn?: true
@@ -5715,6 +5863,7 @@ export namespace Prisma {
     category?: true
     published?: true
     date?: true
+    coverImage?: true
     titleZhCN?: true
     titleZhTW?: true
     titleEn?: true
@@ -5821,6 +5970,7 @@ export namespace Prisma {
     category: string
     published: boolean
     date: string
+    coverImage: string
     titleZhCN: string
     titleZhTW: string
     titleEn: string
@@ -5859,6 +6009,7 @@ export namespace Prisma {
     category?: boolean
     published?: boolean
     date?: boolean
+    coverImage?: boolean
     titleZhCN?: boolean
     titleZhTW?: boolean
     titleEn?: boolean
@@ -5878,6 +6029,7 @@ export namespace Prisma {
     category?: boolean
     published?: boolean
     date?: boolean
+    coverImage?: boolean
     titleZhCN?: boolean
     titleZhTW?: boolean
     titleEn?: boolean
@@ -5897,6 +6049,7 @@ export namespace Prisma {
     category?: boolean
     published?: boolean
     date?: boolean
+    coverImage?: boolean
     titleZhCN?: boolean
     titleZhTW?: boolean
     titleEn?: boolean
@@ -5916,6 +6069,7 @@ export namespace Prisma {
     category?: boolean
     published?: boolean
     date?: boolean
+    coverImage?: boolean
     titleZhCN?: boolean
     titleZhTW?: boolean
     titleEn?: boolean
@@ -5929,7 +6083,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "category" | "published" | "date" | "titleZhCN" | "titleZhTW" | "titleEn" | "excerptZhCN" | "excerptZhTW" | "excerptEn" | "contentZhCN" | "contentZhTW" | "contentEn" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "category" | "published" | "date" | "coverImage" | "titleZhCN" | "titleZhTW" | "titleEn" | "excerptZhCN" | "excerptZhTW" | "excerptEn" | "contentZhCN" | "contentZhTW" | "contentEn" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
 
   export type $ArticlePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Article"
@@ -5940,6 +6094,7 @@ export namespace Prisma {
       category: string
       published: boolean
       date: string
+      coverImage: string
       titleZhCN: string
       titleZhTW: string
       titleEn: string
@@ -6379,6 +6534,7 @@ export namespace Prisma {
     readonly category: FieldRef<"Article", 'String'>
     readonly published: FieldRef<"Article", 'Boolean'>
     readonly date: FieldRef<"Article", 'String'>
+    readonly coverImage: FieldRef<"Article", 'String'>
     readonly titleZhCN: FieldRef<"Article", 'String'>
     readonly titleZhTW: FieldRef<"Article", 'String'>
     readonly titleEn: FieldRef<"Article", 'String'>
@@ -6755,6 +6911,1072 @@ export namespace Prisma {
 
 
   /**
+   * Model ContactSubmission
+   */
+
+  export type AggregateContactSubmission = {
+    _count: ContactSubmissionCountAggregateOutputType | null
+    _avg: ContactSubmissionAvgAggregateOutputType | null
+    _sum: ContactSubmissionSumAggregateOutputType | null
+    _min: ContactSubmissionMinAggregateOutputType | null
+    _max: ContactSubmissionMaxAggregateOutputType | null
+  }
+
+  export type ContactSubmissionAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContactSubmissionSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContactSubmissionMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+    company: string | null
+    subject: string | null
+    message: string | null
+    read: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ContactSubmissionMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+    company: string | null
+    subject: string | null
+    message: string | null
+    read: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ContactSubmissionCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    company: number
+    subject: number
+    message: number
+    read: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ContactSubmissionAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ContactSubmissionSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ContactSubmissionMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    company?: true
+    subject?: true
+    message?: true
+    read?: true
+    createdAt?: true
+  }
+
+  export type ContactSubmissionMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    company?: true
+    subject?: true
+    message?: true
+    read?: true
+    createdAt?: true
+  }
+
+  export type ContactSubmissionCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    company?: true
+    subject?: true
+    message?: true
+    read?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ContactSubmissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactSubmission to aggregate.
+     */
+    where?: ContactSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactSubmissions to fetch.
+     */
+    orderBy?: ContactSubmissionOrderByWithRelationInput | ContactSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContactSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContactSubmissions
+    **/
+    _count?: true | ContactSubmissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContactSubmissionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContactSubmissionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContactSubmissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContactSubmissionMaxAggregateInputType
+  }
+
+  export type GetContactSubmissionAggregateType<T extends ContactSubmissionAggregateArgs> = {
+        [P in keyof T & keyof AggregateContactSubmission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContactSubmission[P]>
+      : GetScalarType<T[P], AggregateContactSubmission[P]>
+  }
+
+
+
+
+  export type ContactSubmissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactSubmissionWhereInput
+    orderBy?: ContactSubmissionOrderByWithAggregationInput | ContactSubmissionOrderByWithAggregationInput[]
+    by: ContactSubmissionScalarFieldEnum[] | ContactSubmissionScalarFieldEnum
+    having?: ContactSubmissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContactSubmissionCountAggregateInputType | true
+    _avg?: ContactSubmissionAvgAggregateInputType
+    _sum?: ContactSubmissionSumAggregateInputType
+    _min?: ContactSubmissionMinAggregateInputType
+    _max?: ContactSubmissionMaxAggregateInputType
+  }
+
+  export type ContactSubmissionGroupByOutputType = {
+    id: number
+    name: string
+    email: string
+    company: string
+    subject: string
+    message: string
+    read: boolean
+    createdAt: Date
+    _count: ContactSubmissionCountAggregateOutputType | null
+    _avg: ContactSubmissionAvgAggregateOutputType | null
+    _sum: ContactSubmissionSumAggregateOutputType | null
+    _min: ContactSubmissionMinAggregateOutputType | null
+    _max: ContactSubmissionMaxAggregateOutputType | null
+  }
+
+  type GetContactSubmissionGroupByPayload<T extends ContactSubmissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContactSubmissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContactSubmissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContactSubmissionGroupByOutputType[P]>
+            : GetScalarType<T[P], ContactSubmissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContactSubmissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    company?: boolean
+    subject?: boolean
+    message?: boolean
+    read?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["contactSubmission"]>
+
+  export type ContactSubmissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    company?: boolean
+    subject?: boolean
+    message?: boolean
+    read?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["contactSubmission"]>
+
+  export type ContactSubmissionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    company?: boolean
+    subject?: boolean
+    message?: boolean
+    read?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["contactSubmission"]>
+
+  export type ContactSubmissionSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    company?: boolean
+    subject?: boolean
+    message?: boolean
+    read?: boolean
+    createdAt?: boolean
+  }
+
+  export type ContactSubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "company" | "subject" | "message" | "read" | "createdAt", ExtArgs["result"]["contactSubmission"]>
+
+  export type $ContactSubmissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContactSubmission"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      email: string
+      company: string
+      subject: string
+      message: string
+      read: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["contactSubmission"]>
+    composites: {}
+  }
+
+  type ContactSubmissionGetPayload<S extends boolean | null | undefined | ContactSubmissionDefaultArgs> = $Result.GetResult<Prisma.$ContactSubmissionPayload, S>
+
+  type ContactSubmissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContactSubmissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContactSubmissionCountAggregateInputType | true
+    }
+
+  export interface ContactSubmissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContactSubmission'], meta: { name: 'ContactSubmission' } }
+    /**
+     * Find zero or one ContactSubmission that matches the filter.
+     * @param {ContactSubmissionFindUniqueArgs} args - Arguments to find a ContactSubmission
+     * @example
+     * // Get one ContactSubmission
+     * const contactSubmission = await prisma.contactSubmission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContactSubmissionFindUniqueArgs>(args: SelectSubset<T, ContactSubmissionFindUniqueArgs<ExtArgs>>): Prisma__ContactSubmissionClient<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContactSubmission that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContactSubmissionFindUniqueOrThrowArgs} args - Arguments to find a ContactSubmission
+     * @example
+     * // Get one ContactSubmission
+     * const contactSubmission = await prisma.contactSubmission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContactSubmissionFindUniqueOrThrowArgs>(args: SelectSubset<T, ContactSubmissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContactSubmissionClient<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContactSubmission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactSubmissionFindFirstArgs} args - Arguments to find a ContactSubmission
+     * @example
+     * // Get one ContactSubmission
+     * const contactSubmission = await prisma.contactSubmission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContactSubmissionFindFirstArgs>(args?: SelectSubset<T, ContactSubmissionFindFirstArgs<ExtArgs>>): Prisma__ContactSubmissionClient<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContactSubmission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactSubmissionFindFirstOrThrowArgs} args - Arguments to find a ContactSubmission
+     * @example
+     * // Get one ContactSubmission
+     * const contactSubmission = await prisma.contactSubmission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContactSubmissionFindFirstOrThrowArgs>(args?: SelectSubset<T, ContactSubmissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContactSubmissionClient<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContactSubmissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactSubmissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContactSubmissions
+     * const contactSubmissions = await prisma.contactSubmission.findMany()
+     * 
+     * // Get first 10 ContactSubmissions
+     * const contactSubmissions = await prisma.contactSubmission.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contactSubmissionWithIdOnly = await prisma.contactSubmission.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContactSubmissionFindManyArgs>(args?: SelectSubset<T, ContactSubmissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContactSubmission.
+     * @param {ContactSubmissionCreateArgs} args - Arguments to create a ContactSubmission.
+     * @example
+     * // Create one ContactSubmission
+     * const ContactSubmission = await prisma.contactSubmission.create({
+     *   data: {
+     *     // ... data to create a ContactSubmission
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContactSubmissionCreateArgs>(args: SelectSubset<T, ContactSubmissionCreateArgs<ExtArgs>>): Prisma__ContactSubmissionClient<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContactSubmissions.
+     * @param {ContactSubmissionCreateManyArgs} args - Arguments to create many ContactSubmissions.
+     * @example
+     * // Create many ContactSubmissions
+     * const contactSubmission = await prisma.contactSubmission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContactSubmissionCreateManyArgs>(args?: SelectSubset<T, ContactSubmissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContactSubmissions and returns the data saved in the database.
+     * @param {ContactSubmissionCreateManyAndReturnArgs} args - Arguments to create many ContactSubmissions.
+     * @example
+     * // Create many ContactSubmissions
+     * const contactSubmission = await prisma.contactSubmission.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContactSubmissions and only return the `id`
+     * const contactSubmissionWithIdOnly = await prisma.contactSubmission.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContactSubmissionCreateManyAndReturnArgs>(args?: SelectSubset<T, ContactSubmissionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContactSubmission.
+     * @param {ContactSubmissionDeleteArgs} args - Arguments to delete one ContactSubmission.
+     * @example
+     * // Delete one ContactSubmission
+     * const ContactSubmission = await prisma.contactSubmission.delete({
+     *   where: {
+     *     // ... filter to delete one ContactSubmission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContactSubmissionDeleteArgs>(args: SelectSubset<T, ContactSubmissionDeleteArgs<ExtArgs>>): Prisma__ContactSubmissionClient<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContactSubmission.
+     * @param {ContactSubmissionUpdateArgs} args - Arguments to update one ContactSubmission.
+     * @example
+     * // Update one ContactSubmission
+     * const contactSubmission = await prisma.contactSubmission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContactSubmissionUpdateArgs>(args: SelectSubset<T, ContactSubmissionUpdateArgs<ExtArgs>>): Prisma__ContactSubmissionClient<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContactSubmissions.
+     * @param {ContactSubmissionDeleteManyArgs} args - Arguments to filter ContactSubmissions to delete.
+     * @example
+     * // Delete a few ContactSubmissions
+     * const { count } = await prisma.contactSubmission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContactSubmissionDeleteManyArgs>(args?: SelectSubset<T, ContactSubmissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContactSubmissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactSubmissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContactSubmissions
+     * const contactSubmission = await prisma.contactSubmission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContactSubmissionUpdateManyArgs>(args: SelectSubset<T, ContactSubmissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContactSubmissions and returns the data updated in the database.
+     * @param {ContactSubmissionUpdateManyAndReturnArgs} args - Arguments to update many ContactSubmissions.
+     * @example
+     * // Update many ContactSubmissions
+     * const contactSubmission = await prisma.contactSubmission.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContactSubmissions and only return the `id`
+     * const contactSubmissionWithIdOnly = await prisma.contactSubmission.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContactSubmissionUpdateManyAndReturnArgs>(args: SelectSubset<T, ContactSubmissionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContactSubmission.
+     * @param {ContactSubmissionUpsertArgs} args - Arguments to update or create a ContactSubmission.
+     * @example
+     * // Update or create a ContactSubmission
+     * const contactSubmission = await prisma.contactSubmission.upsert({
+     *   create: {
+     *     // ... data to create a ContactSubmission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContactSubmission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContactSubmissionUpsertArgs>(args: SelectSubset<T, ContactSubmissionUpsertArgs<ExtArgs>>): Prisma__ContactSubmissionClient<$Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContactSubmissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactSubmissionCountArgs} args - Arguments to filter ContactSubmissions to count.
+     * @example
+     * // Count the number of ContactSubmissions
+     * const count = await prisma.contactSubmission.count({
+     *   where: {
+     *     // ... the filter for the ContactSubmissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContactSubmissionCountArgs>(
+      args?: Subset<T, ContactSubmissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContactSubmissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContactSubmission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactSubmissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContactSubmissionAggregateArgs>(args: Subset<T, ContactSubmissionAggregateArgs>): Prisma.PrismaPromise<GetContactSubmissionAggregateType<T>>
+
+    /**
+     * Group by ContactSubmission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactSubmissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContactSubmissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContactSubmissionGroupByArgs['orderBy'] }
+        : { orderBy?: ContactSubmissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContactSubmissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContactSubmissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContactSubmission model
+   */
+  readonly fields: ContactSubmissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContactSubmission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContactSubmissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContactSubmission model
+   */
+  interface ContactSubmissionFieldRefs {
+    readonly id: FieldRef<"ContactSubmission", 'Int'>
+    readonly name: FieldRef<"ContactSubmission", 'String'>
+    readonly email: FieldRef<"ContactSubmission", 'String'>
+    readonly company: FieldRef<"ContactSubmission", 'String'>
+    readonly subject: FieldRef<"ContactSubmission", 'String'>
+    readonly message: FieldRef<"ContactSubmission", 'String'>
+    readonly read: FieldRef<"ContactSubmission", 'Boolean'>
+    readonly createdAt: FieldRef<"ContactSubmission", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContactSubmission findUnique
+   */
+  export type ContactSubmissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * Filter, which ContactSubmission to fetch.
+     */
+    where: ContactSubmissionWhereUniqueInput
+  }
+
+  /**
+   * ContactSubmission findUniqueOrThrow
+   */
+  export type ContactSubmissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * Filter, which ContactSubmission to fetch.
+     */
+    where: ContactSubmissionWhereUniqueInput
+  }
+
+  /**
+   * ContactSubmission findFirst
+   */
+  export type ContactSubmissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * Filter, which ContactSubmission to fetch.
+     */
+    where?: ContactSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactSubmissions to fetch.
+     */
+    orderBy?: ContactSubmissionOrderByWithRelationInput | ContactSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactSubmissions.
+     */
+    cursor?: ContactSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactSubmissions.
+     */
+    distinct?: ContactSubmissionScalarFieldEnum | ContactSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * ContactSubmission findFirstOrThrow
+   */
+  export type ContactSubmissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * Filter, which ContactSubmission to fetch.
+     */
+    where?: ContactSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactSubmissions to fetch.
+     */
+    orderBy?: ContactSubmissionOrderByWithRelationInput | ContactSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactSubmissions.
+     */
+    cursor?: ContactSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactSubmissions.
+     */
+    distinct?: ContactSubmissionScalarFieldEnum | ContactSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * ContactSubmission findMany
+   */
+  export type ContactSubmissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * Filter, which ContactSubmissions to fetch.
+     */
+    where?: ContactSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactSubmissions to fetch.
+     */
+    orderBy?: ContactSubmissionOrderByWithRelationInput | ContactSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContactSubmissions.
+     */
+    cursor?: ContactSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactSubmissions.
+     */
+    skip?: number
+    distinct?: ContactSubmissionScalarFieldEnum | ContactSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * ContactSubmission create
+   */
+  export type ContactSubmissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a ContactSubmission.
+     */
+    data: XOR<ContactSubmissionCreateInput, ContactSubmissionUncheckedCreateInput>
+  }
+
+  /**
+   * ContactSubmission createMany
+   */
+  export type ContactSubmissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContactSubmissions.
+     */
+    data: ContactSubmissionCreateManyInput | ContactSubmissionCreateManyInput[]
+  }
+
+  /**
+   * ContactSubmission createManyAndReturn
+   */
+  export type ContactSubmissionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContactSubmissions.
+     */
+    data: ContactSubmissionCreateManyInput | ContactSubmissionCreateManyInput[]
+  }
+
+  /**
+   * ContactSubmission update
+   */
+  export type ContactSubmissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a ContactSubmission.
+     */
+    data: XOR<ContactSubmissionUpdateInput, ContactSubmissionUncheckedUpdateInput>
+    /**
+     * Choose, which ContactSubmission to update.
+     */
+    where: ContactSubmissionWhereUniqueInput
+  }
+
+  /**
+   * ContactSubmission updateMany
+   */
+  export type ContactSubmissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContactSubmissions.
+     */
+    data: XOR<ContactSubmissionUpdateManyMutationInput, ContactSubmissionUncheckedUpdateManyInput>
+    /**
+     * Filter which ContactSubmissions to update
+     */
+    where?: ContactSubmissionWhereInput
+    /**
+     * Limit how many ContactSubmissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactSubmission updateManyAndReturn
+   */
+  export type ContactSubmissionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * The data used to update ContactSubmissions.
+     */
+    data: XOR<ContactSubmissionUpdateManyMutationInput, ContactSubmissionUncheckedUpdateManyInput>
+    /**
+     * Filter which ContactSubmissions to update
+     */
+    where?: ContactSubmissionWhereInput
+    /**
+     * Limit how many ContactSubmissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactSubmission upsert
+   */
+  export type ContactSubmissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the ContactSubmission to update in case it exists.
+     */
+    where: ContactSubmissionWhereUniqueInput
+    /**
+     * In case the ContactSubmission found by the `where` argument doesn't exist, create a new ContactSubmission with this data.
+     */
+    create: XOR<ContactSubmissionCreateInput, ContactSubmissionUncheckedCreateInput>
+    /**
+     * In case the ContactSubmission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContactSubmissionUpdateInput, ContactSubmissionUncheckedUpdateInput>
+  }
+
+  /**
+   * ContactSubmission delete
+   */
+  export type ContactSubmissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+    /**
+     * Filter which ContactSubmission to delete.
+     */
+    where: ContactSubmissionWhereUniqueInput
+  }
+
+  /**
+   * ContactSubmission deleteMany
+   */
+  export type ContactSubmissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactSubmissions to delete
+     */
+    where?: ContactSubmissionWhereInput
+    /**
+     * Limit how many ContactSubmissions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactSubmission without action
+   */
+  export type ContactSubmissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactSubmission
+     */
+    select?: ContactSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactSubmission
+     */
+    omit?: ContactSubmissionOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6821,7 +8043,11 @@ export namespace Prisma {
     titleEn: 'titleEn',
     shortDescZhCN: 'shortDescZhCN',
     shortDescZhTW: 'shortDescZhTW',
-    shortDescEn: 'shortDescEn'
+    shortDescEn: 'shortDescEn',
+    bodyZhCN: 'bodyZhCN',
+    bodyZhTW: 'bodyZhTW',
+    bodyEn: 'bodyEn',
+    coverImage: 'coverImage'
   };
 
   export type BusinessDivisionScalarFieldEnum = (typeof BusinessDivisionScalarFieldEnum)[keyof typeof BusinessDivisionScalarFieldEnum]
@@ -6833,6 +8059,7 @@ export namespace Prisma {
     category: 'category',
     published: 'published',
     date: 'date',
+    coverImage: 'coverImage',
     titleZhCN: 'titleZhCN',
     titleZhTW: 'titleZhTW',
     titleEn: 'titleEn',
@@ -6847,6 +8074,20 @@ export namespace Prisma {
   };
 
   export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
+
+
+  export const ContactSubmissionScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    company: 'company',
+    subject: 'subject',
+    message: 'message',
+    read: 'read',
+    createdAt: 'createdAt'
+  };
+
+  export type ContactSubmissionScalarFieldEnum = (typeof ContactSubmissionScalarFieldEnum)[keyof typeof ContactSubmissionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7137,6 +8378,10 @@ export namespace Prisma {
     shortDescZhCN?: StringFilter<"BusinessDivision"> | string
     shortDescZhTW?: StringFilter<"BusinessDivision"> | string
     shortDescEn?: StringFilter<"BusinessDivision"> | string
+    bodyZhCN?: StringFilter<"BusinessDivision"> | string
+    bodyZhTW?: StringFilter<"BusinessDivision"> | string
+    bodyEn?: StringFilter<"BusinessDivision"> | string
+    coverImage?: StringFilter<"BusinessDivision"> | string
   }
 
   export type BusinessDivisionOrderByWithRelationInput = {
@@ -7151,6 +8396,10 @@ export namespace Prisma {
     shortDescZhCN?: SortOrder
     shortDescZhTW?: SortOrder
     shortDescEn?: SortOrder
+    bodyZhCN?: SortOrder
+    bodyZhTW?: SortOrder
+    bodyEn?: SortOrder
+    coverImage?: SortOrder
   }
 
   export type BusinessDivisionWhereUniqueInput = Prisma.AtLeast<{
@@ -7168,6 +8417,10 @@ export namespace Prisma {
     shortDescZhCN?: StringFilter<"BusinessDivision"> | string
     shortDescZhTW?: StringFilter<"BusinessDivision"> | string
     shortDescEn?: StringFilter<"BusinessDivision"> | string
+    bodyZhCN?: StringFilter<"BusinessDivision"> | string
+    bodyZhTW?: StringFilter<"BusinessDivision"> | string
+    bodyEn?: StringFilter<"BusinessDivision"> | string
+    coverImage?: StringFilter<"BusinessDivision"> | string
   }, "id" | "divisionId" | "slug">
 
   export type BusinessDivisionOrderByWithAggregationInput = {
@@ -7182,6 +8435,10 @@ export namespace Prisma {
     shortDescZhCN?: SortOrder
     shortDescZhTW?: SortOrder
     shortDescEn?: SortOrder
+    bodyZhCN?: SortOrder
+    bodyZhTW?: SortOrder
+    bodyEn?: SortOrder
+    coverImage?: SortOrder
     _count?: BusinessDivisionCountOrderByAggregateInput
     _avg?: BusinessDivisionAvgOrderByAggregateInput
     _max?: BusinessDivisionMaxOrderByAggregateInput
@@ -7204,6 +8461,10 @@ export namespace Prisma {
     shortDescZhCN?: StringWithAggregatesFilter<"BusinessDivision"> | string
     shortDescZhTW?: StringWithAggregatesFilter<"BusinessDivision"> | string
     shortDescEn?: StringWithAggregatesFilter<"BusinessDivision"> | string
+    bodyZhCN?: StringWithAggregatesFilter<"BusinessDivision"> | string
+    bodyZhTW?: StringWithAggregatesFilter<"BusinessDivision"> | string
+    bodyEn?: StringWithAggregatesFilter<"BusinessDivision"> | string
+    coverImage?: StringWithAggregatesFilter<"BusinessDivision"> | string
   }
 
   export type ArticleWhereInput = {
@@ -7215,6 +8476,7 @@ export namespace Prisma {
     category?: StringFilter<"Article"> | string
     published?: BoolFilter<"Article"> | boolean
     date?: StringFilter<"Article"> | string
+    coverImage?: StringFilter<"Article"> | string
     titleZhCN?: StringFilter<"Article"> | string
     titleZhTW?: StringFilter<"Article"> | string
     titleEn?: StringFilter<"Article"> | string
@@ -7234,6 +8496,7 @@ export namespace Prisma {
     category?: SortOrder
     published?: SortOrder
     date?: SortOrder
+    coverImage?: SortOrder
     titleZhCN?: SortOrder
     titleZhTW?: SortOrder
     titleEn?: SortOrder
@@ -7256,6 +8519,7 @@ export namespace Prisma {
     category?: StringFilter<"Article"> | string
     published?: BoolFilter<"Article"> | boolean
     date?: StringFilter<"Article"> | string
+    coverImage?: StringFilter<"Article"> | string
     titleZhCN?: StringFilter<"Article"> | string
     titleZhTW?: StringFilter<"Article"> | string
     titleEn?: StringFilter<"Article"> | string
@@ -7275,6 +8539,7 @@ export namespace Prisma {
     category?: SortOrder
     published?: SortOrder
     date?: SortOrder
+    coverImage?: SortOrder
     titleZhCN?: SortOrder
     titleZhTW?: SortOrder
     titleEn?: SortOrder
@@ -7302,6 +8567,7 @@ export namespace Prisma {
     category?: StringWithAggregatesFilter<"Article"> | string
     published?: BoolWithAggregatesFilter<"Article"> | boolean
     date?: StringWithAggregatesFilter<"Article"> | string
+    coverImage?: StringWithAggregatesFilter<"Article"> | string
     titleZhCN?: StringWithAggregatesFilter<"Article"> | string
     titleZhTW?: StringWithAggregatesFilter<"Article"> | string
     titleEn?: StringWithAggregatesFilter<"Article"> | string
@@ -7313,6 +8579,75 @@ export namespace Prisma {
     contentEn?: StringWithAggregatesFilter<"Article"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
+  }
+
+  export type ContactSubmissionWhereInput = {
+    AND?: ContactSubmissionWhereInput | ContactSubmissionWhereInput[]
+    OR?: ContactSubmissionWhereInput[]
+    NOT?: ContactSubmissionWhereInput | ContactSubmissionWhereInput[]
+    id?: IntFilter<"ContactSubmission"> | number
+    name?: StringFilter<"ContactSubmission"> | string
+    email?: StringFilter<"ContactSubmission"> | string
+    company?: StringFilter<"ContactSubmission"> | string
+    subject?: StringFilter<"ContactSubmission"> | string
+    message?: StringFilter<"ContactSubmission"> | string
+    read?: BoolFilter<"ContactSubmission"> | boolean
+    createdAt?: DateTimeFilter<"ContactSubmission"> | Date | string
+  }
+
+  export type ContactSubmissionOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    company?: SortOrder
+    subject?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ContactSubmissionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ContactSubmissionWhereInput | ContactSubmissionWhereInput[]
+    OR?: ContactSubmissionWhereInput[]
+    NOT?: ContactSubmissionWhereInput | ContactSubmissionWhereInput[]
+    name?: StringFilter<"ContactSubmission"> | string
+    email?: StringFilter<"ContactSubmission"> | string
+    company?: StringFilter<"ContactSubmission"> | string
+    subject?: StringFilter<"ContactSubmission"> | string
+    message?: StringFilter<"ContactSubmission"> | string
+    read?: BoolFilter<"ContactSubmission"> | boolean
+    createdAt?: DateTimeFilter<"ContactSubmission"> | Date | string
+  }, "id">
+
+  export type ContactSubmissionOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    company?: SortOrder
+    subject?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    createdAt?: SortOrder
+    _count?: ContactSubmissionCountOrderByAggregateInput
+    _avg?: ContactSubmissionAvgOrderByAggregateInput
+    _max?: ContactSubmissionMaxOrderByAggregateInput
+    _min?: ContactSubmissionMinOrderByAggregateInput
+    _sum?: ContactSubmissionSumOrderByAggregateInput
+  }
+
+  export type ContactSubmissionScalarWhereWithAggregatesInput = {
+    AND?: ContactSubmissionScalarWhereWithAggregatesInput | ContactSubmissionScalarWhereWithAggregatesInput[]
+    OR?: ContactSubmissionScalarWhereWithAggregatesInput[]
+    NOT?: ContactSubmissionScalarWhereWithAggregatesInput | ContactSubmissionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ContactSubmission"> | number
+    name?: StringWithAggregatesFilter<"ContactSubmission"> | string
+    email?: StringWithAggregatesFilter<"ContactSubmission"> | string
+    company?: StringWithAggregatesFilter<"ContactSubmission"> | string
+    subject?: StringWithAggregatesFilter<"ContactSubmission"> | string
+    message?: StringWithAggregatesFilter<"ContactSubmission"> | string
+    read?: BoolWithAggregatesFilter<"ContactSubmission"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ContactSubmission"> | Date | string
   }
 
   export type SettingCreateInput = {
@@ -7569,6 +8904,10 @@ export namespace Prisma {
     shortDescZhCN: string
     shortDescZhTW: string
     shortDescEn: string
+    bodyZhCN?: string
+    bodyZhTW?: string
+    bodyEn?: string
+    coverImage?: string
   }
 
   export type BusinessDivisionUncheckedCreateInput = {
@@ -7583,6 +8922,10 @@ export namespace Prisma {
     shortDescZhCN: string
     shortDescZhTW: string
     shortDescEn: string
+    bodyZhCN?: string
+    bodyZhTW?: string
+    bodyEn?: string
+    coverImage?: string
   }
 
   export type BusinessDivisionUpdateInput = {
@@ -7596,6 +8939,10 @@ export namespace Prisma {
     shortDescZhCN?: StringFieldUpdateOperationsInput | string
     shortDescZhTW?: StringFieldUpdateOperationsInput | string
     shortDescEn?: StringFieldUpdateOperationsInput | string
+    bodyZhCN?: StringFieldUpdateOperationsInput | string
+    bodyZhTW?: StringFieldUpdateOperationsInput | string
+    bodyEn?: StringFieldUpdateOperationsInput | string
+    coverImage?: StringFieldUpdateOperationsInput | string
   }
 
   export type BusinessDivisionUncheckedUpdateInput = {
@@ -7610,6 +8957,10 @@ export namespace Prisma {
     shortDescZhCN?: StringFieldUpdateOperationsInput | string
     shortDescZhTW?: StringFieldUpdateOperationsInput | string
     shortDescEn?: StringFieldUpdateOperationsInput | string
+    bodyZhCN?: StringFieldUpdateOperationsInput | string
+    bodyZhTW?: StringFieldUpdateOperationsInput | string
+    bodyEn?: StringFieldUpdateOperationsInput | string
+    coverImage?: StringFieldUpdateOperationsInput | string
   }
 
   export type BusinessDivisionCreateManyInput = {
@@ -7624,6 +8975,10 @@ export namespace Prisma {
     shortDescZhCN: string
     shortDescZhTW: string
     shortDescEn: string
+    bodyZhCN?: string
+    bodyZhTW?: string
+    bodyEn?: string
+    coverImage?: string
   }
 
   export type BusinessDivisionUpdateManyMutationInput = {
@@ -7637,6 +8992,10 @@ export namespace Prisma {
     shortDescZhCN?: StringFieldUpdateOperationsInput | string
     shortDescZhTW?: StringFieldUpdateOperationsInput | string
     shortDescEn?: StringFieldUpdateOperationsInput | string
+    bodyZhCN?: StringFieldUpdateOperationsInput | string
+    bodyZhTW?: StringFieldUpdateOperationsInput | string
+    bodyEn?: StringFieldUpdateOperationsInput | string
+    coverImage?: StringFieldUpdateOperationsInput | string
   }
 
   export type BusinessDivisionUncheckedUpdateManyInput = {
@@ -7651,6 +9010,10 @@ export namespace Prisma {
     shortDescZhCN?: StringFieldUpdateOperationsInput | string
     shortDescZhTW?: StringFieldUpdateOperationsInput | string
     shortDescEn?: StringFieldUpdateOperationsInput | string
+    bodyZhCN?: StringFieldUpdateOperationsInput | string
+    bodyZhTW?: StringFieldUpdateOperationsInput | string
+    bodyEn?: StringFieldUpdateOperationsInput | string
+    coverImage?: StringFieldUpdateOperationsInput | string
   }
 
   export type ArticleCreateInput = {
@@ -7658,6 +9021,7 @@ export namespace Prisma {
     category: string
     published?: boolean
     date: string
+    coverImage?: string
     titleZhCN: string
     titleZhTW: string
     titleEn: string
@@ -7677,6 +9041,7 @@ export namespace Prisma {
     category: string
     published?: boolean
     date: string
+    coverImage?: string
     titleZhCN: string
     titleZhTW: string
     titleEn: string
@@ -7695,6 +9060,7 @@ export namespace Prisma {
     category?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     date?: StringFieldUpdateOperationsInput | string
+    coverImage?: StringFieldUpdateOperationsInput | string
     titleZhCN?: StringFieldUpdateOperationsInput | string
     titleZhTW?: StringFieldUpdateOperationsInput | string
     titleEn?: StringFieldUpdateOperationsInput | string
@@ -7714,6 +9080,7 @@ export namespace Prisma {
     category?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     date?: StringFieldUpdateOperationsInput | string
+    coverImage?: StringFieldUpdateOperationsInput | string
     titleZhCN?: StringFieldUpdateOperationsInput | string
     titleZhTW?: StringFieldUpdateOperationsInput | string
     titleEn?: StringFieldUpdateOperationsInput | string
@@ -7733,6 +9100,7 @@ export namespace Prisma {
     category: string
     published?: boolean
     date: string
+    coverImage?: string
     titleZhCN: string
     titleZhTW: string
     titleEn: string
@@ -7751,6 +9119,7 @@ export namespace Prisma {
     category?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     date?: StringFieldUpdateOperationsInput | string
+    coverImage?: StringFieldUpdateOperationsInput | string
     titleZhCN?: StringFieldUpdateOperationsInput | string
     titleZhTW?: StringFieldUpdateOperationsInput | string
     titleEn?: StringFieldUpdateOperationsInput | string
@@ -7770,6 +9139,7 @@ export namespace Prisma {
     category?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     date?: StringFieldUpdateOperationsInput | string
+    coverImage?: StringFieldUpdateOperationsInput | string
     titleZhCN?: StringFieldUpdateOperationsInput | string
     titleZhTW?: StringFieldUpdateOperationsInput | string
     titleEn?: StringFieldUpdateOperationsInput | string
@@ -7781,6 +9151,80 @@ export namespace Prisma {
     contentEn?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactSubmissionCreateInput = {
+    name: string
+    email: string
+    company?: string
+    subject?: string
+    message: string
+    read?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ContactSubmissionUncheckedCreateInput = {
+    id?: number
+    name: string
+    email: string
+    company?: string
+    subject?: string
+    message: string
+    read?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ContactSubmissionUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactSubmissionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactSubmissionCreateManyInput = {
+    id?: number
+    name: string
+    email: string
+    company?: string
+    subject?: string
+    message: string
+    read?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ContactSubmissionUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactSubmissionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    read?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -7989,6 +9433,10 @@ export namespace Prisma {
     shortDescZhCN?: SortOrder
     shortDescZhTW?: SortOrder
     shortDescEn?: SortOrder
+    bodyZhCN?: SortOrder
+    bodyZhTW?: SortOrder
+    bodyEn?: SortOrder
+    coverImage?: SortOrder
   }
 
   export type BusinessDivisionAvgOrderByAggregateInput = {
@@ -8008,6 +9456,10 @@ export namespace Prisma {
     shortDescZhCN?: SortOrder
     shortDescZhTW?: SortOrder
     shortDescEn?: SortOrder
+    bodyZhCN?: SortOrder
+    bodyZhTW?: SortOrder
+    bodyEn?: SortOrder
+    coverImage?: SortOrder
   }
 
   export type BusinessDivisionMinOrderByAggregateInput = {
@@ -8022,6 +9474,10 @@ export namespace Prisma {
     shortDescZhCN?: SortOrder
     shortDescZhTW?: SortOrder
     shortDescEn?: SortOrder
+    bodyZhCN?: SortOrder
+    bodyZhTW?: SortOrder
+    bodyEn?: SortOrder
+    coverImage?: SortOrder
   }
 
   export type BusinessDivisionSumOrderByAggregateInput = {
@@ -8051,6 +9507,7 @@ export namespace Prisma {
     category?: SortOrder
     published?: SortOrder
     date?: SortOrder
+    coverImage?: SortOrder
     titleZhCN?: SortOrder
     titleZhTW?: SortOrder
     titleEn?: SortOrder
@@ -8074,6 +9531,7 @@ export namespace Prisma {
     category?: SortOrder
     published?: SortOrder
     date?: SortOrder
+    coverImage?: SortOrder
     titleZhCN?: SortOrder
     titleZhTW?: SortOrder
     titleEn?: SortOrder
@@ -8093,6 +9551,7 @@ export namespace Prisma {
     category?: SortOrder
     published?: SortOrder
     date?: SortOrder
+    coverImage?: SortOrder
     titleZhCN?: SortOrder
     titleZhTW?: SortOrder
     titleEn?: SortOrder
@@ -8130,6 +9589,47 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type ContactSubmissionCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    company?: SortOrder
+    subject?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ContactSubmissionAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ContactSubmissionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    company?: SortOrder
+    subject?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ContactSubmissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    company?: SortOrder
+    subject?: SortOrder
+    message?: SortOrder
+    read?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ContactSubmissionSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
