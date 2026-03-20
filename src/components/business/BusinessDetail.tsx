@@ -26,9 +26,18 @@ export default function BusinessDetail({
   features: Feature[];
   currentSlug: string;
 }) {
+  const bgMap: Record<string, string> = {
+    'gold': '/images/business/gold-bg.png',
+    'ipo-anchor': '/images/business/ipo-bg.png',
+    'china-innovation': '/images/business/china-innovation-bg.png',
+    'digital-trade': '/images/business/digital-trade-bg.png',
+    'energy': '/images/business/energy-bg.png',
+    'web3-finance': '/images/business/web3-bg.png',
+  };
+
   return (
     <>
-      <HeroSection title={heroTitle} subtitle={heroSubtitle} />
+      <HeroSection title={heroTitle} subtitle={heroSubtitle} backgroundImage={bgMap[currentSlug]} />
 
       <section className="bg-white">
         <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-8 lg:py-32">

@@ -332,6 +332,26 @@ function GatewaySection() {
           </p>
         </AnimatedSection>
 
+        <AnimatedSection delay={0.08}>
+          <div className="relative mt-12 overflow-hidden border border-[#e5e7eb]">
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-20"
+              style={{ backgroundImage: "url('/images/home/gateway-banner.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-white/82" />
+            <div className="relative z-10 flex min-h-[220px] items-end px-8 py-8 lg:px-10">
+              <div className="max-w-xl">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-500">
+                  Hong Kong Gateway
+                </p>
+                <p className="mt-3 text-[14px] leading-relaxed text-[#6c757d]">
+                  Legal certainty, regulated capital channels, tax efficiency and cross-border execution.
+                </p>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+
         <div className="mt-16 grid gap-px bg-[#e5e7eb] sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((pillar, i) => (
             <AnimatedSection key={i} delay={i * 0.1}>
@@ -440,6 +460,7 @@ function EcosystemSection() {
       highlight: 'CAS Innovation + China Resources Capital',
       descKey: 'ecosystem1Desc' as const,
       accent: '#D4AF37',
+      cityImage: '/images/home/ecosystem-beijing.jpg',
     },
     {
       logo: 'AKJ Group',
@@ -454,6 +475,7 @@ function EcosystemSection() {
       highlight: 'London · Norway · Malta Regulated',
       descKey: 'ecosystem2Desc' as const,
       accent: '#8B9DC3',
+      cityImage: '/images/home/ecosystem-london.jpg',
     },
     {
       logo: '中银资管',
@@ -468,6 +490,7 @@ function EcosystemSection() {
       highlight: 'Bank of China 83.5% + BlackRock 16.5%',
       descKey: 'ecosystem3Desc' as const,
       accent: '#C41E3A',
+      cityImage: '/images/home/ecosystem-singapore.jpg',
     },
   ];
 
@@ -489,9 +512,14 @@ function EcosystemSection() {
         <div className="mt-16 grid gap-px bg-white/[0.06] sm:grid-cols-3">
           {partners.map((p, i) => (
             <AnimatedSection key={i} delay={i * 0.12}>
-              <div className="bg-[#070e1f] p-9 lg:p-10 h-full flex flex-col">
+              <div className="relative bg-[#070e1f] p-9 lg:p-10 h-full flex flex-col overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-center pointer-events-none"
+                  style={{ backgroundImage: `url(${p.cityImage})`, opacity: 0.32 }}
+                />
+                <div className="absolute inset-0 bg-[#070e1f]/80" />
                 {/* Header */}
-                <div className="flex items-start justify-between mb-6">
+                <div className="relative z-10 flex items-start justify-between mb-6">
                   <div>
                     <div className="text-[20px] font-light tracking-wide text-white">{p.logo}</div>
                     <div className="text-[11px] text-white/35 mt-0.5 tracking-wide">{p.logoEn}</div>
@@ -505,12 +533,12 @@ function EcosystemSection() {
                 </div>
 
                 {/* Highlight */}
-                <div className="mb-5 pb-5 border-b border-white/[0.07]">
+                <div className="relative z-10 mb-5 pb-5 border-b border-white/[0.07]">
                   <span className="text-[11px] font-medium text-white/45">{p.highlight}</span>
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-3 gap-3 mb-6">
+                <div className="relative z-10 grid grid-cols-3 gap-3 mb-6">
                   {p.stats.map((s, si) => (
                     <div key={si}>
                       <div className="text-[16px] font-light text-gold-400 leading-none">{s.v}</div>
@@ -520,12 +548,12 @@ function EcosystemSection() {
                 </div>
 
                 {/* Desc */}
-                <p className="text-[13.5px] leading-relaxed text-white/40 flex-1">
+                <p className="relative z-10 text-[13.5px] leading-relaxed text-white/40 flex-1">
                   {t(p.descKey)}
                 </p>
 
                 {/* Badge */}
-                <div className="mt-6 pt-5 border-t border-white/[0.06]">
+                <div className="relative z-10 mt-6 pt-5 border-t border-white/[0.06]">
                   <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/25">
                     {p.badge}
                   </span>
@@ -715,17 +743,39 @@ function TrackRecordSection() {
   return (
     <section className="bg-[#f7f8f9]">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
-        <AnimatedSection>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-500">
-            {t('trackLabel')}
-          </p>
-          <h2 className="mt-4 max-w-2xl text-[clamp(1.6rem,3vw,2.5rem)] font-light leading-tight text-[#1a1a2e]">
-            {t('trackTitle')}
-          </h2>
-          <p className="mt-5 max-w-2xl text-[1rem] leading-relaxed text-[#6c757d] font-light">
-            {t('trackSubtitle')}
-          </p>
-        </AnimatedSection>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-start">
+          <AnimatedSection>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-500">
+              {t('trackLabel')}
+            </p>
+            <h2 className="mt-4 max-w-2xl text-[clamp(1.6rem,3vw,2.5rem)] font-light leading-tight text-[#1a1a2e]">
+              {t('trackTitle')}
+            </h2>
+            <p className="mt-5 max-w-2xl text-[1rem] leading-relaxed text-[#6c757d] font-light">
+              {t('trackSubtitle')}
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.12}>
+            <div className="relative min-h-[320px] overflow-hidden border border-[#e5e7eb] bg-[#0b1328]">
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-[0.48]"
+                style={{ backgroundImage: "url('/images/home/trackrecord-hkex.jpg')" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-[#0b1328]/40 via-[#0b1328]/58 to-[#0b1328]/82" />
+              <div className="relative z-10 flex h-full items-end p-8">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-400">
+                    HKEX / IPO Scene
+                  </p>
+                  <p className="mt-3 max-w-[240px] text-[13px] leading-relaxed text-white/52">
+                    Anchor, cornerstone and post-listing support framed around Hong Kong capital markets.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
 
         {/* Sector legend */}
         <div className="mt-10 flex flex-wrap gap-3">
@@ -1092,18 +1142,27 @@ function CtaBanner() {
 
   return (
     <section className="bg-navy-950">
-      <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-8 px-6 lg:flex-row lg:items-center lg:px-8 py-24 lg:py-28">
-        <div className="max-w-xl">
-          <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-light text-white">{t('ctaTitle')}</h2>
-          <p className="mt-4 text-[1rem] font-light text-white/42">{t('ctaSubtitle')}</p>
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-24 lg:py-28">
+        <div className="relative overflow-hidden border border-white/10">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('/images/home/cta-banner.jpg')" }}
+          />
+          <div className="absolute inset-0 bg-[#07101f]/72" />
+          <div className="relative z-10 flex flex-col items-start justify-between gap-8 px-8 py-16 lg:flex-row lg:items-center lg:px-12">
+            <div className="max-w-xl">
+              <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-light text-white">{t('ctaTitle')}</h2>
+              <p className="mt-4 text-[1rem] font-light text-white/52">{t('ctaSubtitle')}</p>
+            </div>
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 border border-gold-400 px-8 py-4 text-[11.5px] font-medium uppercase tracking-[0.12em] text-gold-400 transition-colors hover:bg-gold-400 hover:text-navy-950 flex-shrink-0"
+            >
+              {t('ctaButton')}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
-        <Link
-          href="/contact"
-          className="group inline-flex items-center gap-2 border border-gold-400 px-8 py-4 text-[11.5px] font-medium uppercase tracking-[0.12em] text-gold-400 transition-colors hover:bg-gold-400 hover:text-navy-950 flex-shrink-0"
-        >
-          {t('ctaButton')}
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </Link>
       </div>
     </section>
   );

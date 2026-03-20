@@ -2,13 +2,26 @@ export default function HeroSection({
   title,
   subtitle,
   children,
+  backgroundImage,
 }: {
   title: string;
   subtitle?: string;
   children?: React.ReactNode;
+  backgroundImage?: string;
 }) {
   return (
-    <section className="relative bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-24">
+    <section
+      className="relative bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-24 min-h-[400px]"
+      style={backgroundImage ? {
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
+      } : undefined}
+    >
+      {/* Dark overlay for readability */}
+      {backgroundImage && (
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(7, 11, 20, 0.55)' }} />
+      )}
       {/* Subtle grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.03]"
