@@ -1,23 +1,25 @@
-import { useTranslations } from 'next-intl';
-import BusinessDetail from '@/components/business/BusinessDetail';
+import { notFound } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
+import { getDivisionBySlug } from '@/lib/data'
+import BusinessDetailDB from '@/components/business/BusinessDetailDB'
 
-export default function EnergyPage() {
-  const t = useTranslations('Business.energy');
+function loc(obj: any, field: string, locale: string) {
+  if (locale === 'zh-TW') return obj[field + 'ZhTW'] || obj[field + 'ZhCN'] || ''
+  if (locale === 'en') return obj[field + 'En'] || ''
+  return obj[field + 'ZhCN'] || ''
+}
+
+export default async function EnergyPage() {
+  const locale = await getLocale()
+  const div = await getDivisionBySlug('energy')
+  if (!div) notFound()
 
   return (
-    <BusinessDetail
-      heroTitle={t('heroTitle')}
-      heroSubtitle={t('heroSubtitle')}
-      overviewTitle={t('overviewTitle')}
-      overviewP1={t('overviewP1')}
-      overviewP2={t('overviewP2')}
-      currentSlug="energy"
-      features={[
-        { title: t('area1Title'), description: t('area1Desc') },
-        { title: t('area2Title'), description: t('area2Desc') },
-        { title: t('area3Title'), description: t('area3Desc') },
-        { title: t('area4Title'), description: t('area4Desc') },
-      ]}
+    <BusinessDetailDB
+      slug={div.slug}
+      title={loc(div, 'title', locale)}
+      shortDesc={loc(div, 'shortDesc', locale)}
+      body={locale === 'en' ? div.bodyEn : locale === 'zh-TW' ? div.bodyZhTW : div.bodyZhCN}
     />
-  );
+  )
 }

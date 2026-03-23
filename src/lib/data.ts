@@ -16,6 +16,10 @@ export async function getDivisions() {
   return prisma.businessDivision.findMany({ orderBy: { sortOrder: 'asc' } });
 }
 
+export async function getDivisionBySlug(slug: string) {
+  return prisma.businessDivision.findUnique({ where: { slug } });
+}
+
 export async function getPublishedArticles() {
   return prisma.article.findMany({
     where: { published: true },

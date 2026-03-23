@@ -1,23 +1,25 @@
-import { useTranslations } from 'next-intl';
-import BusinessDetail from '@/components/business/BusinessDetail';
+import { notFound } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
+import { getDivisionBySlug } from '@/lib/data'
+import BusinessDetailDB from '@/components/business/BusinessDetailDB'
 
-export default function GoldPage() {
-  const t = useTranslations('Business.gold');
+function loc(obj: any, field: string, locale: string) {
+  if (locale === 'zh-TW') return obj[field + 'ZhTW'] || obj[field + 'ZhCN'] || ''
+  if (locale === 'en') return obj[field + 'En'] || ''
+  return obj[field + 'ZhCN'] || ''
+}
+
+export default async function GoldPage() {
+  const locale = await getLocale()
+  const div = await getDivisionBySlug('gold')
+  if (!div) notFound()
 
   return (
-    <BusinessDetail
-      heroTitle={t('heroTitle')}
-      heroSubtitle={t('heroSubtitle')}
-      overviewTitle={t('overviewTitle')}
-      overviewP1={t('overviewP1')}
-      overviewP2={t('overviewP2')}
-      currentSlug="gold"
-      features={[
-        { title: t('feature1Title'), description: t('feature1Desc') },
-        { title: t('feature2Title'), description: t('feature2Desc') },
-        { title: t('feature3Title'), description: t('feature3Desc') },
-        { title: t('feature4Title'), description: t('feature4Desc') },
-      ]}
+    <BusinessDetailDB
+      slug={div.slug}
+      title={loc(div, 'title', locale)}
+      shortDesc={loc(div, 'shortDesc', locale)}
+      body={locale === 'en' ? div.bodyEn : locale === 'zh-TW' ? div.bodyZhTW : div.bodyZhCN}
     />
-  );
+  )
 }

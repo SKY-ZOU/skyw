@@ -1,23 +1,25 @@
-import { useTranslations } from 'next-intl';
-import BusinessDetail from '@/components/business/BusinessDetail';
+import { notFound } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
+import { getDivisionBySlug } from '@/lib/data'
+import BusinessDetailDB from '@/components/business/BusinessDetailDB'
 
-export default function IpoAnchorPage() {
-  const t = useTranslations('Business.ipo');
+function loc(obj: any, field: string, locale: string) {
+  if (locale === 'zh-TW') return obj[field + 'ZhTW'] || obj[field + 'ZhCN'] || ''
+  if (locale === 'en') return obj[field + 'En'] || ''
+  return obj[field + 'ZhCN'] || ''
+}
+
+export default async function IpoPage() {
+  const locale = await getLocale()
+  const div = await getDivisionBySlug('ipo-anchor')
+  if (!div) notFound()
 
   return (
-    <BusinessDetail
-      heroTitle={t('heroTitle')}
-      heroSubtitle={t('heroSubtitle')}
-      overviewTitle={t('overviewTitle')}
-      overviewP1={t('overviewP1')}
-      overviewP2={t('overviewP2')}
-      currentSlug="ipo-anchor"
-      features={[
-        { title: t('advantage1Title'), description: t('advantage1Desc') },
-        { title: t('advantage2Title'), description: t('advantage2Desc') },
-        { title: t('advantage3Title'), description: t('advantage3Desc') },
-        { title: t('advantage4Title'), description: t('advantage4Desc') },
-      ]}
+    <BusinessDetailDB
+      slug={div.slug}
+      title={loc(div, 'title', locale)}
+      shortDesc={loc(div, 'shortDesc', locale)}
+      body={locale === 'en' ? div.bodyEn : locale === 'zh-TW' ? div.bodyZhTW : div.bodyZhCN}
     />
-  );
+  )
 }
