@@ -8,3 +8,10 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# lp.skyw.group/* → skyw.group/lp/:splat
+[[redirects]]
+  from = "https://lp.skyw.group/*"
+  to = "https://skyw.group/lp/:splat"
+  status = 301
+  force = true
