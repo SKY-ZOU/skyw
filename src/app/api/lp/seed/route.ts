@@ -1,86 +1,80 @@
 /**
- * LP Portal 数据库初始化接口
- * 用于首次部署后创建测试账号和基础数据
- *
- * 调用方式：POST /api/lp/seed
+ * POST /api/lp/seed - LP Portal 初始化（Turso 版）
  * Body: { "secret": "<LP_SEED_SECRET>" }
- *
- * ⚠️ 生产环境使用后应删除或通过环境变量禁用此接口
  */
 
 import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
-import { createAdminClient } from '@/lib/lp-supabase'
+import { lpQuery, lpExecute, newId } from '@/lib/lp-turso'
 
 const SEED_SECRET = process.env.LP_SEED_SECRET
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-
     if (!SEED_SECRET || body.secret !== SEED_SECRET) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const supabase = createAdminClient()
-
-    // Check existing users
-    const { data: existingUsers, error: checkError } = await supabase
-      .from('users')
-      .select('email')
-
-    if (checkError) {
-      return NextResponse.json({
-        error: `Cannot check users table: ${checkError.message}`,
-        hint: 'Run schema migration first in Supabase SQL editor'
-      }, { status: 500 })
-    }
-
-    const existingEmails = (existingUsers || []).map((u: any) => u.email)
-
-    // Generate password hashes
     const adminHash = await bcrypt.hash('admin123', 10)
     const lpHash = await bcrypt.hash('lp123456', 10)
+    const ts = new Date().toISOString()
 
-    const usersToInsert = [
-      { email: 'admin@skyw.group', password_hash: adminHash, role: 'admin', name: '系统管理员', phone: '+852 6819 9909' },
-      { email: 'lp1@skyw.group', password_hash: lpHash, role: 'lp', name: '张投资人', phone: '+852 9123 4567' },
-      { email: 'lp2@skyw.group', password_hash: lpHash, role: 'lp', name: '李投资人', phone: '+852 9876 5432' },
-    ].filter(u => !existingEmails.includes(u.email))
+    const usersToSeed = [
+      { email: 'admin@skyw.group', hash: adminHash, role: 'admin', name: '系统管理员' },
+      { email: 'lp1@skyw.group', hash: lpHash, role: 'lp', name: '张投资人' },
+      { email: 'lp2@skyw.group', hash: lpHash, role: 'lp', name: '李投资人' },
+    ]
 
-    const results: { created: string[]; skipped: string[]; errors: string[] } = {
-      created: [],
-      skipped: existingEmails.filter((e: string) => ['admin@skyw.group', 'lp1@skyw.group', 'lp2@skyw.group'].includes(e)),
-      errors: [],
-    }
+    const existing = await lpQuery<{ email: string }>(`SELECT email FROM lp_users`)
+    const existingEmails = existing.map(u => u.email)
 
-    for (const user of usersToInsert) {
-      const { error } = await supabase.from('users').insert(user)
-      if (error) {
-        results.errors.push(`${user.email}: ${error.message}`)
+    const created: string[] = []
+    const skipped: string[] = []
+
+    for (const u of usersToSeed) {
+      if (existingEmails.includes(u.email)) {
+        skipped.push(u.email)
       } else {
-        results.created.push(user.email)
+        await lpExecute(
+          `INSERT INTO lp_users (id, email, password_hash, role, name, created_at) VALUES (?,?,?,?,?,?)`,
+          [newId(), u.email, u.hash, u.role, u.name, ts]
+        )
+        created.push(u.email)
       }
     }
 
-    // Seed basic fund data if funds table is empty
-    const { data: existingFunds } = await supabase.from('funds').select('id').limit(1)
+    // Seed funds if empty
+    const funds = await lpQuery(`SELECT id FROM lp_funds`)
     let fundsSeeded = false
+    if (!funds.length) {
+      const fundData = [
+        ['10000000-0000-0000-0000-000000000001', '天汇成长一期基金', 'CNY', 1.2580],
+        ['10000000-0000-0000-0000-000000000002', '天汇稳健二期基金', 'CNY', 1.1025],
+        ['10000000-0000-0000-0000-000000000003', '天汇全球配置基金', 'USD', 1.0568],
+        ['10000000-0000-0000-0000-000000000004', '天汇科技创新基金', 'CNY', 1.3892],
+      ]
+      for (const [id, name, currency, nav] of fundData) {
+        await lpExecute(
+          `INSERT INTO lp_funds (id, name, currency, nav, status, created_at) VALUES (?,?,?,?,'active',?)`,
+          [id, name, currency, nav, ts]
+        )
+      }
+      fundsSeeded = true
+    }
 
-    if (!existingFunds || existingFunds.length === 0) {
-      const { error: fundError } = await supabase.from('funds').insert([
-        { id: '10000000-0000-0000-0000-000000000001', name: '天汇成长一期基金', currency: 'CNY', nav: 1.2580, status: 'active' },
-        { id: '10000000-0000-0000-0000-000000000002', name: '天汇稳健二期基金', currency: 'CNY', nav: 1.1025, status: 'active' },
-        { id: '10000000-0000-0000-0000-000000000003', name: '天汇全球配置基金', currency: 'USD', nav: 1.0568, status: 'active' },
-        { id: '10000000-0000-0000-0000-000000000004', name: '天汇科技创新基金', currency: 'CNY', nav: 1.3892, status: 'active' },
-      ])
-      fundsSeeded = !fundError
-      if (fundError) results.errors.push(`Funds: ${fundError.message}`)
+    // Seed announcements if empty
+    const ann = await lpQuery(`SELECT id FROM lp_announcements`)
+    if (!ann.length) {
+      await lpExecute(
+        `INSERT INTO lp_announcements (id, title, content, priority, created_at) VALUES (?,?,?,?,?)`,
+        [newId(), '系统上线公告', '天汇基金 LP Portal 正式上线，欢迎使用我们的全新服务平台。', 'high', ts]
+      )
     }
 
     return NextResponse.json({
       ok: true,
-      users: results,
+      users: { created, skipped },
       fundsSeeded,
       accounts: [
         { email: 'admin@skyw.group', password: 'admin123', role: 'admin' },
