@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import NextLink from 'next/link';
 import { Menu, ChevronDown } from 'lucide-react';
 import { useSiteData } from '@/components/providers/SiteDataProvider';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -139,6 +140,18 @@ export default function Header() {
             >
               {t('partnership')}
             </Link>
+
+            {/* Investor Portal CTA */}
+            <NextLink
+              href="/lp/login"
+              className={`ml-2 rounded-sm border px-4 py-1.5 text-[13px] font-medium uppercase tracking-[0.08em] transition-all duration-200 ${
+                scrolled
+                  ? 'border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white'
+                  : 'border-white/60 text-white hover:border-[#D4AF37] hover:text-[#D4AF37]'
+              }`}
+            >
+              {t('investorPortal')}
+            </NextLink>
           </nav>
 
           {/* Right side */}

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
+import NextLink from 'next/link';
 import { X, ChevronDown } from 'lucide-react';
 import { useSiteData } from '@/components/providers/SiteDataProvider';
 import { loc } from '@/lib/locale-utils';
@@ -74,6 +75,17 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
         <Link href="/partnership" onClick={onClose} className="block border-b border-[#E9ECEF] py-4 text-lg font-medium text-[#212529]">
           {t('partnership')}
         </Link>
+
+        {/* Investor Portal */}
+        <div className="pt-6">
+          <NextLink
+            href="/lp/login"
+            onClick={onClose}
+            className="flex w-full items-center justify-center rounded-sm border border-[#D4AF37] py-3 text-base font-medium tracking-wider text-[#D4AF37]"
+          >
+            {t('investorPortal')}
+          </NextLink>
+        </div>
 
         {/* Language selector */}
         <div className="mt-8">

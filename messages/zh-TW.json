@@ -19,7 +19,8 @@
     "digitalTrade": "數字貿易科技",
     "energy": "綠色能源投資",
     "web3Finance": "Web3 金融",
-    "language": "語言"
+    "language": "語言",
+    "investorPortal": "投資人入口"
   },
   "Home": {
     "heroTagline": "硬資產 · 新科技 · 香港合規通道",
@@ -39,6 +40,8 @@
     "gatewayLabel": "為何選擇香港",
     "gatewayTitle": "以亞洲最高監管標準，架設您通往中國的橋梁",
     "gatewaySubtitle": "對於尋求可靠、透明地進入中國及東方市場的一帶一路投資人，香港提供無可比擬的監管公信力、法律清晰度與金融互聯互通。",
+    "gatewayBannerLabel": "香港金融門戶",
+    "gatewayBannerDesc": "法律確定性、受監管的資本通道、稅務效率與跨境執行能力——香港是連接中國與全球資本的首選平台。",
     "gateway1Title": "SFC持牌合規",
     "gateway1Desc": "持有香港證監會第6類及第9類牌照——香港最嚴格的金融監管資質——確保每筆交易均符合國際一流的合規標準。",
     "gateway2Title": "QFLP / QDIE通道",
@@ -88,6 +91,11 @@
     "trackLabel": "過往業績",
     "trackTitle": "30+ IPO基石與錨定投資",
     "trackSubtitle": "團隊已作為基石或錨定投資人參與逾30個港股及A+H上市項目，覆蓋人工智能芯片、機器人、生物科技及新消費品牌等多個賽道。",
+    "trackStatLabel": "關鍵指標",
+    "trackStat1": "港股基石 / 錨定參與項目",
+    "trackStat2": "累計參與 IPO 募資規模",
+    "trackStat3": "覆蓋核心行業賽道",
+    "trackStat4": "活躍參與港股投資",
     "sectorAI": "AI與半導體",
     "sectorRobotics": "機器人與自動化",
     "sectorHealth": "生物科技與醫療",
@@ -289,6 +297,40 @@
       "feature3Desc": "以鏈上黃金代幣化打通實物貴金屬與數位資產基礎設施",
       "feature4Title": "每月流動性",
       "feature4Desc": "每月開放申購與贖回，並提供完整透明與穿透式報告"
+    },
+    "creditGuarantee": {
+      "title": "商業信用擔保",
+      "shortDesc": "為中小企業提供跨境貿易融資擔保服務，依托香港合規架構連接內地及東南亞供應鏈企業與國際融資渠道。",
+      "heroTitle": "商業信用擔保",
+      "heroSubtitle": "以香港合規架構為跨境貿易提供機構級信用支持",
+      "overviewTitle": "跨境貿易信用增強服務",
+      "overviewP1": "天匯依托香港SFC持牌架構，為參與一帶一路貿易走廊的中小企業提供商業信用擔保服務。通過連接內地、東南亞與中東貿易融資需求，幫助企業降低跨境貿易的信用風險與融資成本。",
+      "overviewP2": "服務範圍涵蓋貿易應收賬款擔保、跨境供應鏈融資增信及信用證優化。依托恒邦資本與中銀資管的戰略網絡，為擔保項目提供強有力的機構支持。",
+      "feature1Title": "貿易應收賬款擔保",
+      "feature1Desc": "為跨境貿易應收賬款提供機構級信用增級，降低壞賬風險",
+      "feature2Title": "供應鏈融資增信",
+      "feature2Desc": "支持核心企業供應鏈上下游獲得更低成本的融資安排",
+      "feature3Title": "信用證優化",
+      "feature3Desc": "協助優化信用證條款結構，提升跨境貿易結算效率",
+      "feature4Title": "風險管理",
+      "feature4Desc": "專業盡職調查與持續風險監控，保障擔保資產品質"
+    },
+    "fundManagement": {
+      "title": "基金管理服務",
+      "shortDesc": "為機構投資人及家族辦公室提供定制化基金管理與財富管理解決方案，依托香港SFC第9類牌照提供專業資產管理服務。",
+      "heroTitle": "基金管理服務",
+      "heroSubtitle": "SFC第9類持牌，為機構及高淨值客戶提供專業資產管理",
+      "overviewTitle": "專業資產管理平台",
+      "overviewP1": "天匯持有香港證監會第9類（提供資產管理）牌照，具備合規管理客戶資產的資質。依托三大股東機構的資源與研究能力，提供涵蓋港股、A+H股及跨境另類資產的多策略投資組合。",
+      "overviewP2": "服務對象包括主權基金、家族辦公室、企業養老金及合格海外機構投資人。基金架構可依據投資人稅務與合規需求定製，通過香港OFC、開曼基金或新加坡VCC靈活架設。",
+      "feature1Title": "多策略投資",
+      "feature1Desc": "港股新經濟、A+H雙邊套利、另類資產與跨境主題組合",
+      "feature2Title": "定制化架構",
+      "feature2Desc": "香港OFC / 開曼基金 / 新加坡VCC，按需匹配最優合規架構",
+      "feature3Title": "機構級合規",
+      "feature3Desc": "普華永道審計、Fireblocks托管，符合SFC及國際機構標準",
+      "feature4Title": "投資人報告",
+      "feature4Desc": "完整透明的穿透式定期報告與NAV核算服務"
     }
   },
   "Insights": {

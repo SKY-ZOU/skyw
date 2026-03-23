@@ -19,7 +19,8 @@
     "digitalTrade": "Digital Trade & Tech",
     "energy": "Green Energy",
     "web3Finance": "Web3 Finance",
-    "language": "Language"
+    "language": "Language",
+    "investorPortal": "Investor Portal"
   },
   "Home": {
     "heroTagline": "Hard Assets · New Tech · Hong Kong Compliant Gateway",
@@ -39,6 +40,8 @@
     "gatewayLabel": "Why Hong Kong",
     "gatewayTitle": "Your Bridge to China, Built on Asia's Gold Standard of Regulation",
     "gatewaySubtitle": "For Belt & Road investors seeking reliable, transparent access to China and Eastern markets, Hong Kong offers an unmatched combination of regulatory credibility, legal clarity, and financial connectivity.",
+    "gatewayBannerLabel": "Hong Kong Financial Gateway",
+    "gatewayBannerDesc": "Legal certainty, regulated capital channels, tax efficiency and cross-border execution — Hong Kong is the premier platform connecting China with global capital.",
     "gateway1Title": "SFC Regulated",
     "gateway1Desc": "Holding SFC Type 6 and Type 9 licenses — Hong Kong's most rigorous financial designations — ensures every transaction meets world-class compliance standards.",
     "gateway2Title": "QFLP / QDIE Access",
@@ -88,6 +91,11 @@
     "trackLabel": "Track Record",
     "trackTitle": "30+ IPO Cornerstone & Anchor Investments",
     "trackSubtitle": "Our team has served as cornerstone or anchor investor in over 30 Hong Kong and A+H IPO projects spanning AI chips, robotics, biotech, and new consumer brands.",
+    "trackStatLabel": "Key Metrics",
+    "trackStat1": "HK IPO cornerstone / anchor deals",
+    "trackStat2": "Total IPO fundraising participated",
+    "trackStat3": "Core sector verticals covered",
+    "trackStat4": "Active HK market participation",
     "sectorAI": "AI & Semiconductor",
     "sectorRobotics": "Robotics & Automation",
     "sectorHealth": "Biotech & Healthcare",
@@ -289,6 +297,40 @@
       "feature3Desc": "On-chain gold tokenization bridging physical precious metals with digital asset infrastructure",
       "feature4Title": "Monthly Liquidity",
       "feature4Desc": "Open subscriptions and redemptions monthly with full transparency and look-through reporting"
+    },
+    "creditGuarantee": {
+      "title": "Commercial Credit Guarantee",
+      "shortDesc": "Providing cross-border trade finance guarantee services for SMEs, connecting mainland and Southeast Asian supply chain enterprises with international financing channels via Hong Kong's regulatory framework.",
+      "heroTitle": "Commercial Credit Guarantee",
+      "heroSubtitle": "Institutional-grade credit support for cross-border trade via Hong Kong's regulatory framework",
+      "overviewTitle": "Cross-Border Trade Credit Enhancement",
+      "overviewP1": "SKYW leverages its SFC-licensed Hong Kong structure to provide commercial credit guarantee services for SMEs participating in Belt & Road trade corridors. By connecting mainland China, Southeast Asia, and Middle East trade financing needs, we help enterprises reduce cross-border credit risk and financing costs.",
+      "overviewP2": "Services encompass trade receivables guarantees, cross-border supply chain financing credit enhancement, and letter of credit optimization. Backed by the strategic networks of Hengbang Capital and BOCAM, our guarantees carry strong institutional support.",
+      "feature1Title": "Trade Receivables Guarantee",
+      "feature1Desc": "Institutional-grade credit enhancement for cross-border trade receivables, reducing bad debt risk",
+      "feature2Title": "Supply Chain Finance Enhancement",
+      "feature2Desc": "Supporting upstream and downstream supply chain players to access lower-cost financing arrangements",
+      "feature3Title": "Letter of Credit Optimization",
+      "feature3Desc": "Optimizing L/C term structures to improve cross-border trade settlement efficiency",
+      "feature4Title": "Risk Management",
+      "feature4Desc": "Professional due diligence and ongoing risk monitoring to safeguard guarantee asset quality"
+    },
+    "fundManagement": {
+      "title": "Fund Management Services",
+      "shortDesc": "Customized fund management and wealth management solutions for institutional investors and family offices, backed by Hong Kong SFC Type 9 licensing.",
+      "heroTitle": "Fund Management Services",
+      "heroSubtitle": "SFC Type 9 Licensed — Professional Asset Management for Institutions and HNWIs",
+      "overviewTitle": "Professional Asset Management Platform",
+      "overviewP1": "SKYW holds a Hong Kong Securities and Futures Commission Type 9 (Asset Management) license, enabling compliant management of client assets. Leveraging the resources and research capabilities of our three institutional shareholders, we offer multi-strategy portfolios spanning HK equities, A+H shares, and cross-border alternative assets.",
+      "overviewP2": "Clients include sovereign funds, family offices, corporate pension funds, and qualified overseas institutional investors. Fund structures are customized to client tax and compliance requirements, with flexible setup via Hong Kong OFC, Cayman funds, or Singapore VCC.",
+      "feature1Title": "Multi-Strategy Investing",
+      "feature1Desc": "HK new economy, A+H dual-listing arbitrage, alternative assets and cross-border thematic portfolios",
+      "feature2Title": "Customized Structures",
+      "feature2Desc": "HK OFC / Cayman / Singapore VCC — matched to optimal compliance structure per client needs",
+      "feature3Title": "Institutional Compliance",
+      "feature3Desc": "PwC audit, Fireblocks custody, meeting SFC and international institutional standards",
+      "feature4Title": "Investor Reporting",
+      "feature4Desc": "Full look-through periodic reporting and NAV calculation services"
     }
   },
   "Insights": {
