@@ -136,7 +136,7 @@ export default function Header() {
             </Link>
             <Link
               href="/partnership"
-              className={`px-4 py-2 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
+              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
             >
               {t('partnership')}
             </Link>
