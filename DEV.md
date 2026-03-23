@@ -3,8 +3,8 @@
 > 项目：skyw.group 官网
 > 主库：https://github.com/SKY-ZOU/skyw
 > 线上：https://skyw-website.netlify.app
-> 本地：http://localhost:3002
-> 更新：2026-03-08
+> 本地：http://127.0.0.1:3030/zh-CN
+> 更新：2026-03-20
 
 ---
 
@@ -80,9 +80,17 @@
 
 ### 本地开发
 ```bash
-cd /Users/mac/.gemini/antigravity/scratch/skyw
-npm run dev   # 启动 → http://localhost:3002
+cd /Volumes/imac/开发项目/SKYW天汇基金官网
+npm run dev:3030          # 后台拉起并等待健康检查通过
+npm run dev:3030:status   # 检查 3030 是否稳定可访问
+npm run dev:3030:logs     # 看最近日志
+npm run dev:3030:stop     # 停掉本地联调服务
 ```
+
+说明：
+- `npm run dev` 仍保留前台模式，适合临时调试。
+- 联调统一使用 `dev:3030`，会写日志到 `.tmp/next-3030.log`，并校验 `http://127.0.0.1:3030/zh-CN` 是否返回成功。
+- 若端口看起来“时好时坏”，先执行 `npm run dev:3030:restart`，再看 `npm run dev:3030:logs`。
 
 ### 部署
 ```bash

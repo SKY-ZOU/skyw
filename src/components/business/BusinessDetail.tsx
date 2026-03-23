@@ -33,6 +33,8 @@ export default function BusinessDetail({
     'digital-trade': '/images/business/digital-trade-bg.png',
     'energy': '/images/business/energy-bg.png',
     'web3-finance': '/images/business/web3-bg.png',
+    'credit-guarantee': '/images/business/digital-trade-bg.png',
+    'fund-management': '/images/business/ipo-bg.png',
   };
 
   return (

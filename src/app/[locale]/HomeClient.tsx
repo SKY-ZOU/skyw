@@ -333,19 +333,19 @@ function GatewaySection() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.08}>
-          <div className="relative mt-12 overflow-hidden border border-[#e5e7eb]">
+          <div className="relative mt-12 overflow-hidden">
             <div
-              className="absolute inset-0 bg-cover bg-center opacity-20"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/images/home/gateway-banner.jpg')" }}
             />
-            <div className="absolute inset-0 bg-white/82" />
-            <div className="relative z-10 flex min-h-[220px] items-end px-8 py-8 lg:px-10">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#070B14]/85 via-[#070B14]/60 to-[#070B14]/30" />
+            <div className="relative z-10 flex min-h-[240px] items-end px-8 py-10 lg:px-12">
               <div className="max-w-xl">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-500">
-                  Hong Kong Gateway
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-400">
+                  {t('gatewayBannerLabel')}
                 </p>
-                <p className="mt-3 text-[14px] leading-relaxed text-[#6c757d]">
-                  Legal certainty, regulated capital channels, tax efficiency and cross-border execution.
+                <p className="mt-3 text-[15px] font-light leading-relaxed text-white/80">
+                  {t('gatewayBannerDesc')}
                 </p>
               </div>
             </div>
@@ -381,44 +381,49 @@ function CorridorSection() {
   const t = useTranslations('Home');
 
   const corridors = [
-    { key: 'corridor1', dotLabel: 'Dubai' },
-    { key: 'corridor2', dotLabel: 'Singapore' },
-    { key: 'corridor3', dotLabel: 'Shenzhen' },
-    { key: 'corridor4', dotLabel: 'South Asia' },
-    { key: 'corridor5', dotLabel: 'London' },
+    { key: 'corridor1', city: 'Dubai', region: 'GCC · Middle East' },
+    { key: 'corridor2', city: 'Singapore', region: 'ASEAN Hub' },
+    { key: 'corridor3', city: 'Shenzhen', region: 'Greater Bay Area' },
+    { key: 'corridor4', city: 'South Asia', region: 'Pakistan · Bangladesh' },
+    { key: 'corridor5', city: 'London', region: 'Europe · UK' },
   ];
 
   return (
-    <section className="bg-navy-950">
+    <section className="bg-[#f7f8f9]">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
-          {/* Left: corridor list */}
+          {/* Left: header */}
           <AnimatedSection>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-400">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-500">
               {t('corridorLabel')}
             </p>
-            <h2 className="mt-4 text-[clamp(1.6rem,3vw,2.5rem)] font-light leading-tight text-white">
+            <h2 className="mt-4 text-[clamp(1.6rem,3vw,2.5rem)] font-light leading-tight text-[#1a1a2e]">
               {t('corridorTitle')}
             </h2>
-            <p className="mt-5 text-[1rem] leading-relaxed text-white/42 font-light">
+            <p className="mt-5 text-[1rem] leading-relaxed text-[#6c757d] font-light">
               {t('corridorSubtitle')}
             </p>
 
-            <div className="mt-12 divide-y divide-white/[0.07]">
+            <div className="mt-12 divide-y divide-[#e5e7eb]">
               {corridors.map((c, i) => (
                 <AnimatedSection key={c.key} delay={i * 0.09}>
                   <div className="py-5 flex gap-5 items-start">
-                    <div className="flex-shrink-0 mt-1.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-gold-400 opacity-70" />
+                    <div className="flex-shrink-0 mt-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-gold-400" />
                     </div>
-                    <div>
-                      <h3 className="text-[14.5px] font-semibold text-white/88 leading-snug">
-                        {t(`${c.key}` as const)}
-                      </h3>
-                      <p className="mt-1.5 text-[13.5px] leading-relaxed text-white/38">
-                        {t(`${c.key}Desc` as const)}
-                      </p>
+                    <div className="flex-1 flex items-start justify-between gap-4">
+                      <div>
+                        <h3 className="text-[14.5px] font-semibold text-[#1a1a2e] leading-snug">
+                          {t(`${c.key}` as const)}
+                        </h3>
+                        <p className="mt-1.5 text-[13.5px] leading-relaxed text-[#6c757d]">
+                          {t(`${c.key}Desc` as const)}
+                        </p>
+                      </div>
+                      <span className="flex-shrink-0 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#adb5bd] mt-0.5 text-right">
+                        {c.region}
+                      </span>
                     </div>
                   </div>
                 </AnimatedSection>
@@ -426,12 +431,26 @@ function CorridorSection() {
             </div>
           </AnimatedSection>
 
-          {/* Right: SVG map */}
-          <AnimatedSection delay={0.25}>
-            <div className="flex items-center justify-center lg:pt-8">
-              <div className="w-full max-w-[520px]">
-                <BRIMapSVG />
-              </div>
+          {/* Right: corridor images grid */}
+          <AnimatedSection delay={0.2}>
+            <div className="grid grid-cols-2 gap-px bg-[#e5e7eb]">
+              {[
+                { img: '/images/home/corridor-dubai.png', label: 'Dubai' },
+                { img: '/images/home/corridor-singapore.png', label: 'Singapore' },
+                { img: '/images/home/corridor-shenzhen.png', label: 'Shenzhen' },
+                { img: '/images/home/corridor-london.png', label: 'London' },
+              ].map((item) => (
+                <div key={item.label} className="relative overflow-hidden bg-[#e5e7eb]" style={{ aspectRatio: '4/3' }}>
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
+                    style={{ backgroundImage: `url(${item.img})` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070B14]/70 via-transparent to-transparent" />
+                  <span className="absolute bottom-3 left-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/80">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
             </div>
           </AnimatedSection>
         </div>
@@ -509,52 +528,50 @@ function EcosystemSection() {
           </p>
         </AnimatedSection>
 
-        <div className="mt-16 grid gap-px bg-white/[0.06] sm:grid-cols-3">
+        <div className="mt-16 grid gap-px bg-white/[0.08] sm:grid-cols-3">
           {partners.map((p, i) => (
             <AnimatedSection key={i} delay={i * 0.12}>
-              <div className="relative bg-[#070e1f] p-9 lg:p-10 h-full flex flex-col overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center pointer-events-none"
-                  style={{ backgroundImage: `url(${p.cityImage})`, opacity: 0.32 }}
-                />
-                <div className="absolute inset-0 bg-[#070e1f]/80" />
+              <div className="bg-navy-900 p-9 lg:p-10 h-full flex flex-col">
+                {/* Accent top bar */}
+                <div className="h-[3px] w-10 mb-8" style={{ backgroundColor: p.accent }} />
+
                 {/* Header */}
-                <div className="relative z-10 flex items-start justify-between mb-6">
+                <div className="flex items-start justify-between mb-6">
                   <div>
-                    <div className="text-[20px] font-light tracking-wide text-white">{p.logo}</div>
-                    <div className="text-[11px] text-white/35 mt-0.5 tracking-wide">{p.logoEn}</div>
+                    <div className="text-[21px] font-light tracking-wide text-white">{p.logo}</div>
+                    <div className="text-[11px] text-white/50 mt-0.5 tracking-wide">{p.logoEn}</div>
                   </div>
                   <span
-                    className="text-[9px] font-semibold uppercase tracking-[0.15em] px-2.5 py-1 border flex-shrink-0"
-                    style={{ borderColor: `${p.accent}40`, color: p.accent }}
+                    className="text-[9px] font-semibold uppercase tracking-[0.14em] px-2.5 py-1 border flex-shrink-0 mt-1"
+                    style={{ borderColor: `${p.accent}55`, color: p.accent, background: `${p.accent}10` }}
                   >
                     {p.role}
                   </span>
                 </div>
 
                 {/* Highlight */}
-                <div className="relative z-10 mb-5 pb-5 border-b border-white/[0.07]">
-                  <span className="text-[11px] font-medium text-white/45">{p.highlight}</span>
+                <div className="mb-5 pb-5 border-b border-white/[0.1]">
+                  <span className="text-[11.5px] font-medium text-white/60">{p.highlight}</span>
                 </div>
 
                 {/* Stats */}
-                <div className="relative z-10 grid grid-cols-3 gap-3 mb-6">
+                <div className="grid grid-cols-3 gap-3 mb-6">
                   {p.stats.map((s, si) => (
                     <div key={si}>
-                      <div className="text-[16px] font-light text-gold-400 leading-none">{s.v}</div>
-                      <div className="text-[10px] text-white/30 mt-1 leading-snug">{s.l}</div>
+                      <div className="text-[17px] font-light leading-none" style={{ color: p.accent }}>{s.v}</div>
+                      <div className="text-[10px] text-white/40 mt-1.5 leading-snug">{s.l}</div>
                     </div>
                   ))}
                 </div>
 
                 {/* Desc */}
-                <p className="relative z-10 text-[13.5px] leading-relaxed text-white/40 flex-1">
+                <p className="text-[13.5px] leading-relaxed text-white/65 flex-1">
                   {t(p.descKey)}
                 </p>
 
                 {/* Badge */}
-                <div className="relative z-10 mt-6 pt-5 border-t border-white/[0.06]">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/25">
+                <div className="mt-6 pt-5 border-t border-white/[0.08]">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/35">
                     {p.badge}
                   </span>
                 </div>
@@ -757,21 +774,22 @@ function TrackRecordSection() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.12}>
-            <div className="relative min-h-[320px] overflow-hidden border border-[#e5e7eb] bg-[#0b1328]">
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-[0.48]"
-                style={{ backgroundImage: "url('/images/home/trackrecord-hkex.jpg')" }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-l from-[#0b1328]/40 via-[#0b1328]/58 to-[#0b1328]/82" />
-              <div className="relative z-10 flex h-full items-end p-8">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-400">
-                    HKEX / IPO Scene
-                  </p>
-                  <p className="mt-3 max-w-[240px] text-[13px] leading-relaxed text-white/52">
-                    Anchor, cornerstone and post-listing support framed around Hong Kong capital markets.
-                  </p>
-                </div>
+            <div className="bg-navy-900 border border-navy-800 p-8 lg:p-10">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-400 mb-6">
+                {t('trackStatLabel')}
+              </p>
+              <div className="space-y-5">
+                {[
+                  { value: '20+', label: t('trackStat1') },
+                  { value: 'HKD 15B+', label: t('trackStat2') },
+                  { value: '5', label: t('trackStat3') },
+                  { value: '2021–', label: t('trackStat4') },
+                ].map((s, i) => (
+                  <div key={i} className="flex items-baseline gap-4 pb-5 border-b border-white/[0.07] last:border-0 last:pb-0">
+                    <div className="text-[1.7rem] font-light text-gold-400 leading-none w-24 flex-shrink-0">{s.value}</div>
+                    <div className="text-[13px] text-white/60 leading-snug">{s.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </AnimatedSection>
