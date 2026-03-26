@@ -15,8 +15,6 @@
         "npm:@prisma/adapter-libsql@^7.4.2",
         "npm:@prisma/client@^7.4.2",
         "npm:@studio-freight/lenis@^1.0.42",
-        "npm:@supabase/ssr@0.8",
-        "npm:@supabase/supabase-js@^2.96.0",
         "npm:@tailwindcss/postcss@4",
         "npm:@types/bcryptjs@^2.4.6",
         "npm:@types/node@20",

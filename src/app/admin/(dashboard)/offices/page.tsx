@@ -78,12 +78,12 @@ export default function OfficesPage() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-[#1a1a2e]">Offices</h1>
+        <h1 className="text-2xl font-semibold text-[#1a1a2e]">办公室管理</h1>
         <button
           onClick={startNew}
           className="flex items-center gap-2 rounded-lg bg-[#070B14] px-4 py-2.5 text-[13px] font-medium text-white hover:bg-[#1A2A4A]"
         >
-          <Plus className="h-4 w-4" /> Add Office
+          <Plus className="h-4 w-4" /> 添加办公室
         </button>
       </div>
 
@@ -101,21 +101,23 @@ export default function OfficesPage() {
             ) : (
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-[#1a1a2e]">{office.nameEn}</h3>
+                  <h3 className="text-lg font-semibold text-[#1a1a2e]">{office.nameZhCN}</h3>
                   <p className="text-[13px] text-[#6c757d]">
-                    {office.typeEn} &middot; {office.phone} &middot; {office.email}
+                    {office.typeZhCN} &middot; {office.phone} &middot; {office.email}
                   </p>
                 </div>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setEditing(office)}
                     className="rounded-lg p-2 text-[#6c757d] hover:bg-[#f8f9fa] hover:text-[#1a1a2e]"
+                    title="编辑"
                   >
                     <Pencil className="h-4 w-4" />
                   </button>
                   <button
                     onClick={() => setDeleting(office)}
                     className="rounded-lg p-2 text-[#6c757d] hover:bg-red-50 hover:text-red-600"
+                    title="删除"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -140,7 +142,7 @@ export default function OfficesPage() {
 
       <DeleteConfirm
         open={!!deleting}
-        title={deleting?.nameEn ?? ''}
+        title={deleting?.nameZhCN ?? ''}
         onConfirm={handleDelete}
         onCancel={() => setDeleting(null)}
       />
@@ -165,15 +167,18 @@ function OfficeEditForm({
     <div className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-3">
         <div>
-          <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">Slug</label>
+          <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">
+            Slug
+            <span className="ml-1 text-[10px] text-[#adb5bd]">（英文，用于标识）</span>
+          </label>
           <input className={inputClass} value={data.slug} onChange={(e) => onChange('slug', e.target.value)} />
         </div>
         <div>
-          <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">Phone</label>
+          <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">电话</label>
           <input className={inputClass} value={data.phone} onChange={(e) => onChange('phone', e.target.value)} />
         </div>
         <div>
-          <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">Email</label>
+          <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">邮箱</label>
           <input className={inputClass} value={data.email} onChange={(e) => onChange('email', e.target.value)} />
         </div>
       </div>
@@ -182,7 +187,7 @@ function OfficeEditForm({
         {(lang: Lang) => (
           <div className="grid gap-4 sm:grid-cols-3">
             <div>
-              <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">Name</label>
+              <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">办公室名称</label>
               <input
                 className={inputClass}
                 value={data[langKey('name', lang)] as string}
@@ -190,15 +195,16 @@ function OfficeEditForm({
               />
             </div>
             <div>
-              <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">Type</label>
+              <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">类型</label>
               <input
                 className={inputClass}
+                placeholder="如：香港总部 / 亚太区中心"
                 value={data[langKey('type', lang)] as string}
                 onChange={(e) => onChange(langKey('type', lang), e.target.value)}
               />
             </div>
             <div>
-              <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">Address</label>
+              <label className="mb-1 block text-[12px] font-medium text-[#6c757d]">地址</label>
               <input
                 className={inputClass}
                 value={data[langKey('address', lang)] as string}
@@ -211,10 +217,10 @@ function OfficeEditForm({
 
       <div className="flex gap-2">
         <button onClick={onSave} className="flex items-center gap-1 rounded-lg bg-[#070B14] px-4 py-2 text-[13px] font-medium text-white hover:bg-[#1A2A4A]">
-          <Check className="h-4 w-4" /> Save
+          <Check className="h-4 w-4" /> 保存
         </button>
         <button onClick={onCancel} className="flex items-center gap-1 rounded-lg border border-[#e5e7eb] px-4 py-2 text-[13px] font-medium text-[#6c757d] hover:bg-[#f8f9fa]">
-          <X className="h-4 w-4" /> Cancel
+          <X className="h-4 w-4" /> 取消
         </button>
       </div>
     </div>

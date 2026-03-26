@@ -25,6 +25,10 @@ export async function PUT(request: NextRequest) {
         companyFull: setting.companyFull,
         email: setting.email,
         phone: setting.phone,
+        ogImage: setting.ogImage ?? '',
+        linkedinUrl: setting.linkedinUrl ?? '',
+        wechatId: setting.wechatId ?? '',
+        twitterUrl: setting.twitterUrl ?? '',
       },
     });
   }

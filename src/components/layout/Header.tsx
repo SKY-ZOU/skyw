@@ -80,77 +80,64 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden items-center gap-1 lg:flex">
-            <Link
-              href="/"
-              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
-            >
-              {t('home')}
-            </Link>
-            <Link
-              href="/about"
-              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
-            >
-              {t('about')}
-            </Link>
-
-            {/* Business dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setBizDropdown(true)}
-              onMouseLeave={() => setBizDropdown(false)}
-            >
-              <Link
-                href="/business"
-                className={`flex items-center gap-1 px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
+            {[
+              { href: '/', label: t('home') },
+              { href: '/about', label: t('about') },
+              { href: '/business', label: t('business'), isDropdown: true },
+              { href: '/insights', label: t('insights') },
+              { href: '/contact', label: t('contact') },
+              { href: '/partnership', label: t('partnership') },
+            ].map((item) => (
+              <div
+                key={item.href}
+                className="relative"
+                onMouseEnter={() => item.isDropdown && setBizDropdown(true)}
+                onMouseLeave={() => item.isDropdown && setBizDropdown(false)}
               >
-                {t('business')}
-                <ChevronDown className="h-3.5 w-3.5 opacity-60" />
-              </Link>
+                <Link
+                  href={item.href}
+                  className={`group relative px-4 py-2 text-body-sm font-medium uppercase tracking-[0.12em] transition-colors ${navLinkClass} flex items-center gap-1`}
+                >
+                  <span className="relative z-10">{item.label}</span>
+                  {item.isDropdown && <ChevronDown className="h-3.5 w-3.5 opacity-60 relative z-10" />}
+                  
+                  {/* Magnetic Underline Effect */}
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gold-400 origin-left"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </Link>
 
-              {bizDropdown && (
-                <div className="absolute left-0 top-full z-50 w-64 border border-[#e5e7eb] bg-white py-2 shadow-xl">
-                  {divisions.map((div) => (
-                    <Link
-                      key={div.divisionId}
-                      href={`/business/${div.slug}`}
-                      className="block px-5 py-3 text-body-sm text-[#495057] transition-colors hover:bg-[#f8f9fa] hover:text-navy-900"
-                    >
-                      {loc(div, 'title', locale)}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <Link
-              href="/insights"
-              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
-            >
-              {t('insights')}
-            </Link>
-            <Link
-              href="/contact"
-              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
-            >
-              {t('contact')}
-            </Link>
-            <Link
-              href="/partnership"
-              className={`px-4 py-2 text-body-sm font-medium uppercase tracking-[0.08em] transition-colors ${navLinkClass}`}
-            >
-              {t('partnership')}
-            </Link>
+                {item.isDropdown && bizDropdown && (
+                  <div className="absolute left-0 top-full z-50 w-64 border border-[#e5e7eb] bg-white py-2 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-300">
+                    <div className="h-[2px] w-full bg-gold-400 absolute top-0 left-0" />
+                    {divisions.map((div) => (
+                      <Link
+                        key={div.divisionId}
+                        href={`/business/${div.slug}`}
+                        className="block px-5 py-3 text-body-sm text-[#495057] transition-all hover:bg-[#f8f9fa] hover:text-gold-600 hover:pl-7"
+                      >
+                        {loc(div, 'title', locale)}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
 
             {/* Investor Portal CTA */}
             <NextLink
               href="/lp/login"
-              className={`ml-2 rounded-sm border px-4 py-1.5 text-[13px] font-medium uppercase tracking-[0.08em] transition-all duration-200 ${
+              className={`ml-4 rounded-sm border px-5 py-2 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 group relative overflow-hidden ${
                 scrolled
-                  ? 'border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white'
-                  : 'border-white/60 text-white hover:border-[#D4AF37] hover:text-[#D4AF37]'
+                  ? 'border-gold-400 text-gold-500 hover:text-white'
+                  : 'border-white/40 text-white hover:border-gold-400 hover:text-gold-400'
               }`}
             >
-              {t('investorPortal')}
+              <span className="relative z-10">{t('investorPortal')}</span>
+              <div className="absolute inset-0 bg-gold-400 -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
             </NextLink>
           </nav>
 

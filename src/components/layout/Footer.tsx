@@ -107,6 +107,14 @@ export default function Footer() {
           <p className="mt-3 text-caption text-white/30">
             {t('copyright')}
           </p>
+          <div className="mt-4 border-t border-white/5 pt-3">
+            <a
+              href="/admin"
+              className="text-[11px] text-white/15 transition-colors hover:text-white/40"
+            >
+              Admin
+            </a>
+          </div>
         </div>
       </div>
     </footer>

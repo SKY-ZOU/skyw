@@ -23,9 +23,10 @@ interface Props {
   title: string;
   shortDesc: string;
   body: string; // JSON string
+  coverImage?: string; // 来自数据库，优先使用
 }
 
-/* ─── Background image map ──────────────────────────────── */
+/* ─── Background image fallback map ────────────────────── */
 const bgMap: Record<string, string> = {
   gold:             '/images/business/gold-bg.png',
   'ipo-anchor':     '/images/business/ipo-bg.png',
@@ -98,7 +99,7 @@ function FeaturesSection({ section }: { section: Extract<Section, { type: 'featu
 }
 
 /* ─── Main component ────────────────────────────────────── */
-export default function BusinessDetailDB({ slug, title, shortDesc, body }: Props) {
+export default function BusinessDetailDB({ slug, title, shortDesc, body, coverImage }: Props) {
   let parsed: DivisionBody | null = null;
   try {
     parsed = JSON.parse(body);
@@ -106,7 +107,8 @@ export default function BusinessDetailDB({ slug, title, shortDesc, body }: Props
     // fallback to shortDesc only
   }
 
-  const bg = bgMap[slug];
+  // 优先使用后台设置的图片，其次使用本地静态图
+  const bg = coverImage || bgMap[slug];
 
   return (
     <>

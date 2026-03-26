@@ -1347,6 +1347,16 @@ export namespace Prisma {
     companyFull: string | null
     email: string | null
     phone: string | null
+    ogImage: string | null
+    linkedinUrl: string | null
+    wechatId: string | null
+    twitterUrl: string | null
+    geoAllowBots: string | null
+    geoOrgDesc: string | null
+    geoOrgFounded: string | null
+    geoOrgIndustry: string | null
+    faqJson: string | null
+    llmsCustom: string | null
   }
 
   export type SettingMaxAggregateOutputType = {
@@ -1355,6 +1365,16 @@ export namespace Prisma {
     companyFull: string | null
     email: string | null
     phone: string | null
+    ogImage: string | null
+    linkedinUrl: string | null
+    wechatId: string | null
+    twitterUrl: string | null
+    geoAllowBots: string | null
+    geoOrgDesc: string | null
+    geoOrgFounded: string | null
+    geoOrgIndustry: string | null
+    faqJson: string | null
+    llmsCustom: string | null
   }
 
   export type SettingCountAggregateOutputType = {
@@ -1363,6 +1383,16 @@ export namespace Prisma {
     companyFull: number
     email: number
     phone: number
+    ogImage: number
+    linkedinUrl: number
+    wechatId: number
+    twitterUrl: number
+    geoAllowBots: number
+    geoOrgDesc: number
+    geoOrgFounded: number
+    geoOrgIndustry: number
+    faqJson: number
+    llmsCustom: number
     _all: number
   }
 
@@ -1381,6 +1411,16 @@ export namespace Prisma {
     companyFull?: true
     email?: true
     phone?: true
+    ogImage?: true
+    linkedinUrl?: true
+    wechatId?: true
+    twitterUrl?: true
+    geoAllowBots?: true
+    geoOrgDesc?: true
+    geoOrgFounded?: true
+    geoOrgIndustry?: true
+    faqJson?: true
+    llmsCustom?: true
   }
 
   export type SettingMaxAggregateInputType = {
@@ -1389,6 +1429,16 @@ export namespace Prisma {
     companyFull?: true
     email?: true
     phone?: true
+    ogImage?: true
+    linkedinUrl?: true
+    wechatId?: true
+    twitterUrl?: true
+    geoAllowBots?: true
+    geoOrgDesc?: true
+    geoOrgFounded?: true
+    geoOrgIndustry?: true
+    faqJson?: true
+    llmsCustom?: true
   }
 
   export type SettingCountAggregateInputType = {
@@ -1397,6 +1447,16 @@ export namespace Prisma {
     companyFull?: true
     email?: true
     phone?: true
+    ogImage?: true
+    linkedinUrl?: true
+    wechatId?: true
+    twitterUrl?: true
+    geoAllowBots?: true
+    geoOrgDesc?: true
+    geoOrgFounded?: true
+    geoOrgIndustry?: true
+    faqJson?: true
+    llmsCustom?: true
     _all?: true
   }
 
@@ -1492,6 +1552,16 @@ export namespace Prisma {
     companyFull: string
     email: string
     phone: string
+    ogImage: string
+    linkedinUrl: string
+    wechatId: string
+    twitterUrl: string
+    geoAllowBots: string
+    geoOrgDesc: string
+    geoOrgFounded: string
+    geoOrgIndustry: string
+    faqJson: string
+    llmsCustom: string
     _count: SettingCountAggregateOutputType | null
     _avg: SettingAvgAggregateOutputType | null
     _sum: SettingSumAggregateOutputType | null
@@ -1519,6 +1589,16 @@ export namespace Prisma {
     companyFull?: boolean
     email?: boolean
     phone?: boolean
+    ogImage?: boolean
+    linkedinUrl?: boolean
+    wechatId?: boolean
+    twitterUrl?: boolean
+    geoAllowBots?: boolean
+    geoOrgDesc?: boolean
+    geoOrgFounded?: boolean
+    geoOrgIndustry?: boolean
+    faqJson?: boolean
+    llmsCustom?: boolean
   }, ExtArgs["result"]["setting"]>
 
   export type SettingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1527,6 +1607,16 @@ export namespace Prisma {
     companyFull?: boolean
     email?: boolean
     phone?: boolean
+    ogImage?: boolean
+    linkedinUrl?: boolean
+    wechatId?: boolean
+    twitterUrl?: boolean
+    geoAllowBots?: boolean
+    geoOrgDesc?: boolean
+    geoOrgFounded?: boolean
+    geoOrgIndustry?: boolean
+    faqJson?: boolean
+    llmsCustom?: boolean
   }, ExtArgs["result"]["setting"]>
 
   export type SettingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1535,6 +1625,16 @@ export namespace Prisma {
     companyFull?: boolean
     email?: boolean
     phone?: boolean
+    ogImage?: boolean
+    linkedinUrl?: boolean
+    wechatId?: boolean
+    twitterUrl?: boolean
+    geoAllowBots?: boolean
+    geoOrgDesc?: boolean
+    geoOrgFounded?: boolean
+    geoOrgIndustry?: boolean
+    faqJson?: boolean
+    llmsCustom?: boolean
   }, ExtArgs["result"]["setting"]>
 
   export type SettingSelectScalar = {
@@ -1543,9 +1643,19 @@ export namespace Prisma {
     companyFull?: boolean
     email?: boolean
     phone?: boolean
+    ogImage?: boolean
+    linkedinUrl?: boolean
+    wechatId?: boolean
+    twitterUrl?: boolean
+    geoAllowBots?: boolean
+    geoOrgDesc?: boolean
+    geoOrgFounded?: boolean
+    geoOrgIndustry?: boolean
+    faqJson?: boolean
+    llmsCustom?: boolean
   }
 
-  export type SettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyName" | "companyFull" | "email" | "phone", ExtArgs["result"]["setting"]>
+  export type SettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyName" | "companyFull" | "email" | "phone" | "ogImage" | "linkedinUrl" | "wechatId" | "twitterUrl" | "geoAllowBots" | "geoOrgDesc" | "geoOrgFounded" | "geoOrgIndustry" | "faqJson" | "llmsCustom", ExtArgs["result"]["setting"]>
 
   export type $SettingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Setting"
@@ -1556,6 +1666,16 @@ export namespace Prisma {
       companyFull: string
       email: string
       phone: string
+      ogImage: string
+      linkedinUrl: string
+      wechatId: string
+      twitterUrl: string
+      geoAllowBots: string
+      geoOrgDesc: string
+      geoOrgFounded: string
+      geoOrgIndustry: string
+      faqJson: string
+      llmsCustom: string
     }, ExtArgs["result"]["setting"]>
     composites: {}
   }
@@ -1984,6 +2104,16 @@ export namespace Prisma {
     readonly companyFull: FieldRef<"Setting", 'String'>
     readonly email: FieldRef<"Setting", 'String'>
     readonly phone: FieldRef<"Setting", 'String'>
+    readonly ogImage: FieldRef<"Setting", 'String'>
+    readonly linkedinUrl: FieldRef<"Setting", 'String'>
+    readonly wechatId: FieldRef<"Setting", 'String'>
+    readonly twitterUrl: FieldRef<"Setting", 'String'>
+    readonly geoAllowBots: FieldRef<"Setting", 'String'>
+    readonly geoOrgDesc: FieldRef<"Setting", 'String'>
+    readonly geoOrgFounded: FieldRef<"Setting", 'String'>
+    readonly geoOrgIndustry: FieldRef<"Setting", 'String'>
+    readonly faqJson: FieldRef<"Setting", 'String'>
+    readonly llmsCustom: FieldRef<"Setting", 'String'>
   }
     
 
@@ -5763,6 +5893,8 @@ export namespace Prisma {
     contentZhCN: string | null
     contentZhTW: string | null
     contentEn: string | null
+    keywords: string | null
+    featured: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5783,6 +5915,8 @@ export namespace Prisma {
     contentZhCN: string | null
     contentZhTW: string | null
     contentEn: string | null
+    keywords: string | null
+    featured: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5803,6 +5937,8 @@ export namespace Prisma {
     contentZhCN: number
     contentZhTW: number
     contentEn: number
+    keywords: number
+    featured: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5833,6 +5969,8 @@ export namespace Prisma {
     contentZhCN?: true
     contentZhTW?: true
     contentEn?: true
+    keywords?: true
+    featured?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5853,6 +5991,8 @@ export namespace Prisma {
     contentZhCN?: true
     contentZhTW?: true
     contentEn?: true
+    keywords?: true
+    featured?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5873,6 +6013,8 @@ export namespace Prisma {
     contentZhCN?: true
     contentZhTW?: true
     contentEn?: true
+    keywords?: true
+    featured?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5980,6 +6122,8 @@ export namespace Prisma {
     contentZhCN: string
     contentZhTW: string
     contentEn: string
+    keywords: string
+    featured: boolean
     createdAt: Date
     updatedAt: Date
     _count: ArticleCountAggregateOutputType | null
@@ -6019,6 +6163,8 @@ export namespace Prisma {
     contentZhCN?: boolean
     contentZhTW?: boolean
     contentEn?: boolean
+    keywords?: boolean
+    featured?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["article"]>
@@ -6039,6 +6185,8 @@ export namespace Prisma {
     contentZhCN?: boolean
     contentZhTW?: boolean
     contentEn?: boolean
+    keywords?: boolean
+    featured?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["article"]>
@@ -6059,6 +6207,8 @@ export namespace Prisma {
     contentZhCN?: boolean
     contentZhTW?: boolean
     contentEn?: boolean
+    keywords?: boolean
+    featured?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["article"]>
@@ -6079,11 +6229,13 @@ export namespace Prisma {
     contentZhCN?: boolean
     contentZhTW?: boolean
     contentEn?: boolean
+    keywords?: boolean
+    featured?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "category" | "published" | "date" | "coverImage" | "titleZhCN" | "titleZhTW" | "titleEn" | "excerptZhCN" | "excerptZhTW" | "excerptEn" | "contentZhCN" | "contentZhTW" | "contentEn" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "category" | "published" | "date" | "coverImage" | "titleZhCN" | "titleZhTW" | "titleEn" | "excerptZhCN" | "excerptZhTW" | "excerptEn" | "contentZhCN" | "contentZhTW" | "contentEn" | "keywords" | "featured" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
 
   export type $ArticlePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Article"
@@ -6104,6 +6256,8 @@ export namespace Prisma {
       contentZhCN: string
       contentZhTW: string
       contentEn: string
+      keywords: string
+      featured: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["article"]>
@@ -6544,6 +6698,8 @@ export namespace Prisma {
     readonly contentZhCN: FieldRef<"Article", 'String'>
     readonly contentZhTW: FieldRef<"Article", 'String'>
     readonly contentEn: FieldRef<"Article", 'String'>
+    readonly keywords: FieldRef<"Article", 'String'>
+    readonly featured: FieldRef<"Article", 'Boolean'>
     readonly createdAt: FieldRef<"Article", 'DateTime'>
     readonly updatedAt: FieldRef<"Article", 'DateTime'>
   }
@@ -7992,7 +8148,17 @@ export namespace Prisma {
     companyName: 'companyName',
     companyFull: 'companyFull',
     email: 'email',
-    phone: 'phone'
+    phone: 'phone',
+    ogImage: 'ogImage',
+    linkedinUrl: 'linkedinUrl',
+    wechatId: 'wechatId',
+    twitterUrl: 'twitterUrl',
+    geoAllowBots: 'geoAllowBots',
+    geoOrgDesc: 'geoOrgDesc',
+    geoOrgFounded: 'geoOrgFounded',
+    geoOrgIndustry: 'geoOrgIndustry',
+    faqJson: 'faqJson',
+    llmsCustom: 'llmsCustom'
   };
 
   export type SettingScalarFieldEnum = (typeof SettingScalarFieldEnum)[keyof typeof SettingScalarFieldEnum]
@@ -8069,6 +8235,8 @@ export namespace Prisma {
     contentZhCN: 'contentZhCN',
     contentZhTW: 'contentZhTW',
     contentEn: 'contentEn',
+    keywords: 'keywords',
+    featured: 'featured',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -8150,6 +8318,16 @@ export namespace Prisma {
     companyFull?: StringFilter<"Setting"> | string
     email?: StringFilter<"Setting"> | string
     phone?: StringFilter<"Setting"> | string
+    ogImage?: StringFilter<"Setting"> | string
+    linkedinUrl?: StringFilter<"Setting"> | string
+    wechatId?: StringFilter<"Setting"> | string
+    twitterUrl?: StringFilter<"Setting"> | string
+    geoAllowBots?: StringFilter<"Setting"> | string
+    geoOrgDesc?: StringFilter<"Setting"> | string
+    geoOrgFounded?: StringFilter<"Setting"> | string
+    geoOrgIndustry?: StringFilter<"Setting"> | string
+    faqJson?: StringFilter<"Setting"> | string
+    llmsCustom?: StringFilter<"Setting"> | string
   }
 
   export type SettingOrderByWithRelationInput = {
@@ -8158,6 +8336,16 @@ export namespace Prisma {
     companyFull?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    ogImage?: SortOrder
+    linkedinUrl?: SortOrder
+    wechatId?: SortOrder
+    twitterUrl?: SortOrder
+    geoAllowBots?: SortOrder
+    geoOrgDesc?: SortOrder
+    geoOrgFounded?: SortOrder
+    geoOrgIndustry?: SortOrder
+    faqJson?: SortOrder
+    llmsCustom?: SortOrder
   }
 
   export type SettingWhereUniqueInput = Prisma.AtLeast<{
@@ -8169,6 +8357,16 @@ export namespace Prisma {
     companyFull?: StringFilter<"Setting"> | string
     email?: StringFilter<"Setting"> | string
     phone?: StringFilter<"Setting"> | string
+    ogImage?: StringFilter<"Setting"> | string
+    linkedinUrl?: StringFilter<"Setting"> | string
+    wechatId?: StringFilter<"Setting"> | string
+    twitterUrl?: StringFilter<"Setting"> | string
+    geoAllowBots?: StringFilter<"Setting"> | string
+    geoOrgDesc?: StringFilter<"Setting"> | string
+    geoOrgFounded?: StringFilter<"Setting"> | string
+    geoOrgIndustry?: StringFilter<"Setting"> | string
+    faqJson?: StringFilter<"Setting"> | string
+    llmsCustom?: StringFilter<"Setting"> | string
   }, "id">
 
   export type SettingOrderByWithAggregationInput = {
@@ -8177,6 +8375,16 @@ export namespace Prisma {
     companyFull?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    ogImage?: SortOrder
+    linkedinUrl?: SortOrder
+    wechatId?: SortOrder
+    twitterUrl?: SortOrder
+    geoAllowBots?: SortOrder
+    geoOrgDesc?: SortOrder
+    geoOrgFounded?: SortOrder
+    geoOrgIndustry?: SortOrder
+    faqJson?: SortOrder
+    llmsCustom?: SortOrder
     _count?: SettingCountOrderByAggregateInput
     _avg?: SettingAvgOrderByAggregateInput
     _max?: SettingMaxOrderByAggregateInput
@@ -8193,6 +8401,16 @@ export namespace Prisma {
     companyFull?: StringWithAggregatesFilter<"Setting"> | string
     email?: StringWithAggregatesFilter<"Setting"> | string
     phone?: StringWithAggregatesFilter<"Setting"> | string
+    ogImage?: StringWithAggregatesFilter<"Setting"> | string
+    linkedinUrl?: StringWithAggregatesFilter<"Setting"> | string
+    wechatId?: StringWithAggregatesFilter<"Setting"> | string
+    twitterUrl?: StringWithAggregatesFilter<"Setting"> | string
+    geoAllowBots?: StringWithAggregatesFilter<"Setting"> | string
+    geoOrgDesc?: StringWithAggregatesFilter<"Setting"> | string
+    geoOrgFounded?: StringWithAggregatesFilter<"Setting"> | string
+    geoOrgIndustry?: StringWithAggregatesFilter<"Setting"> | string
+    faqJson?: StringWithAggregatesFilter<"Setting"> | string
+    llmsCustom?: StringWithAggregatesFilter<"Setting"> | string
   }
 
   export type MetricWhereInput = {
@@ -8486,6 +8704,8 @@ export namespace Prisma {
     contentZhCN?: StringFilter<"Article"> | string
     contentZhTW?: StringFilter<"Article"> | string
     contentEn?: StringFilter<"Article"> | string
+    keywords?: StringFilter<"Article"> | string
+    featured?: BoolFilter<"Article"> | boolean
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
   }
@@ -8506,6 +8726,8 @@ export namespace Prisma {
     contentZhCN?: SortOrder
     contentZhTW?: SortOrder
     contentEn?: SortOrder
+    keywords?: SortOrder
+    featured?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8529,6 +8751,8 @@ export namespace Prisma {
     contentZhCN?: StringFilter<"Article"> | string
     contentZhTW?: StringFilter<"Article"> | string
     contentEn?: StringFilter<"Article"> | string
+    keywords?: StringFilter<"Article"> | string
+    featured?: BoolFilter<"Article"> | boolean
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
   }, "id" | "slug">
@@ -8549,6 +8773,8 @@ export namespace Prisma {
     contentZhCN?: SortOrder
     contentZhTW?: SortOrder
     contentEn?: SortOrder
+    keywords?: SortOrder
+    featured?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ArticleCountOrderByAggregateInput
@@ -8577,6 +8803,8 @@ export namespace Prisma {
     contentZhCN?: StringWithAggregatesFilter<"Article"> | string
     contentZhTW?: StringWithAggregatesFilter<"Article"> | string
     contentEn?: StringWithAggregatesFilter<"Article"> | string
+    keywords?: StringWithAggregatesFilter<"Article"> | string
+    featured?: BoolWithAggregatesFilter<"Article"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
   }
@@ -8655,6 +8883,16 @@ export namespace Prisma {
     companyFull?: string
     email?: string
     phone?: string
+    ogImage?: string
+    linkedinUrl?: string
+    wechatId?: string
+    twitterUrl?: string
+    geoAllowBots?: string
+    geoOrgDesc?: string
+    geoOrgFounded?: string
+    geoOrgIndustry?: string
+    faqJson?: string
+    llmsCustom?: string
   }
 
   export type SettingUncheckedCreateInput = {
@@ -8663,6 +8901,16 @@ export namespace Prisma {
     companyFull?: string
     email?: string
     phone?: string
+    ogImage?: string
+    linkedinUrl?: string
+    wechatId?: string
+    twitterUrl?: string
+    geoAllowBots?: string
+    geoOrgDesc?: string
+    geoOrgFounded?: string
+    geoOrgIndustry?: string
+    faqJson?: string
+    llmsCustom?: string
   }
 
   export type SettingUpdateInput = {
@@ -8670,6 +8918,16 @@ export namespace Prisma {
     companyFull?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    ogImage?: StringFieldUpdateOperationsInput | string
+    linkedinUrl?: StringFieldUpdateOperationsInput | string
+    wechatId?: StringFieldUpdateOperationsInput | string
+    twitterUrl?: StringFieldUpdateOperationsInput | string
+    geoAllowBots?: StringFieldUpdateOperationsInput | string
+    geoOrgDesc?: StringFieldUpdateOperationsInput | string
+    geoOrgFounded?: StringFieldUpdateOperationsInput | string
+    geoOrgIndustry?: StringFieldUpdateOperationsInput | string
+    faqJson?: StringFieldUpdateOperationsInput | string
+    llmsCustom?: StringFieldUpdateOperationsInput | string
   }
 
   export type SettingUncheckedUpdateInput = {
@@ -8678,6 +8936,16 @@ export namespace Prisma {
     companyFull?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    ogImage?: StringFieldUpdateOperationsInput | string
+    linkedinUrl?: StringFieldUpdateOperationsInput | string
+    wechatId?: StringFieldUpdateOperationsInput | string
+    twitterUrl?: StringFieldUpdateOperationsInput | string
+    geoAllowBots?: StringFieldUpdateOperationsInput | string
+    geoOrgDesc?: StringFieldUpdateOperationsInput | string
+    geoOrgFounded?: StringFieldUpdateOperationsInput | string
+    geoOrgIndustry?: StringFieldUpdateOperationsInput | string
+    faqJson?: StringFieldUpdateOperationsInput | string
+    llmsCustom?: StringFieldUpdateOperationsInput | string
   }
 
   export type SettingCreateManyInput = {
@@ -8686,6 +8954,16 @@ export namespace Prisma {
     companyFull?: string
     email?: string
     phone?: string
+    ogImage?: string
+    linkedinUrl?: string
+    wechatId?: string
+    twitterUrl?: string
+    geoAllowBots?: string
+    geoOrgDesc?: string
+    geoOrgFounded?: string
+    geoOrgIndustry?: string
+    faqJson?: string
+    llmsCustom?: string
   }
 
   export type SettingUpdateManyMutationInput = {
@@ -8693,6 +8971,16 @@ export namespace Prisma {
     companyFull?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    ogImage?: StringFieldUpdateOperationsInput | string
+    linkedinUrl?: StringFieldUpdateOperationsInput | string
+    wechatId?: StringFieldUpdateOperationsInput | string
+    twitterUrl?: StringFieldUpdateOperationsInput | string
+    geoAllowBots?: StringFieldUpdateOperationsInput | string
+    geoOrgDesc?: StringFieldUpdateOperationsInput | string
+    geoOrgFounded?: StringFieldUpdateOperationsInput | string
+    geoOrgIndustry?: StringFieldUpdateOperationsInput | string
+    faqJson?: StringFieldUpdateOperationsInput | string
+    llmsCustom?: StringFieldUpdateOperationsInput | string
   }
 
   export type SettingUncheckedUpdateManyInput = {
@@ -8701,6 +8989,16 @@ export namespace Prisma {
     companyFull?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    ogImage?: StringFieldUpdateOperationsInput | string
+    linkedinUrl?: StringFieldUpdateOperationsInput | string
+    wechatId?: StringFieldUpdateOperationsInput | string
+    twitterUrl?: StringFieldUpdateOperationsInput | string
+    geoAllowBots?: StringFieldUpdateOperationsInput | string
+    geoOrgDesc?: StringFieldUpdateOperationsInput | string
+    geoOrgFounded?: StringFieldUpdateOperationsInput | string
+    geoOrgIndustry?: StringFieldUpdateOperationsInput | string
+    faqJson?: StringFieldUpdateOperationsInput | string
+    llmsCustom?: StringFieldUpdateOperationsInput | string
   }
 
   export type MetricCreateInput = {
@@ -9031,6 +9329,8 @@ export namespace Prisma {
     contentZhCN: string
     contentZhTW: string
     contentEn: string
+    keywords?: string
+    featured?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9051,6 +9351,8 @@ export namespace Prisma {
     contentZhCN: string
     contentZhTW: string
     contentEn: string
+    keywords?: string
+    featured?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9070,6 +9372,8 @@ export namespace Prisma {
     contentZhCN?: StringFieldUpdateOperationsInput | string
     contentZhTW?: StringFieldUpdateOperationsInput | string
     contentEn?: StringFieldUpdateOperationsInput | string
+    keywords?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9090,6 +9394,8 @@ export namespace Prisma {
     contentZhCN?: StringFieldUpdateOperationsInput | string
     contentZhTW?: StringFieldUpdateOperationsInput | string
     contentEn?: StringFieldUpdateOperationsInput | string
+    keywords?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9110,6 +9416,8 @@ export namespace Prisma {
     contentZhCN: string
     contentZhTW: string
     contentEn: string
+    keywords?: string
+    featured?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9129,6 +9437,8 @@ export namespace Prisma {
     contentZhCN?: StringFieldUpdateOperationsInput | string
     contentZhTW?: StringFieldUpdateOperationsInput | string
     contentEn?: StringFieldUpdateOperationsInput | string
+    keywords?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9149,6 +9459,8 @@ export namespace Prisma {
     contentZhCN?: StringFieldUpdateOperationsInput | string
     contentZhTW?: StringFieldUpdateOperationsInput | string
     contentEn?: StringFieldUpdateOperationsInput | string
+    keywords?: StringFieldUpdateOperationsInput | string
+    featured?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9258,6 +9570,16 @@ export namespace Prisma {
     companyFull?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    ogImage?: SortOrder
+    linkedinUrl?: SortOrder
+    wechatId?: SortOrder
+    twitterUrl?: SortOrder
+    geoAllowBots?: SortOrder
+    geoOrgDesc?: SortOrder
+    geoOrgFounded?: SortOrder
+    geoOrgIndustry?: SortOrder
+    faqJson?: SortOrder
+    llmsCustom?: SortOrder
   }
 
   export type SettingAvgOrderByAggregateInput = {
@@ -9270,6 +9592,16 @@ export namespace Prisma {
     companyFull?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    ogImage?: SortOrder
+    linkedinUrl?: SortOrder
+    wechatId?: SortOrder
+    twitterUrl?: SortOrder
+    geoAllowBots?: SortOrder
+    geoOrgDesc?: SortOrder
+    geoOrgFounded?: SortOrder
+    geoOrgIndustry?: SortOrder
+    faqJson?: SortOrder
+    llmsCustom?: SortOrder
   }
 
   export type SettingMinOrderByAggregateInput = {
@@ -9278,6 +9610,16 @@ export namespace Prisma {
     companyFull?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    ogImage?: SortOrder
+    linkedinUrl?: SortOrder
+    wechatId?: SortOrder
+    twitterUrl?: SortOrder
+    geoAllowBots?: SortOrder
+    geoOrgDesc?: SortOrder
+    geoOrgFounded?: SortOrder
+    geoOrgIndustry?: SortOrder
+    faqJson?: SortOrder
+    llmsCustom?: SortOrder
   }
 
   export type SettingSumOrderByAggregateInput = {
@@ -9517,6 +9859,8 @@ export namespace Prisma {
     contentZhCN?: SortOrder
     contentZhTW?: SortOrder
     contentEn?: SortOrder
+    keywords?: SortOrder
+    featured?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9541,6 +9885,8 @@ export namespace Prisma {
     contentZhCN?: SortOrder
     contentZhTW?: SortOrder
     contentEn?: SortOrder
+    keywords?: SortOrder
+    featured?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9561,6 +9907,8 @@ export namespace Prisma {
     contentZhCN?: SortOrder
     contentZhTW?: SortOrder
     contentEn?: SortOrder
+    keywords?: SortOrder
+    featured?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }

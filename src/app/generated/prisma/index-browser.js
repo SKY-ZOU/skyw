@@ -122,7 +122,17 @@ exports.Prisma.SettingScalarFieldEnum = {
   companyName: 'companyName',
   companyFull: 'companyFull',
   email: 'email',
-  phone: 'phone'
+  phone: 'phone',
+  ogImage: 'ogImage',
+  linkedinUrl: 'linkedinUrl',
+  wechatId: 'wechatId',
+  twitterUrl: 'twitterUrl',
+  geoAllowBots: 'geoAllowBots',
+  geoOrgDesc: 'geoOrgDesc',
+  geoOrgFounded: 'geoOrgFounded',
+  geoOrgIndustry: 'geoOrgIndustry',
+  faqJson: 'faqJson',
+  llmsCustom: 'llmsCustom'
 };
 
 exports.Prisma.MetricScalarFieldEnum = {
@@ -187,6 +197,8 @@ exports.Prisma.ArticleScalarFieldEnum = {
   contentZhCN: 'contentZhCN',
   contentZhTW: 'contentZhTW',
   contentEn: 'contentEn',
+  keywords: 'keywords',
+  featured: 'featured',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

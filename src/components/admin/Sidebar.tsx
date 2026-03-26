@@ -10,15 +10,17 @@ import {
   Settings,
   ExternalLink,
   Inbox,
+  SearchCheck,
 } from 'lucide-react';
 
 const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/articles', label: 'Articles', icon: FileText },
-  { href: '/admin/inbox', label: 'Inbox', icon: Inbox },
-  { href: '/admin/offices', label: 'Offices', icon: Building2 },
-  { href: '/admin/business', label: 'Business', icon: Briefcase },
-  { href: '/admin/settings', label: 'Settings', icon: Settings },
+  { href: '/admin', label: '控制台', icon: LayoutDashboard },
+  { href: '/admin/articles', label: '文章管理', icon: FileText },
+  { href: '/admin/inbox', label: '收件箱', icon: Inbox },
+  { href: '/admin/offices', label: '办公室', icon: Building2 },
+  { href: '/admin/business', label: '业务板块', icon: Briefcase },
+  { href: '/admin/seo', label: 'SEO / GEO 优化', icon: SearchCheck },
+  { href: '/admin/settings', label: '网站设置', icon: Settings },
 ];
 
 export default function Sidebar() {
@@ -67,7 +69,7 @@ export default function Sidebar() {
           className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-body-sm font-medium text-white/40 transition-colors hover:bg-white/5 hover:text-white/70"
         >
           <ExternalLink className="h-4 w-4" />
-          View Site
+          查看前台网站
         </Link>
       </div>
     </aside>

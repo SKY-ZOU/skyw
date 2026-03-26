@@ -23,7 +23,7 @@ export default function AdminLoginPage() {
     if (res.ok) {
       router.push('/admin');
     } else {
-      setError('Invalid password');
+      setError('密码错误，请重试');
     }
     setLoading(false);
   }
@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
           <span className="text-3xl font-bold tracking-[0.15em] text-[#070B14]">
             SKYW
           </span>
-          <p className="mt-2 text-[14px] text-[#6c757d]">Admin Panel</p>
+          <p className="mt-2 text-[14px] text-[#6c757d]">管理后台</p>
         </div>
 
         <form
@@ -43,14 +43,14 @@ export default function AdminLoginPage() {
           className="rounded-xl bg-white p-8 shadow-sm"
         >
           <label className="block text-[13px] font-medium text-[#1a1a2e]">
-            Password
+            登录密码
           </label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="mt-2 w-full rounded-lg border border-[#e5e7eb] px-4 py-2.5 text-[14px] outline-none transition-colors focus:border-[#070B14] focus:ring-1 focus:ring-[#070B14]"
-            placeholder="Enter admin password"
+            placeholder="请输入管理员密码"
             required
           />
           {error && (
@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
             disabled={loading}
             className="mt-4 w-full rounded-lg bg-[#070B14] py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-[#1A2A4A] disabled:opacity-50"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? '登录中...' : '登录'}
           </button>
         </form>
       </div>

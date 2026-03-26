@@ -12,17 +12,17 @@ export default async function AdminDashboardPage() {
   ]);
 
   const stats = [
-    { label: 'Articles', value: articleCount, icon: FileText },
-    { label: 'Offices', value: officeCount, icon: Building2 },
-    { label: 'Divisions', value: divisionCount, icon: Briefcase },
-    { label: 'Metrics', value: 4, icon: BarChart3 },
+    { label: '文章数量', value: articleCount, icon: FileText },
+    { label: '办公室', value: officeCount, icon: Building2 },
+    { label: '业务板块', value: divisionCount, icon: Briefcase },
+    { label: '首页指标', value: 4, icon: BarChart3 },
   ];
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-[#1a1a2e]">Dashboard</h1>
+      <h1 className="text-2xl font-semibold text-[#1a1a2e]">控制台</h1>
       <p className="mt-1 text-[14px] text-[#6c757d]">
-        Welcome to {setting?.companyName ?? 'SKYW'} admin panel.
+        欢迎使用 {setting?.companyName ?? 'SKYW'} 管理后台。
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -45,6 +45,36 @@ export default async function AdminDashboardPage() {
             </div>
           );
         })}
+      </div>
+
+      <div className="mt-8 rounded-xl bg-white p-6 shadow-sm">
+        <h2 className="text-base font-semibold text-[#1a1a2e]">快速操作</h2>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <a
+            href="/admin/articles/new"
+            className="rounded-lg bg-[#070B14] px-4 py-2 text-[13px] font-medium text-white hover:bg-[#1A2A4A]"
+          >
+            + 发布新文章
+          </a>
+          <a
+            href="/admin/articles"
+            className="rounded-lg border border-[#e5e7eb] px-4 py-2 text-[13px] font-medium text-[#6c757d] hover:bg-[#f8f9fa]"
+          >
+            管理文章
+          </a>
+          <a
+            href="/admin/inbox"
+            className="rounded-lg border border-[#e5e7eb] px-4 py-2 text-[13px] font-medium text-[#6c757d] hover:bg-[#f8f9fa]"
+          >
+            查看收件箱
+          </a>
+          <a
+            href="/admin/business"
+            className="rounded-lg border border-[#e5e7eb] px-4 py-2 text-[13px] font-medium text-[#6c757d] hover:bg-[#f8f9fa]"
+          >
+            编辑业务板块
+          </a>
+        </div>
       </div>
     </div>
   );

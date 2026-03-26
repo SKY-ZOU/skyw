@@ -1,11 +1,13 @@
 'use client';
 
+import React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useSiteData } from '@/components/providers/SiteDataProvider';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import { ArrowRight } from 'lucide-react';
 import { loc } from '@/lib/locale-utils';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface ArticleRow {
   id: number;
@@ -49,6 +51,9 @@ function BRIMapSVG() {
           <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.2" />
           <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
         </radialGradient>
+        <pattern id="dot-matrix" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="0.8" fill="rgba(212,175,55,0.08)" />
+        </pattern>
         <style>{`
           @keyframes briDraw {
             from { stroke-dashoffset: var(--len, 500); }
@@ -107,12 +112,19 @@ function BRIMapSVG() {
         `}</style>
       </defs>
 
-      {/* ── Region blobs ── */}
+      {/* ── Professional Dot Matrix World Overlay ── */}
+      <rect width="660" height="360" fill="url(#dot-matrix)" />
+      
+      {/* ── Region blobs (Subtle glow backdrops) ── */}
       <ellipse cx="95"  cy="115" rx="78"  ry="48"  fill="rgba(212,175,55,0.025)" />
       <ellipse cx="255" cy="172" rx="82"  ry="58"  fill="rgba(212,175,55,0.028)" />
       <ellipse cx="400" cy="148" rx="78"  ry="54"  fill="rgba(212,175,55,0.025)" />
       <ellipse cx="545" cy="178" rx="88"  ry="68"  fill="rgba(212,175,55,0.032)" />
       <ellipse cx="530" cy="270" rx="52"  ry="38"  fill="rgba(212,175,55,0.022)" />
+
+      {/* ── World map paths (Simplified digital outline) ── */}
+      <path d="M50 100 Q150 50 250 150 T450 100 T600 200" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
+      <path d="M100 250 Q200 300 300 200 T500 250 T650 150" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
 
       {/* ── Paths ── */}
       {/* London → Dubai */}
@@ -174,6 +186,9 @@ function BRIMapSVG() {
 ───────────────────────────────────────── */
 function BRIHero() {
   const t = useTranslations('Home');
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   const kpis = [
     { value: t('kpi1Value'), label: t('kpi1Label') },
@@ -183,30 +198,49 @@ function BRIHero() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center bg-navy-950 overflow-hidden">
-      {/* Grid */}
+    <section className="relative min-h-[110vh] flex items-center bg-navy-950 overflow-hidden">
+      {/* Immersive Background Image */}
+      <motion.div 
+        style={{ y: y1 }}
+        className="absolute inset-0 z-0"
+      >
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.18] mix-blend-luminosity scale-110"
+          style={{ backgroundImage: "url('/images/home/hero-bg.png')" }}
+        />
+        {/* Deep navy gradient mask for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/40 via-navy-950/20 to-navy-950" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-transparent to-transparent opacity-80" />
+      </motion.div>
+
+      {/* Grid Overlay */}
       <div
-        className="absolute inset-0 opacity-[0.025]"
+        className="absolute inset-0 z-[1] opacity-[0.035]"
         style={{
           backgroundImage:
             'linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px)',
           backgroundSize: '64px 64px',
         }}
       />
+      
       {/* Warm radial glow from right */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 65% 75% at 75% 50%, rgba(212,175,55,0.045) 0%, transparent 65%)',
+            'radial-gradient(ellipse 65% 75% at 75% 50%, rgba(212,175,55,0.06) 0%, transparent 65%)',
         }}
       />
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-8 pt-36 pb-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
+          
           {/* Left: copy */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
             {/* Badge */}
             <div className="inline-flex items-center gap-2.5 border border-gold-400/25 bg-gold-400/5 px-4 py-2 mb-9">
               <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
@@ -231,17 +265,18 @@ function BRIHero() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/business"
-                className="group inline-flex items-center gap-2 bg-gold-400 px-7 py-3.5 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-navy-950 transition-colors hover:bg-gold-300"
+                className="group relative overflow-hidden inline-flex items-center gap-2 bg-gold-400 px-8 py-4 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-navy-950 transition-all hover:pr-10"
               >
-                {t('heroCta1')}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <span className="relative z-10">{t('heroCta1')}</span>
+                <ArrowRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform group-hover:translate-x-0" />
               </Link>
               <Link
                 href="/about"
-                className="group inline-flex items-center gap-2 border border-white/20 px-7 py-3.5 text-[11.5px] font-medium uppercase tracking-[0.1em] text-white/65 transition-colors hover:border-white/45 hover:text-white"
+                className="group inline-flex items-center gap-2 border border-white/20 px-8 py-4 text-[11.5px] font-medium uppercase tracking-[0.1em] text-white/65 transition-all hover:border-white/45 hover:text-white"
               >
                 {t('heroCta2')}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
 
@@ -258,14 +293,21 @@ function BRIHero() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right: BRI map */}
-          <div className="hidden lg:flex items-center justify-center">
-            <div className="w-full max-w-[580px]">
+          {/* Right: BRI map with subtle float */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden lg:flex items-center justify-center"
+          >
+            <div className="w-full max-w-[620px] relative">
+              {/* Subtle backglow for the map */}
+              <div className="absolute inset-0 bg-gold-400/5 blur-[100px] rounded-full pointer-events-none" />
               <BRIMapSVG />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -277,6 +319,13 @@ function BRIHero() {
 ───────────────────────────────────────── */
 function GatewaySection() {
   const t = useTranslations('Home');
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
 
   const pillars = [
     {
@@ -333,18 +382,20 @@ function GatewaySection() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.08}>
-          <div className="relative mt-12 overflow-hidden">
-            <div
+          <div ref={ref} className="relative mt-12 overflow-hidden aspect-[21/9] sm:aspect-[24/7]">
+            <motion.div
+              style={{ y, scale }}
               className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: "url('/images/home/gateway-banner.jpg')" }}
+              style={{ backgroundImage: "url('/images/home/gateway-banner.jpg')", y, scale }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#070B14]/85 via-[#070B14]/60 to-[#070B14]/30" />
-            <div className="relative z-10 flex min-h-[240px] items-end px-8 py-10 lg:px-12">
+            <div className="absolute inset-0 bg-gradient-to-r from-navy-950/90 via-navy-950/40 to-transparent" />
+            <div className="relative z-10 flex h-full items-center px-8 lg:px-16">
               <div className="max-w-xl">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-400">
+                <div className="w-10 h-[1px] bg-gold-400 mb-6" />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold-400">
                   {t('gatewayBannerLabel')}
                 </p>
-                <p className="mt-3 text-[15px] font-light leading-relaxed text-white/80">
+                <p className="mt-6 text-[clamp(1rem,1.5vw,1.3rem)] font-light leading-relaxed text-white/90">
                   {t('gatewayBannerDesc')}
                 </p>
               </div>
@@ -431,24 +482,35 @@ function CorridorSection() {
             </div>
           </AnimatedSection>
 
-          {/* Right: corridor images grid */}
+          {/* Right: corridor images grid with premium reveal */}
           <AnimatedSection delay={0.2}>
-            <div className="grid grid-cols-2 gap-px bg-[#e5e7eb]">
+            <div className="grid grid-cols-2 gap-px bg-[#e5e7eb] border border-[#e5e7eb] shadow-2xl shadow-navy-950/20">
               {[
                 { img: '/images/home/corridor-dubai.png', label: 'Dubai' },
                 { img: '/images/home/corridor-singapore.png', label: 'Singapore' },
                 { img: '/images/home/corridor-shenzhen.png', label: 'Shenzhen' },
                 { img: '/images/home/corridor-london.png', label: 'London' },
-              ].map((item) => (
-                <div key={item.label} className="relative overflow-hidden bg-[#e5e7eb]" style={{ aspectRatio: '4/3' }}>
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
+              ].map((item, idx) => (
+                <div key={item.label} className="relative overflow-hidden group bg-[#f0f0f0]" style={{ aspectRatio: '4/3' }}>
+                  <motion.div
+                    initial={{ scale: 1.2, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: idx * 0.1 }}
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
                     style={{ backgroundImage: `url(${item.img})` }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#070B14]/70 via-transparent to-transparent" />
-                  <span className="absolute bottom-3 left-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/80">
-                    {item.label}
-                  </span>
+                  {/* Premium overlay with subtle color cast */}
+                  <div className="absolute inset-0 bg-navy-950/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
+                  
+                  {/* Label with animated line */}
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90">
+                      {item.label}
+                    </span>
+                    <div className="h-[1px] w-0 bg-gold-400 mt-2 transition-all duration-700 group-hover:w-full opacity-60" />
+                  </div>
                 </div>
               ))}
             </div>
@@ -514,7 +576,7 @@ function EcosystemSection() {
   ];
 
   return (
-    <section className="bg-navy-950">
+    <section className="bg-navy-950 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
         <AnimatedSection>
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-400">
@@ -528,52 +590,61 @@ function EcosystemSection() {
           </p>
         </AnimatedSection>
 
-        <div className="mt-16 grid gap-px bg-white/[0.08] sm:grid-cols-3">
+        <div className="mt-16 grid gap-px bg-white/[0.08] sm:grid-cols-3 border border-white/5">
           {partners.map((p, i) => (
             <AnimatedSection key={i} delay={i * 0.12}>
-              <div className="bg-navy-900 p-9 lg:p-10 h-full flex flex-col">
-                {/* Accent top bar */}
-                <div className="h-[3px] w-10 mb-8" style={{ backgroundColor: p.accent }} />
+              <div className="group relative bg-navy-900 p-9 lg:p-10 h-full flex flex-col overflow-hidden">
+                {/* Immersive City Background on Hover */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-[0.15] transition-all duration-1000 scale-110 group-hover:scale-100 grayscale group-hover:grayscale-0"
+                  style={{ backgroundImage: `url(${p.cityImage})` }}
+                />
+                <div className="absolute inset-0 bg-navy-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
-                {/* Header */}
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <div className="text-[21px] font-light tracking-wide text-white">{p.logo}</div>
-                    <div className="text-[11px] text-white/50 mt-0.5 tracking-wide">{p.logoEn}</div>
-                  </div>
-                  <span
-                    className="text-[9px] font-semibold uppercase tracking-[0.14em] px-2.5 py-1 border flex-shrink-0 mt-1"
-                    style={{ borderColor: `${p.accent}55`, color: p.accent, background: `${p.accent}10` }}
-                  >
-                    {p.role}
-                  </span>
-                </div>
+                <div className="relative z-10 h-full flex flex-col">
+                  {/* Accent top bar */}
+                  <div className="h-[3px] w-10 mb-8 transition-all duration-700 group-hover:w-16" style={{ backgroundColor: p.accent }} />
 
-                {/* Highlight */}
-                <div className="mb-5 pb-5 border-b border-white/[0.1]">
-                  <span className="text-[11.5px] font-medium text-white/60">{p.highlight}</span>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-3 mb-6">
-                  {p.stats.map((s, si) => (
-                    <div key={si}>
-                      <div className="text-[17px] font-light leading-none" style={{ color: p.accent }}>{s.v}</div>
-                      <div className="text-[10px] text-white/40 mt-1.5 leading-snug">{s.l}</div>
+                  {/* Header */}
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <div className="text-[21px] font-light tracking-wide text-white group-hover:text-gold-400 transition-colors">{p.logo}</div>
+                      <div className="text-[11px] text-white/50 mt-0.5 tracking-wide">{p.logoEn}</div>
                     </div>
-                  ))}
-                </div>
+                    <span
+                      className="text-[9px] font-semibold uppercase tracking-[0.14em] px-2.5 py-1 border flex-shrink-0 mt-1 transition-all"
+                      style={{ borderColor: `${p.accent}55`, color: p.accent, background: `${p.accent}10` }}
+                    >
+                      {p.role}
+                    </span>
+                  </div>
 
-                {/* Desc */}
-                <p className="text-[13.5px] leading-relaxed text-white/65 flex-1">
-                  {t(p.descKey)}
-                </p>
+                  {/* Highlight */}
+                  <div className="mb-5 pb-5 border-b border-white/[0.1]">
+                    <span className="text-[11.5px] font-medium text-white/60 group-hover:text-white/80 transition-colors">{p.highlight}</span>
+                  </div>
 
-                {/* Badge */}
-                <div className="mt-6 pt-5 border-t border-white/[0.08]">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/35">
-                    {p.badge}
-                  </span>
+                  {/* Stats */}
+                  <div className="grid grid-cols-3 gap-3 mb-6">
+                    {p.stats.map((s, si) => (
+                      <div key={si}>
+                        <div className="text-[17px] font-light leading-none" style={{ color: p.accent }}>{s.v}</div>
+                        <div className="text-[10px] text-white/40 mt-1.5 leading-snug">{s.l}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Desc */}
+                  <p className="text-[13.5px] leading-relaxed text-white/65 group-hover:text-white/85 transition-colors flex-1">
+                    {t(p.descKey)}
+                  </p>
+
+                  {/* Badge */}
+                  <div className="mt-6 pt-5 border-t border-white/[0.08]">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/35">
+                      {p.badge}
+                    </span>
+                  </div>
                 </div>
               </div>
             </AnimatedSection>
@@ -717,6 +788,12 @@ function FundArchSection() {
 function TrackRecordSection() {
   const t = useTranslations('Home');
   const locale = useLocale();
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   const sectorStyle: Record<string, { bg: string; text: string; border: string }> = {
     ai:         { bg: '#fffbeb', text: '#92400e', border: '#fcd34d' },
@@ -758,8 +835,19 @@ function TrackRecordSection() {
   };
 
   return (
-    <section className="bg-[#f7f8f9]">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
+    <section ref={ref} className="relative bg-[#f7f8f9] overflow-hidden">
+      {/* Parallax Background for the section */}
+      <motion.div 
+        style={{ y }}
+        className="absolute inset-0 opacity-[0.05] pointer-events-none grayscale"
+      >
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/home/track-record-bg.png')" }}
+        />
+      </motion.div>
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-start">
           <AnimatedSection>
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-500">
@@ -774,11 +862,14 @@ function TrackRecordSection() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.12}>
-            <div className="bg-navy-900 border border-navy-800 p-8 lg:p-10">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-400 mb-6">
+            <div className="relative overflow-hidden bg-navy-900 border border-navy-800 p-8 lg:p-10 shadow-2xl">
+              {/* Subtle inner glow for the card */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gold-400/5 blur-[60px] rounded-full -mr-16 -mt-16" />
+              
+              <p className="relative z-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-400 mb-6">
                 {t('trackStatLabel')}
               </p>
-              <div className="space-y-5">
+              <div className="relative z-10 space-y-5">
                 {[
                   { value: '20+', label: t('trackStat1') },
                   { value: 'HKD 15B+', label: t('trackStat2') },
@@ -856,10 +947,27 @@ function BusinessSection() {
   const t = useTranslations('Home');
   const locale = useLocale();
   const { divisions } = useSiteData();
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
+    <section ref={ref} className="relative bg-white overflow-hidden">
+      {/* Subtle Section Background Parallax */}
+      <motion.div 
+        style={{ y }}
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+      >
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/home/hero-bg.png')" }}
+        />
+      </motion.div>
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
         <AnimatedSection>
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-500">
             {t('businessLabel')}
@@ -872,23 +980,30 @@ function BusinessSection() {
           </p>
         </AnimatedSection>
 
-        <div className="mt-16 grid gap-px bg-[#e5e7eb] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-px bg-[#e5e7eb] sm:grid-cols-2 lg:grid-cols-3 border border-[#e5e7eb] shadow-xl">
           {divisions.map((div, i) => (
             <AnimatedSection key={div.divisionId} delay={i * 0.07}>
               <Link
                 href={`/business/${div.slug}`}
-                className="group flex h-full flex-col justify-between bg-white p-9 transition-colors hover:bg-[#fafafa] lg:p-10"
+                className="group relative overflow-hidden flex h-full flex-col justify-between bg-white p-9 transition-all hover:bg-[#fafafa] lg:p-10"
               >
-                <div>
-                  <h3 className="text-[18px] font-semibold text-[#1a1a2e]">
+                {/* Gold Light Sweep Effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1.5s] ease-in-out bg-gradient-to-r from-transparent via-gold-400/5 to-transparent pointer-events-none" />
+                
+                <div className="relative z-10">
+                  <div className="w-8 h-[1px] bg-gold-400 mb-6 transition-all duration-700 group-hover:w-16" />
+                  <h3 className="text-[18px] font-semibold text-[#1a1a2e] group-hover:text-gold-600 transition-colors">
                     {loc(div, 'title', locale)}
                   </h3>
-                  <p className="mt-3 text-[14px] leading-relaxed text-[#6c757d]">
+                  <p className="mt-4 text-[14.5px] leading-relaxed text-[#6c757d] font-light">
                     {loc(div, 'shortDesc', locale)}
                   </p>
                 </div>
-                <div className="mt-7 flex items-center gap-1.5 text-[11.5px] font-semibold uppercase tracking-[0.09em] text-gold-500 transition-colors group-hover:text-navy-900">
-                  {t('businessLearnMore')}
+                
+                <div className="relative z-10 mt-10 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-gold-500 group-hover:text-navy-900 transition-all">
+                  <span className="border-b border-transparent group-hover:border-navy-900">
+                    {t('businessLearnMore')}
+                  </span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
@@ -896,14 +1011,14 @@ function BusinessSection() {
           ))}
         </div>
 
-        <div className="mt-10">
+        <div className="mt-12 flex justify-center">
           <AnimatedSection>
             <Link
               href="/business"
-              className="inline-flex items-center gap-2 text-[11.5px] font-medium uppercase tracking-[0.09em] text-[#1a1a2e] hover:text-gold-500 transition-colors"
+              className="group inline-flex items-center gap-3 px-8 py-3.5 border border-navy-900/10 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#1a1a2e] hover:bg-navy-950 hover:text-white transition-all duration-500 rounded-full"
             >
               {t('businessViewAll')}
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </AnimatedSection>
         </div>
@@ -917,6 +1032,12 @@ function BusinessSection() {
 ───────────────────────────────────────── */
 function InvestorConnectSection() {
   const t = useTranslations('Home');
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   const paths = [
     {
@@ -953,8 +1074,19 @@ function InvestorConnectSection() {
   ];
 
   return (
-    <section className="bg-navy-950">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
+    <section ref={ref} className="relative bg-navy-950 overflow-hidden">
+      {/* Parallax Background for the section */}
+      <motion.div 
+        style={{ y }}
+        className="absolute inset-0 opacity-[0.1] pointer-events-none grayscale"
+      >
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/home/cta-bg.png')" }}
+        />
+      </motion.div>
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
         {/* Header */}
         <AnimatedSection>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
@@ -973,30 +1105,35 @@ function InvestorConnectSection() {
         </AnimatedSection>
 
         {/* Three paths */}
-        <div className="grid gap-px bg-white/[0.05] sm:grid-cols-3">
+        <div className="grid gap-px bg-white/[0.05] sm:grid-cols-3 border border-white/5">
           {paths.map((p, i) => (
             <AnimatedSection key={i} delay={i * 0.1}>
-              <Link href={p.href} className="group bg-[#070e1f] p-9 lg:p-10 h-full flex flex-col hover:bg-[#0c1628] transition-colors cursor-pointer">
-                <div className="flex items-start justify-between mb-6">
+              <Link href={p.href} className="group relative bg-[#070e1f]/80 backdrop-blur-md p-9 lg:p-10 h-full flex flex-col hover:bg-[#0c1628]/90 transition-all cursor-pointer">
+                {/* Subtle highlight gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="relative z-10 flex items-start justify-between mb-6">
                   <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/20">{p.num}</span>
-                  <div className="w-10 h-10 flex items-center justify-center border border-gold-400/25 text-gold-400 flex-shrink-0">
+                  <div className="w-10 h-10 flex items-center justify-center border border-gold-400/25 text-gold-400 flex-shrink-0 group-hover:bg-gold-400 group-hover:text-navy-950 transition-colors">
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d={p.iconPath} />
                     </svg>
                   </div>
                 </div>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-400 mb-3">
-                  {t(p.tagKey)}
-                </span>
-                <h3 className="text-[16px] font-semibold text-white leading-snug mb-3">
-                  {t(p.titleKey)}
-                </h3>
-                <p className="text-[13.5px] leading-relaxed text-white/38 flex-1">
-                  {t(p.descKey)}
-                </p>
-                <div className="mt-6 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-gold-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                  {t('lpGetStarted')}
-                  <ArrowRight className="h-3.5 w-3.5" />
+                <div className="relative z-10">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-400 mb-3 block">
+                    {t(p.tagKey)}
+                  </span>
+                  <h3 className="text-[16px] font-semibold text-white leading-snug mb-3 group-hover:text-gold-400 transition-colors">
+                    {t(p.titleKey)}
+                  </h3>
+                  <p className="text-[13.5px] leading-relaxed text-white/38 flex-1 group-hover:text-white/60 transition-colors">
+                    {t(p.descKey)}
+                  </p>
+                  <div className="mt-6 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-gold-400 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
+                    {t('lpGetStarted')}
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </div>
                 </div>
               </Link>
             </AnimatedSection>
@@ -1007,7 +1144,7 @@ function InvestorConnectSection() {
         <AnimatedSection delay={0.3}>
           <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.04]">
             {requirements.map((r, i) => (
-              <div key={i} className="bg-[#070e1f] px-6 py-5">
+              <div key={i} className="bg-[#070e1f] px-6 py-5 border-l border-white/5 first:border-l-0">
                 <div className="text-[11px] uppercase tracking-[0.14em] text-white/25 mb-1">{r.label}</div>
                 <div className="text-[14.5px] font-medium text-white/70">{r.value}</div>
               </div>
@@ -1024,6 +1161,12 @@ function InvestorConnectSection() {
 ───────────────────────────────────────── */
 function AboutPreview() {
   const t = useTranslations('Home');
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
 
   const offices = [
     { city: 'Hong Kong', role: 'HQ' },
@@ -1034,14 +1177,24 @@ function AboutPreview() {
   ];
 
   return (
-    <section className="bg-[#f7f8f9]">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
+    <section ref={ref} className="relative bg-[#f7f8f9] overflow-hidden">
+      {/* Decorative Large Typography Background */}
+      <div className="absolute inset-0 pointer-events-none flex items-center overflow-hidden">
+        <motion.div 
+          style={{ x }}
+          className="text-[15vw] font-black text-navy-900/[0.02] leading-none whitespace-nowrap uppercase italic select-none"
+        >
+          Global Network · Strategic Vision · Capital Wisdom · 
+        </motion.div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
         <div className="grid items-start gap-16 lg:grid-cols-2">
           <AnimatedSection>
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-500">
               {t('aboutTitle')}
             </p>
-            <p className="mt-6 text-[clamp(1rem,1.8vw,1.2rem)] font-light leading-relaxed text-[#495057]">
+            <p className="mt-6 text-[clamp(1rem,1.8vw,1.25rem)] font-light leading-relaxed text-[#495057]">
               {t('aboutDescription')}
             </p>
             <Link
@@ -1057,9 +1210,9 @@ function AboutPreview() {
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#adb5bd] mb-8">
               {t('aboutGlobalPresence')}
             </p>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
               {offices.map((office) => (
-                <div key={office.city} className="border-l-2 border-gold-400 py-3 pl-4">
+                <div key={office.city} className="border-l-2 border-gold-400 py-3 pl-4 group transition-all hover:bg-white hover:shadow-lg hover:shadow-navy-900/5 px-4 rounded-r-sm">
                   <div className="text-[15px] font-semibold text-[#1a1a2e]">{office.city}</div>
                   <div className="text-[11px] uppercase tracking-widest text-[#adb5bd] mt-0.5">{office.role}</div>
                 </div>
@@ -1080,6 +1233,12 @@ function InsightsSection({ articles }: { articles: ArticleRow[] }) {
   const tInsights = useTranslations('Insights');
   const locale = useLocale();
   const latest = articles.slice(0, 3);
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   const categoryLabels: Record<string, string> = {
     news: tInsights('categoryNews'),
@@ -1087,22 +1246,32 @@ function InsightsSection({ articles }: { articles: ArticleRow[] }) {
     industry: tInsights('categoryIndustry'),
   };
 
+  const articleImages = [
+    '/images/home/corridor-london.png',
+    '/images/home/corridor-singapore.png',
+    '/images/home/corridor-dubai.png',
+  ];
+
   return (
-    <section className="section-separator bg-white">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
+    <section ref={ref} className="section-separator bg-white overflow-hidden relative">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#1a1a2e 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-8 py-28 lg:py-36">
         <AnimatedSection>
-          <div className="flex items-end justify-between">
+          <div className="flex items-end justify-between border-b border-[#e5e7eb] pb-10">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-500">
                 {t('insightsTitle')}
               </p>
-              <h2 className="mt-4 text-[clamp(1.5rem,3vw,2.25rem)] font-light text-[#1a1a2e]">
+              <h2 className="mt-4 text-[clamp(1.5rem,3vw,2.25rem)] font-light text-[#1a1a2e] leading-tight">
                 {t('insightsSubtitle')}
               </h2>
             </div>
             <Link
               href="/insights"
-              className="hidden items-center gap-1.5 text-[11.5px] font-medium uppercase tracking-[0.09em] text-navy-900 hover:text-gold-500 transition-colors sm:flex"
+              className="hidden items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-navy-900 hover:text-gold-600 transition-all border-b border-transparent hover:border-gold-400 pb-1 sm:flex"
             >
               {t('insightsViewAll')}
               <ArrowRight className="h-4 w-4" />
@@ -1110,29 +1279,43 @@ function InsightsSection({ articles }: { articles: ArticleRow[] }) {
           </div>
         </AnimatedSection>
 
-        <div className="mt-12 grid gap-px bg-[#e5e7eb] md:grid-cols-3">
+        <div className="mt-12 grid gap-px bg-[#e5e7eb] md:grid-cols-3 border border-[#e5e7eb] shadow-2xl shadow-navy-900/5">
           {latest.map((article, i) => (
             <AnimatedSection key={article.slug} delay={i * 0.1}>
               <Link
                 href={`/insights/${article.slug}`}
-                className="group flex h-full flex-col justify-between bg-white p-8 transition-colors hover:bg-[#fafafa]"
+                className="group relative flex h-full min-h-[420px] flex-col justify-between bg-white p-9 transition-all hover:bg-[#fafafa] overflow-hidden"
               >
-                <div>
+                {/* Immersive Background Image (Lens Effect) */}
+                <div className="absolute inset-0 opacity-[0.03] grayscale transition-all duration-1000 group-hover:opacity-[0.08] group-hover:grayscale-0 group-hover:scale-110">
+                  <motion.div 
+                    style={{ y }} 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${articleImages[i % 3]})`, y }}
+                  />
+                </div>
+                
+                <div className="relative z-10">
                   <div className="flex items-center gap-3">
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-gold-500">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-gold-600">
                       {categoryLabels[article.category]}
                     </span>
-                    <span className="text-[11px] text-[#adb5bd]">{article.date}</span>
+                    <div className="w-1 h-1 rounded-full bg-[#adb5bd]" />
+                    <span className="text-[11px] font-medium text-[#adb5bd] uppercase tracking-wider">{article.date}</span>
                   </div>
-                  <h3 className="mt-4 text-[17px] font-semibold leading-snug text-[#1a1a2e] group-hover:text-navy-700">
+                  <h3 className="mt-6 text-[19px] font-semibold leading-snug text-[#1a1a2e] group-hover:text-gold-700 transition-colors">
                     {loc(article, 'title', locale)}
                   </h3>
-                  <p className="mt-3 line-clamp-3 text-[14px] leading-relaxed text-[#6c757d]">
+                  <div className="mt-4 h-[1px] w-12 bg-gold-400/30 transition-all duration-700 group-hover:w-full" />
+                  <p className="mt-6 line-clamp-3 text-[14.5px] leading-relaxed text-[#6c757d] font-light">
                     {loc(article, 'excerpt', locale)}
                   </p>
                 </div>
-                <div className="mt-6 flex items-center gap-1.5 text-[11.5px] font-semibold uppercase tracking-[0.09em] text-gold-500 transition-colors group-hover:text-navy-900">
-                  {t('insightsReadMore')}
+                
+                <div className="relative z-10 mt-10 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-gold-500 group-hover:text-navy-950 transition-all">
+                  <span className="border-b border-transparent group-hover:border-navy-950 pb-0.5">
+                    {t('insightsReadMore')}
+                  </span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
@@ -1142,7 +1325,7 @@ function InsightsSection({ articles }: { articles: ArticleRow[] }) {
 
         <Link
           href="/insights"
-          className="mt-8 flex items-center gap-1.5 text-[11.5px] font-medium uppercase tracking-[0.09em] text-navy-900 hover:text-gold-500 sm:hidden"
+          className="mt-10 flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-navy-900 border border-navy-900/10 py-4 sm:hidden"
         >
           {t('insightsViewAll')}
           <ArrowRight className="h-4 w-4" />
@@ -1159,25 +1342,46 @@ function CtaBanner() {
   const t = useTranslations('Home');
 
   return (
-    <section className="bg-navy-950">
+    <section className="bg-navy-950 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-8 py-24 lg:py-28">
-        <div className="relative overflow-hidden border border-white/10">
-          <div
+        <div className="relative overflow-hidden border border-white/10 group">
+          {/* Ken Burns Effect Background */}
+          <motion.div
+            animate={{ 
+              scale: [1, 1.1, 1],
+              x: [0, -20, 0]
+            }}
+            transition={{ 
+              duration: 25, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: "url('/images/home/cta-banner.jpg')" }}
           />
-          <div className="absolute inset-0 bg-[#07101f]/72" />
+          <div className="absolute inset-0 bg-[#07101f]/82 group-hover:bg-[#07101f]/75 transition-colors duration-1000" />
+          
+          {/* Decorative lines */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-400/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-400/20 to-transparent" />
+
           <div className="relative z-10 flex flex-col items-start justify-between gap-8 px-8 py-16 lg:flex-row lg:items-center lg:px-12">
             <div className="max-w-xl">
-              <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-light text-white">{t('ctaTitle')}</h2>
-              <p className="mt-4 text-[1rem] font-light text-white/52">{t('ctaSubtitle')}</p>
+              <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-light text-white leading-tight">
+                {t('ctaTitle')}
+              </h2>
+              <p className="mt-6 text-[1.05rem] font-light text-white/50 leading-relaxed">
+                {t('ctaSubtitle')}
+              </p>
             </div>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 border border-gold-400 px-8 py-4 text-[11.5px] font-medium uppercase tracking-[0.12em] text-gold-400 transition-colors hover:bg-gold-400 hover:text-navy-950 flex-shrink-0"
+              className="group relative overflow-hidden inline-flex items-center gap-3 border border-gold-400/60 px-10 py-5 text-[11.5px] font-semibold uppercase tracking-[0.15em] text-gold-400 transition-all hover:bg-gold-400 hover:text-navy-950"
             >
-              {t('ctaButton')}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <span className="relative z-10">{t('ctaButton')}</span>
+              <ArrowRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              {/* Shine effect on button hover */}
+              <div className="absolute inset-0 -translate-x-full bg-white/10 skew-x-12 transition-transform duration-500 group-hover:translate-x-full" />
             </Link>
           </div>
         </div>

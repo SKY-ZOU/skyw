@@ -13,6 +13,18 @@ model Setting {
   companyFull String @default("Skyward Holding Group")
   email       String @default("info@skywgroup.com")
   phone       String @default("+852 2888 8888")
+  // SEO 与社交媒体
+  ogImage     String @default("")
+  linkedinUrl String @default("")
+  wechatId    String @default("")
+  twitterUrl  String @default("")
+  // GEO（生成引擎优化）
+  geoAllowBots   String @default("GPTBot,ClaudeBot,PerplexityBot,Google-Extended,YouBot")
+  geoOrgDesc     String @default("")   // 给 AI 看的公司简介（写入 JSON-LD）
+  geoOrgFounded  String @default("")   // 成立年份
+  geoOrgIndustry String @default("")   // 行业描述
+  faqJson        String @default("[]") // FAQ JSON，生成 FAQPage schema
+  llmsCustom     String @default("")   // 附加到 llms.txt 的自定义说明
 }
 
 model Metric {
@@ -80,6 +92,9 @@ model Article {
   contentZhCN   String
   contentZhTW   String
   contentEn     String
+  // SEO 与营销
+  keywords      String   @default("")  // 逗号分隔关键词，用于 meta keywords
+  featured      Boolean  @default(false)  // 首页推荐置顶
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }

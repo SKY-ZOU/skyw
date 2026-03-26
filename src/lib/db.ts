@@ -1,7 +1,9 @@
+import path from 'path';
 import { PrismaClient } from '../app/generated/prisma/client';
 
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
-
+// In production, use a singleton to avoid multiple connections.
+// In dev, always create a fresh client to avoid stale schema issues
+// when the Turbopack module loader evaluates this module before or after migrations.
 function createPrismaClient(): PrismaClient {
   const tursoUrl = process.env.TURSO_DATABASE_URL;
   const authToken = process.env.TURSO_AUTH_TOKEN;
@@ -14,15 +16,15 @@ function createPrismaClient(): PrismaClient {
     return new PrismaClient({ adapter });
   }
 
-  // Local dev: local SQLite file — use node adapter
+  // Local dev: use absolute path to avoid relative-path resolution issues in Next.js
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { PrismaLibSql } = require('@prisma/adapter-libsql');
-  const adapter = new PrismaLibSql({ url: 'file:dev.db' });
+  const dbUrl = 'file:' + path.resolve(process.cwd(), 'dev.db');
+  const adapter = new PrismaLibSql({ url: dbUrl });
   return new PrismaClient({ adapter });
 }
 
-export const prisma = globalForPrisma.prisma ?? createPrismaClient();
+type GlobalWithPrisma = typeof globalThis & { _skyWPrisma?: PrismaClient };
+const g = globalThis as GlobalWithPrisma;
 
-if (process.env.NODE_ENV !== 'production') {
-  globalForPrisma.prisma = prisma;
-}
+export const prisma = g._skyWPrisma ?? (g._skyWPrisma = createPrismaClient());
