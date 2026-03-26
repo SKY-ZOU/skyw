@@ -384,7 +384,6 @@ function GatewaySection() {
         <AnimatedSection delay={0.08}>
           <div ref={ref} className="relative mt-12 overflow-hidden aspect-[21/9] sm:aspect-[24/7]">
             <motion.div
-              style={{ y, scale }}
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/images/home/gateway-banner.jpg')", y, scale }}
             />
