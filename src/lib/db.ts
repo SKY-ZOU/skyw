@@ -6,32 +6,27 @@ function makePrisma(): PrismaClient {
   const authToken = process.env.TURSO_AUTH_TOKEN;
 
   if (tursoUrl) {
+    // Production (Netlify) or local dev with TURSO_DATABASE_URL set:
+    // use web adapter (no native bindings in serverless/Turbopack RSC)
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { PrismaLibSql } = require('@prisma/adapter-libsql/web');
     const adapter = new PrismaLibSql({ url: tursoUrl, authToken });
     return new PrismaClient({ adapter });
   }
 
+  // Local dev without Turso — use absolute path to avoid CWD issues in Turbopack
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { PrismaLibSql } = require('@prisma/adapter-libsql');
   const dbUrl = 'file:' + path.resolve(process.cwd(), 'dev.db');
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  require('fs').appendFileSync('/tmp/db-debug.txt', `makePrisma: dbUrl=${dbUrl}, cwd=${process.cwd()}\n`);
   const adapter = new PrismaLibSql({ url: dbUrl });
   return new PrismaClient({ adapter });
 }
 
-// Singleton for production (serverless — avoid connection churn)
-// Fresh client for dev (avoids Turbopack module-init context issues)
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const _fs = require('fs');
-_fs.appendFileSync('/tmp/db-debug.txt', 'db.ts module eval\n');
-let _prismaInstance: PrismaClient;
-try {
-  _prismaInstance = makePrisma();
-  _fs.appendFileSync('/tmp/db-debug.txt', 'makePrisma() succeeded\n');
-} catch (e: any) {
-  _fs.appendFileSync('/tmp/db-debug.txt', `makePrisma() THREW: ${e?.message}\n`);
-  throw e;
-}
-export const prisma: PrismaClient = _prismaInstance;
+// Singleton for production; fresh per module evaluation in dev
+// (avoids Turbopack hot-reload stale client issues)
+const _g = globalThis as { _skyWPrisma?: PrismaClient };
+
+export const prisma: PrismaClient =
+  process.env.NODE_ENV === 'production'
+    ? (_g._skyWPrisma ??= makePrisma())
+    : makePrisma();

@@ -1286,9 +1286,8 @@ function InsightsSection({ articles }: { articles: ArticleRow[] }) {
                 className="group relative flex h-full min-h-[420px] flex-col justify-between bg-white p-9 transition-all hover:bg-[#fafafa] overflow-hidden"
               >
                 {/* Immersive Background Image (Lens Effect) */}
-                <div className="absolute inset-0 opacity-[0.03] grayscale transition-all duration-1000 group-hover:opacity-[0.08] group-hover:grayscale-0 group-hover:scale-110">
+                <div className="absolute inset-0 opacity-[0.03] grayscale transition-all duration-1000 group-hover:opacity-[0.08] group-hover:grayscale-0 group-hover:scale-105">
                   <motion.div 
-                    style={{ y }} 
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${articleImages[i % 3]})`, y }}
                   />
