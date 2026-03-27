@@ -22,7 +22,6 @@ export default function InteractiveGlobe() {
 
     if (!canvasRef.current) return;
 
-    // @ts-expect-error onRender is a valid property but might be missing in some type definitions
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: 2,
       width: width * 2,
@@ -52,7 +51,7 @@ export default function InteractiveGlobe() {
         state.width = width * 2;
         state.height = width * 2;
       },
-    });
+    } as any);
 
     return () => {
       globe.destroy();
