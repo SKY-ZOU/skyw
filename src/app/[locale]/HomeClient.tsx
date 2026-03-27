@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useSiteData } from '@/components/providers/SiteDataProvider';
 import AnimatedSection from '@/components/ui/AnimatedSection';
+import InteractiveGlobe from '@/components/ui/InteractiveGlobe';
 import { ArrowRight } from 'lucide-react';
 import { loc } from '@/lib/locale-utils';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -35,151 +36,6 @@ interface MetricRow {
 /* ─────────────────────────────────────────
    BRI CORRIDOR MAP SVG
 ───────────────────────────────────────── */
-function BRIMapSVG() {
-  return (
-    <svg
-      viewBox="0 0 660 360"
-      className="w-full h-full"
-      aria-hidden="true"
-    >
-      <defs>
-        <radialGradient id="hk-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
-        </radialGradient>
-        <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
-        </radialGradient>
-        <pattern id="dot-matrix" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="0.8" fill="rgba(212,175,55,0.08)" />
-        </pattern>
-        <style>{`
-          @keyframes briDraw {
-            from { stroke-dashoffset: var(--len, 500); }
-            to   { stroke-dashoffset: 0; }
-          }
-          @keyframes briAppear {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-          }
-          @keyframes briPulse {
-            0%   { r: 10; opacity: 0.45; }
-            100% { r: 38; opacity: 0; }
-          }
-          @keyframes briFloat {
-            0%, 100% { transform: translateY(0); }
-            50%       { transform: translateY(-4px); }
-          }
-          .bri-line-main {
-            fill: none;
-            stroke: rgba(212,175,55,0.55);
-            stroke-width: 1.5;
-            stroke-linecap: round;
-            stroke-dasharray: 420;
-            stroke-dashoffset: 420;
-            animation: briDraw 2.8s cubic-bezier(.4,0,.2,1) forwards;
-          }
-          .bri-line-sub {
-            fill: none;
-            stroke: rgba(212,175,55,0.3);
-            stroke-width: 1;
-            stroke-linecap: round;
-            stroke-dasharray: 280;
-            stroke-dashoffset: 280;
-            animation: briDraw 2s cubic-bezier(.4,0,.2,1) forwards;
-          }
-          .bri-line-arc {
-            fill: none;
-            stroke: rgba(212,175,55,0.1);
-            stroke-width: 1;
-            stroke-linecap: round;
-            stroke-dasharray: 720;
-            stroke-dashoffset: 720;
-            animation: briDraw 3.5s cubic-bezier(.4,0,.2,1) forwards;
-          }
-          .bri-dot {
-            opacity: 0;
-            animation: briAppear 0.4s ease forwards;
-          }
-          .bri-label {
-            opacity: 0;
-            animation: briAppear 0.6s ease forwards;
-          }
-          .hk-ring-1 { animation: briPulse 2.8s ease-out infinite; }
-          .hk-ring-2 { animation: briPulse 2.8s ease-out infinite 1.0s; }
-          .hk-float  { animation: briFloat 4s ease-in-out infinite; }
-        `}</style>
-      </defs>
-
-      {/* ── Professional Dot Matrix World Overlay ── */}
-      <rect width="660" height="360" fill="url(#dot-matrix)" />
-      
-      {/* ── Region blobs (Subtle glow backdrops) ── */}
-      <ellipse cx="95"  cy="115" rx="78"  ry="48"  fill="rgba(212,175,55,0.025)" />
-      <ellipse cx="255" cy="172" rx="82"  ry="58"  fill="rgba(212,175,55,0.028)" />
-      <ellipse cx="400" cy="148" rx="78"  ry="54"  fill="rgba(212,175,55,0.025)" />
-      <ellipse cx="545" cy="178" rx="88"  ry="68"  fill="rgba(212,175,55,0.032)" />
-      <ellipse cx="530" cy="270" rx="52"  ry="38"  fill="rgba(212,175,55,0.022)" />
-
-      {/* ── World map paths (Simplified digital outline) ── */}
-      <path d="M50 100 Q150 50 250 150 T450 100 T600 200" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-      <path d="M100 250 Q200 300 300 200 T500 250 T650 150" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-
-      {/* ── Paths ── */}
-      {/* London → Dubai */}
-      <path className="bri-line-sub"
-        d="M 90,110 Q 172,142 255,172"
-        style={{ animationDelay: '0.1s' }} />
-      {/* Dubai → HK (main east–west BRI axis) */}
-      <path className="bri-line-main"
-        d="M 255,172 Q 400,162 545,178"
-        style={{ animationDelay: '0.5s' }} />
-      {/* Central Asia → HK */}
-      <path className="bri-line-sub"
-        d="M 395,108 Q 470,140 545,178"
-        style={{ animationDelay: '0.9s' }} />
-      {/* HK → Beijing */}
-      <path className="bri-line-sub"
-        d="M 545,178 Q 542,148 540,115"
-        style={{ animationDelay: '1.2s' }} />
-      {/* HK → Singapore */}
-      <path className="bri-line-sub"
-        d="M 545,178 Q 538,224 530,268"
-        style={{ animationDelay: '1.4s' }} />
-      {/* Long financial arc: London → HK */}
-      <path className="bri-line-arc"
-        d="M 90,110 Q 318,32 545,178"
-        style={{ animationDelay: '2.2s' }} />
-
-      {/* ── Labels ── */}
-      <text x="90"  y="96"  textAnchor="middle" fill="rgba(255,255,255,0.42)" fontSize="8.5" fontFamily="Inter,sans-serif" letterSpacing="1.5" className="bri-label" style={{ animationDelay: '0.6s' }}>LONDON</text>
-      <text x="255" y="158" textAnchor="middle" fill="rgba(255,255,255,0.48)" fontSize="8.5" fontFamily="Inter,sans-serif" letterSpacing="1.5" className="bri-label" style={{ animationDelay: '1.0s' }}>DUBAI</text>
-      <text x="395" y="94"  textAnchor="middle" fill="rgba(255,255,255,0.35)" fontSize="7.5" fontFamily="Inter,sans-serif" letterSpacing="1.2" className="bri-label" style={{ animationDelay: '1.2s' }}>CENTRAL ASIA</text>
-      <text x="540" y="101" textAnchor="middle" fill="rgba(255,255,255,0.38)" fontSize="8"   fontFamily="Inter,sans-serif" letterSpacing="1.2" className="bri-label" style={{ animationDelay: '1.5s' }}>BEIJING</text>
-      <text x="530" y="288" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="8.5" fontFamily="Inter,sans-serif" letterSpacing="1.5" className="bri-label" style={{ animationDelay: '1.8s' }}>SINGAPORE</text>
-
-      {/* ── City dots ── */}
-      <circle cx="90"  cy="110" r="3.5"  fill="#D4AF37" fillOpacity="0.65" className="bri-dot" style={{ animationDelay: '0.4s' }} />
-      <circle cx="255" cy="172" r="4.5"  fill="#D4AF37" fillOpacity="0.80" className="bri-dot" style={{ animationDelay: '0.8s' }} />
-      <circle cx="395" cy="108" r="3"    fill="#D4AF37" fillOpacity="0.50" className="bri-dot" style={{ animationDelay: '1.1s' }} />
-      <circle cx="540" cy="115" r="3"    fill="#D4AF37" fillOpacity="0.52" className="bri-dot" style={{ animationDelay: '1.4s' }} />
-      <circle cx="530" cy="268" r="3.5"  fill="#D4AF37" fillOpacity="0.65" className="bri-dot" style={{ animationDelay: '1.7s' }} />
-
-      {/* ── Hong Kong — centre node ── */}
-      <g className="hk-float">
-        <circle cx="545" cy="178" r="55"  fill="url(#hk-glow)" />
-        <circle cx="545" cy="178" className="hk-ring-1" fill="none" stroke="#D4AF37" strokeWidth="0.8" />
-        <circle cx="545" cy="178" className="hk-ring-2" fill="none" stroke="#D4AF37" strokeWidth="0.8" />
-        <circle cx="545" cy="178" r="15"  fill="none" stroke="rgba(212,175,55,0.18)" strokeWidth="1" />
-        <circle cx="545" cy="178" r="8"   fill="#D4AF37" />
-        <circle cx="545" cy="178" r="3.5" fill="white" />
-        <text x="545" y="207" textAnchor="middle" fill="rgba(212,175,55,0.95)" fontSize="10.5" fontFamily="Inter,sans-serif" fontWeight="500" letterSpacing="2.5" className="bri-label" style={{ animationDelay: '0.2s' }}>HONG KONG</text>
-        <text x="545" y="220" textAnchor="middle" fill="rgba(255,255,255,0.28)" fontSize="7.5"  fontFamily="Inter,sans-serif" letterSpacing="1.2" className="bri-label" style={{ animationDelay: '0.2s' }}>GATEWAY HUB</text>
-      </g>
-    </svg>
-  );
-}
 
 /* ─────────────────────────────────────────
    HERO
@@ -202,7 +58,7 @@ function BRIHero() {
       {/* Immersive Background Image */}
       <motion.div 
         style={{ y: y1 }}
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 will-change-transform"
       >
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.18] mix-blend-luminosity scale-110"
@@ -305,7 +161,7 @@ function BRIHero() {
             <div className="w-full max-w-[620px] relative">
               {/* Subtle backglow for the map */}
               <div className="absolute inset-0 bg-gold-400/5 blur-[100px] rounded-full pointer-events-none" />
-              <BRIMapSVG />
+              <InteractiveGlobe />
             </div>
           </motion.div>
         </div>
@@ -384,7 +240,7 @@ function GatewaySection() {
         <AnimatedSection delay={0.08}>
           <div ref={ref} className="relative mt-12 overflow-hidden aspect-[21/9] sm:aspect-[24/7]">
             <motion.div
-              className="absolute inset-0 bg-cover bg-center"
+              className="absolute inset-0 bg-cover bg-center will-change-transform"
               style={{ backgroundImage: "url('/images/home/gateway-banner.jpg')", y, scale }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-navy-950/90 via-navy-950/40 to-transparent" />
@@ -483,20 +339,20 @@ function CorridorSection() {
 
           {/* Right: corridor images grid with premium reveal */}
           <AnimatedSection delay={0.2}>
-            <div className="grid grid-cols-2 gap-px bg-[#e5e7eb] border border-[#e5e7eb] shadow-2xl shadow-navy-950/20">
+            <div className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 gap-px bg-[#e5e7eb] border border-[#e5e7eb] shadow-2xl shadow-navy-950/20 hide-scrollbar">
               {[
                 { img: '/images/home/corridor-dubai.png', label: 'Dubai' },
                 { img: '/images/home/corridor-singapore.png', label: 'Singapore' },
                 { img: '/images/home/corridor-shenzhen.png', label: 'Shenzhen' },
                 { img: '/images/home/corridor-london.png', label: 'London' },
               ].map((item, idx) => (
-                <div key={item.label} className="relative overflow-hidden group bg-[#f0f0f0]" style={{ aspectRatio: '4/3' }}>
+                <div key={item.label} className="relative overflow-hidden group bg-[#f0f0f0] min-w-[85vw] sm:min-w-0 flex-shrink-0 snap-center sm:snap-align-none" style={{ aspectRatio: '4/3' }}>
                   <motion.div
                     initial={{ scale: 1.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: idx * 0.1 }}
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110 will-change-transform"
                     style={{ backgroundImage: `url(${item.img})` }}
                   />
                   {/* Premium overlay with subtle color cast */}
@@ -838,7 +694,7 @@ function TrackRecordSection() {
       {/* Parallax Background for the section */}
       <motion.div 
         style={{ y }}
-        className="absolute inset-0 opacity-[0.05] pointer-events-none grayscale"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none grayscale will-change-transform"
       >
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -902,11 +758,11 @@ function TrackRecordSection() {
         </div>
 
         {/* Portfolio grid */}
-        <div className="mt-8 grid gap-px bg-[#e5e7eb] grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-8 flex overflow-x-auto snap-x snap-mandatory sm:grid gap-px bg-[#e5e7eb] sm:grid-cols-3 lg:grid-cols-4 hide-scrollbar">
           {portfolio.map((item, i) => {
             const s = sectorStyle[item.sector];
             return (
-              <AnimatedSection key={i} delay={i * 0.04}>
+              <AnimatedSection key={i} delay={i * 0.04} className="min-w-[70vw] sm:min-w-0 snap-center sm:snap-align-none flex-shrink-0 h-full">
                 <div className="bg-white px-6 py-5 h-full flex flex-col justify-between">
                   <div>
                     <div className="text-[15.5px] font-semibold text-[#1a1a2e]">
@@ -958,7 +814,7 @@ function BusinessSection() {
       {/* Subtle Section Background Parallax */}
       <motion.div 
         style={{ y }}
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none will-change-transform"
       >
         <div 
           className="absolute inset-0 bg-cover bg-center"
