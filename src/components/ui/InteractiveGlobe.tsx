@@ -46,7 +46,8 @@ export default function InteractiveGlobe() {
         // Beijing
         { location: [39.9042, 116.4074], size: 0.06 },
       ],
-      onRender: (state) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      onRender: (state: any) => {
         // Called on every animation frame.
         // `state` will be an empty object, return updated params.
         state.phi = phi;
