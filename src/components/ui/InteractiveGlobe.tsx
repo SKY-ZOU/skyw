@@ -22,6 +22,7 @@ export default function InteractiveGlobe() {
 
     if (!canvasRef.current) return;
 
+    // @ts-expect-error onRender is a valid property but might be missing in some type definitions
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: 2,
       width: width * 2,
@@ -42,7 +43,7 @@ export default function InteractiveGlobe() {
         { location: [51.5074, -0.1278], size: 0.08 },   // London
         { location: [39.9042, 116.4074], size: 0.06 },  // Beijing
       ],
-      onRender: (state) => {
+      onRender: (state: any) => {
         // This is called on every animation frame
         if (!pointerInteracting.current) {
           phi += 0.005;
