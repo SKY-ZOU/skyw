@@ -15,6 +15,7 @@ interface ArticleRow {
   slug: string;
   category: string;
   date: string;
+  coverImage?: string;
   titleZhCN: string;
   titleZhTW: string;
   titleEn: string;
@@ -1101,7 +1102,7 @@ function InsightsSection({ articles }: { articles: ArticleRow[] }) {
     industry: tInsights('categoryIndustry'),
   };
 
-  const articleImages = [
+  const articleFallbackImages = [
     '/images/home/corridor-london.png',
     '/images/home/corridor-singapore.png',
     '/images/home/corridor-dubai.png',
@@ -1142,10 +1143,10 @@ function InsightsSection({ articles }: { articles: ArticleRow[] }) {
                 className="group relative flex h-full min-h-[420px] flex-col justify-between bg-white p-9 transition-all hover:bg-[#fafafa] overflow-hidden"
               >
                 {/* Immersive Background Image (Lens Effect) */}
-                <div className="absolute inset-0 opacity-[0.03] grayscale transition-all duration-1000 group-hover:opacity-[0.08] group-hover:grayscale-0 group-hover:scale-105">
+                <div className="absolute inset-0 opacity-[0.03] grayscale transition-all duration-1000 group-hover:opacity-[0.08] group-hover:grayscale-0 group-hover:scale-110">
                   <motion.div 
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${articleImages[i % 3]})`, y }}
+                    style={{ backgroundImage: `url(${article.coverImage || articleFallbackImages[i % 3]})`, y }}
                   />
                 </div>
                 

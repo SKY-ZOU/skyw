@@ -14,6 +14,7 @@ interface ArticleRow {
   slug: string;
   category: string;
   date: string;
+  coverImage?: string;
   titleZhCN: string; titleZhTW: string; titleEn: string;
   excerptZhCN: string; excerptZhTW: string; excerptEn: string;
 }
@@ -39,7 +40,7 @@ export default function InsightsClient({ articles }: { articles: ArticleRow[] })
     industry: t('categoryIndustry'),
   };
 
-  const articleImages = [
+  const articleFallbackImages = [
     '/images/home/corridor-london.png',
     '/images/home/corridor-singapore.png',
     '/images/home/corridor-dubai.png',
@@ -91,7 +92,7 @@ export default function InsightsClient({ articles }: { articles: ArticleRow[] })
                   <div className="absolute inset-0 opacity-[0.03] grayscale transition-all duration-1000 group-hover:opacity-[0.08] group-hover:grayscale-0 group-hover:scale-105">
                     <div 
                       className="absolute inset-0 bg-cover bg-center"
-                      style={{ backgroundImage: `url(${articleImages[i % 3]})` }}
+                      style={{ backgroundImage: `url(${article.coverImage || articleFallbackImages[i % 3]})` }}
                     />
                   </div>
                   

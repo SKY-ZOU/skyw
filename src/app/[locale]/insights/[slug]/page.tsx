@@ -65,66 +65,94 @@ export default async function InsightArticlePage({
 
   return (
     <>
-      <HeroSection 
-        title={title} 
-        backgroundImage={article.coverImage || "/images/home/hero-bg.png"}
-      >
-        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mt-4">
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-gold-400">
-              {categoryLabels[article.category]}
-            </span>
-            <div className="w-1 h-1 rounded-full bg-white/20" />
-            <span className="text-[11px] uppercase tracking-wider text-white/50">
-              {article.date}
-            </span>
-          </div>
-        </div>
-      </HeroSection>
-
-      <section className="bg-white relative">
-        {/* Editorial Layout Wrapper */}
-        <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-8 lg:py-28">
-          
+      {/* 1. Simplified Clean Header - Focus on Title */}
+      <section className="bg-navy-950 pt-36 pb-16 lg:pt-44 lg:pb-24 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+             style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        
+        <div className="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-8 text-center sm:text-left">
           <Link
             href="/insights"
-            className="group mb-16 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-navy-900 transition-colors hover:text-gold-600"
+            className="group mb-10 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-gold-400/60 transition-colors hover:text-gold-400"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
             <span className="border-b border-transparent group-hover:border-gold-400 pb-0.5">{t('backToList')}</span>
           </Link>
 
+          <div className="flex flex-col gap-6 max-w-4xl">
+            <div className="flex items-center justify-center sm:justify-start gap-3">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-gold-400">
+                {categoryLabels[article.category]}
+              </span>
+              <div className="w-1 h-1 rounded-full bg-white/20" />
+              <span className="text-[11px] uppercase tracking-wider text-white/40">
+                {article.date}
+              </span>
+            </div>
+            <h1 className="text-[clamp(2rem,5vw,3.8rem)] font-extralight tracking-tight text-white leading-[1.15]">
+              {title}
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Dedicated Full-Visibility Image Area */}
+      {article.coverImage && (
+        <section className="bg-white pt-12 lg:pt-16">
+          <div className="mx-auto max-w-[1200px] px-6">
+            <div className="relative overflow-hidden shadow-2xl bg-[#f7f8f9] border border-[#e5e7eb]">
+              {/* Using a larger aspect ratio or natural container to ensure full visibility */}
+              <div className="relative w-full overflow-hidden">
+                <img 
+                  src={article.coverImage} 
+                  alt={title}
+                  className="w-full h-auto object-contain max-h-[85vh] mx-auto block"
+                />
+              </div>
+              {/* Optional caption bar */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/20 to-transparent h-20 pointer-events-none" />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 3. Refined Editorial Content Layout */}
+      <section className="bg-white relative">
+        <div className="mx-auto max-w-[1400px] px-6 py-16 lg:px-8 lg:py-24">
           <div className="grid lg:grid-cols-[1fr_minmax(300px,350px)] gap-16 items-start">
             <article className="prose prose-lg prose-slate max-w-none prose-headings:font-light prose-headings:text-navy-950 prose-p:font-light prose-p:leading-relaxed prose-p:text-[#495057] prose-a:text-gold-600">
               {content.split('\n\n').map((para, i) => {
-                // Drop cap for the first paragraph
                 if (i === 0) {
                   return (
-                    <p key={i} className="text-[1.1rem] font-light leading-relaxed text-[#495057] first-letter:text-5xl first-letter:font-semibold first-letter:text-navy-950 first-letter:mr-3 first-letter:float-left">
+                    <p key={i} className="text-[1.15rem] font-light leading-relaxed text-navy-900 first-letter:text-6xl first-letter:font-semibold first-letter:text-navy-950 first-letter:mr-4 first-letter:float-left first-letter:mt-2">
                       {para}
                     </p>
                   );
                 }
                 return (
-                  <p key={i} className="text-[1.05rem] font-light leading-relaxed text-[#495057] mt-6">
+                  <p key={i} className="text-[1.05rem] font-light leading-relaxed text-[#495057] mt-8">
                     {para}
                   </p>
                 );
               })}
             </article>
 
-            {/* Sticky Sidebar for Social / Share / Meta (Placeholder for future) */}
             <aside className="hidden lg:block sticky top-32">
-              <div className="p-8 bg-[#f7f8f9] border border-[#e5e7eb]">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-navy-900/40 mb-4">About this insight</p>
-                <div className="h-px w-8 bg-gold-400 mb-6" />
-                <p className="text-[13.5px] leading-relaxed text-[#6c757d] mb-8">
-                  This material is provided for informational purposes only and should not be construed as investment advice.
+              <div className="p-8 bg-[#f7f8f9] border border-[#e5e7eb] rounded-sm shadow-sm">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-[1px] bg-gold-400" />
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-navy-950/60">Insight Overview</p>
+                </div>
+                <p className="text-[13.5px] leading-relaxed text-[#6c757d] mb-8 italic">
+                  "Establishing a cross-border capital nexus requires more than just assets; it demands a strategic convergence of compliance and vision."
                 </p>
-                <div className="flex gap-4">
-                  {/* Share placeholders */}
-                  <div className="w-8 h-8 rounded-full border border-[#adb5bd] flex items-center justify-center text-[#adb5bd] hover:border-navy-900 hover:text-navy-900 transition-colors cursor-pointer">in</div>
-                  <div className="w-8 h-8 rounded-full border border-[#adb5bd] flex items-center justify-center text-[#adb5bd] hover:border-navy-900 hover:text-navy-900 transition-colors cursor-pointer">tw</div>
+                <div className="h-px w-full bg-[#e5e7eb] mb-8" />
+                <div className="space-y-4">
+                  <p className="text-[11px] font-semibold text-navy-900 uppercase tracking-widest">Share this dynamic</p>
+                  <div className="flex gap-3">
+                    <div className="w-9 h-9 border border-[#dee2e6] flex items-center justify-center text-[#adb5bd] hover:border-gold-400 hover:text-gold-500 transition-all cursor-pointer bg-white">in</div>
+                    <div className="w-9 h-9 border border-[#dee2e6] flex items-center justify-center text-[#adb5bd] hover:border-gold-400 hover:text-gold-500 transition-all cursor-pointer bg-white">tw</div>
+                  </div>
                 </div>
               </div>
             </aside>
