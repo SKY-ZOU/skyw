@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Nebula Content Manifest",
+  "type": "object",
+  "properties": {
+    "title": { "type": "string" },
+    "date": { "type": "string", "format": "date" },
+    "author": { "type": "string" },
+    "source_type": { 
+      "type": "string", 
+      "enum": ["moment", "event", "thinking", "video", "official"] 
+    },
+    "targets": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "raw_text": { "type": "string" },
+    "media": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["title", "source_type", "raw_text"]
+}
