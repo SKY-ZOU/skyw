@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useSiteData } from '@/components/providers/SiteDataProvider';
 import AnimatedSection from '@/components/ui/AnimatedSection';
-import InteractiveGlobe from '@/components/ui/InteractiveGlobe';
+import GlobalNetworkPulse from '@/components/ui/GlobalNetworkPulse';
 import { ArrowRight } from 'lucide-react';
 import { loc } from '@/lib/locale-utils';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -151,17 +151,17 @@ function BRIHero() {
             </div>
           </motion.div>
 
-          {/* Right: BRI map with subtle float */}
+          {/* Right: Global Network Pulse (SVG based) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:flex items-center justify-center"
+            className="flex items-center justify-center order-first lg:order-last"
           >
-            <div className="w-full max-w-[620px] relative">
-              {/* Subtle backglow for the map */}
-              <div className="absolute inset-0 bg-gold-400/5 blur-[100px] rounded-full pointer-events-none" />
-              <InteractiveGlobe />
+            <div className="w-full max-w-[450px] lg:max-w-[800px] relative">
+              {/* Subtle backglow */}
+              <div className="absolute inset-0 bg-gold-400/5 blur-[60px] lg:blur-[100px] rounded-full pointer-events-none" />
+              <GlobalNetworkPulse />
             </div>
           </motion.div>
         </div>
