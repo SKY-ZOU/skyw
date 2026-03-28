@@ -31,6 +31,22 @@ export async function getArticleBySlug(slug: string) {
   return prisma.article.findUnique({ where: { slug } });
 }
 
+export async function getAdjacentArticles(currentId: number) {
+  const [prev, next] = await Promise.all([
+    prisma.article.findFirst({
+      where: { id: { lt: currentId }, published: true },
+      orderBy: { id: 'desc' },
+      select: { slug: true, titleZhCN: true, titleZhTW: true, titleEn: true }
+    }),
+    prisma.article.findFirst({
+      where: { id: { gt: currentId }, published: true },
+      orderBy: { id: 'asc' },
+      select: { slug: true, titleZhCN: true, titleZhTW: true, titleEn: true }
+    })
+  ]);
+  return { prev, next };
+}
+
 export async function getAllArticleSlugs() {
   const articles = await prisma.article.findMany({
     where: { published: true },

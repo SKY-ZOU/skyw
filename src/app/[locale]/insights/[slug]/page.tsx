@@ -2,8 +2,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { getArticleBySlug, getAllArticleSlugs } from '@/lib/data';
-import { ArrowLeft } from 'lucide-react';
+import { getArticleBySlug, getAllArticleSlugs, getAdjacentArticles } from '@/lib/data';
+import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { loc } from '@/lib/locale-utils';
 import HeroSection from '@/components/sections/HeroSection';
 
@@ -52,6 +52,7 @@ export default async function InsightArticlePage({
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
+  const { prev, next } = await getAdjacentArticles(article.id);
   const t = await getTranslations({ locale, namespace: 'Insights' });
 
   const categoryLabels: Record<string, string> = {
@@ -62,6 +63,7 @@ export default async function InsightArticlePage({
 
   const title = loc(article, 'title', locale);
   const content = loc(article, 'content', locale);
+  const excerpt = loc(article, 'excerpt', locale);
 
   return (
     <>
@@ -141,21 +143,70 @@ export default async function InsightArticlePage({
               <div className="p-8 bg-[#f7f8f9] border border-[#e5e7eb] rounded-sm shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-8 h-[1px] bg-gold-400" />
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-navy-950/60">Insight Overview</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-navy-950/60">Insight Summary</p>
                 </div>
-                <p className="text-[13.5px] leading-relaxed text-[#6c757d] mb-8 italic">
-                  "Establishing a cross-border capital nexus requires more than just assets; it demands a strategic convergence of compliance and vision."
+                <p className="text-[14px] leading-relaxed text-[#495057] mb-8 font-medium">
+                  {excerpt}
                 </p>
                 <div className="h-px w-full bg-[#e5e7eb] mb-8" />
                 <div className="space-y-4">
                   <p className="text-[11px] font-semibold text-navy-900 uppercase tracking-widest">Share this dynamic</p>
                   <div className="flex gap-3">
-                    <div className="w-9 h-9 border border-[#dee2e6] flex items-center justify-center text-[#adb5bd] hover:border-gold-400 hover:text-gold-500 transition-all cursor-pointer bg-white">in</div>
-                    <div className="w-9 h-9 border border-[#dee2e6] flex items-center justify-center text-[#adb5bd] hover:border-gold-400 hover:text-gold-500 transition-all cursor-pointer bg-white">tw</div>
+                    <div className="w-9 h-9 border border-[#dee2e6] flex items-center justify-center text-[#adb5bd] hover:border-gold-400 hover:text-gold-500 transition-all cursor-pointer bg-white text-[12px]">LI</div>
+                    <div className="w-9 h-9 border border-[#dee2e6] flex items-center justify-center text-[#adb5bd] hover:border-gold-400 hover:text-gold-500 transition-all cursor-pointer bg-white text-[12px]">TW</div>
                   </div>
                 </div>
               </div>
             </aside>
+          </div>
+
+          {/* 4. Article Navigation: Prev / Next */}
+          <div className="mt-24 pt-12 border-t border-[#e5e7eb]">
+            <div className="grid sm:grid-cols-2 gap-8">
+              {/* Previous Article */}
+              <div className="flex flex-col items-start">
+                {prev ? (
+                  <Link href={`/insights/${prev.slug}`} className="group max-w-sm">
+                    <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#adb5bd] group-hover:text-gold-500 transition-colors mb-4">
+                      <ChevronLeft className="h-4 w-4" />
+                      Previous Insight
+                    </p>
+                    <h4 className="text-[18px] font-light text-navy-950 group-hover:text-gold-600 transition-colors line-clamp-2">
+                      {loc(prev, 'title', locale)}
+                    </h4>
+                  </Link>
+                ) : (
+                  <div className="opacity-25 grayscale cursor-not-allowed">
+                    <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#adb5bd] mb-4">
+                      <ChevronLeft className="h-4 w-4" />
+                      First Insight
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Next Article */}
+              <div className="flex flex-col items-end text-right">
+                {next ? (
+                  <Link href={`/insights/${next.slug}`} className="group max-w-sm">
+                    <p className="flex items-center justify-end gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#adb5bd] group-hover:text-gold-500 transition-colors mb-4">
+                      Next Insight
+                      <ChevronRight className="h-4 w-4" />
+                    </p>
+                    <h4 className="text-[18px] font-light text-navy-950 group-hover:text-gold-600 transition-colors line-clamp-2">
+                      {loc(next, 'title', locale)}
+                    </h4>
+                  </Link>
+                ) : (
+                  <div className="opacity-25 grayscale cursor-not-allowed">
+                    <p className="flex items-center justify-end gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#adb5bd] mb-4">
+                      Latest Insight
+                      <ChevronRight className="h-4 w-4" />
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
