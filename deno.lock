@@ -12,6 +12,7 @@
     "packageJson": {
       "dependencies": [
         "npm:@libsql/client@0.17",
+        "npm:@notionhq/client@^5.15.0",
         "npm:@prisma/adapter-libsql@^7.4.2",
         "npm:@prisma/client@^7.4.2",
         "npm:@studio-freight/lenis@^1.0.42",
