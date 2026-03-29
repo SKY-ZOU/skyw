@@ -124,16 +124,28 @@ export default async function InsightArticlePage({
           <div className="grid lg:grid-cols-[1fr_minmax(300px,350px)] gap-16 items-start">
             <article className="prose prose-lg prose-slate max-w-none prose-headings:font-light prose-headings:text-navy-950 prose-p:font-light prose-p:leading-relaxed prose-p:text-[#495057] prose-a:text-gold-600">
               {content.split('\n\n').map((para, i) => {
+                // Simple regex to handle bold text **bold**
+                const formatText = (text: string) => {
+                  const parts = text.split(/(\*\*.*?\*\*)/g);
+                  return parts.map((part, index) => {
+                    if (part.startsWith('**') && part.endsWith('**')) {
+                      return <strong key={index} className="font-bold text-navy-950">{part.slice(2, -2)}</strong>;
+                    }
+                    return part;
+                  });
+                };
+
+                // Drop cap for the first paragraph
                 if (i === 0) {
                   return (
                     <p key={i} className="text-[1.15rem] font-light leading-relaxed text-navy-900 first-letter:text-6xl first-letter:font-semibold first-letter:text-navy-950 first-letter:mr-4 first-letter:float-left first-letter:mt-2">
-                      {para}
+                      {formatText(para)}
                     </p>
                   );
                 }
                 return (
                   <p key={i} className="text-[1.05rem] font-light leading-relaxed text-[#495057] mt-8">
-                    {para}
+                    {formatText(para)}
                   </p>
                 );
               })}
