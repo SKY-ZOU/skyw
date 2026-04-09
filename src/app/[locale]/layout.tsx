@@ -65,7 +65,7 @@ export default async function LocaleLayout({
           <SiteDataProvider divisions={divisions}>
             <SmoothScrollProvider>
               <Header />
-              <main>{children}</main>
+              <main className="w-full overflow-x-hidden">{children}</main>
               <Footer />
             </SmoothScrollProvider>
           </SiteDataProvider>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import NextLink from 'next/link';
@@ -19,8 +19,17 @@ export default function Header() {
   const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [bizDropdown, setBizDropdown] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const { scrollY } = useScroll();
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 1023px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -31,7 +40,7 @@ export default function Header() {
     }
 
     // Hide header when scrolling down, show when scrolling up
-    if (latest > 150 && latest > previous) {
+    if (!isMobile && latest > 150 && latest > previous) {
       setHidden(true);
     } else {
       setHidden(false);
@@ -41,6 +50,11 @@ export default function Header() {
   const navLinkClass = scrolled
     ? 'text-[#1a1a2e] hover:text-gold-500'
     : 'text-white/90 hover:text-white';
+  const headerClass = isMobile
+    ? 'bg-navy-950/92 backdrop-blur-md border-b border-white/10'
+    : (scrolled
+      ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.08)]'
+      : 'bg-transparent');
 
   return (
     <>
@@ -49,12 +63,9 @@ export default function Header() {
           visible: { y: 0 },
           hidden: { y: "-100%" },
         }}
-        animate={hidden ? "hidden" : "visible"}
+        animate={hidden && !mobileOpen ? "hidden" : "visible"}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 right-0 left-0 z-50 transition-colors duration-500 ${scrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.08)]'
-            : 'bg-transparent'
-          }`}
+        className={`fixed top-0 right-0 left-0 z-50 transition-colors duration-500 ${headerClass}`}
       >
         {/* Top bar - secondary links */}
         <div
@@ -67,11 +78,12 @@ export default function Header() {
         </div>
 
         {/* Main nav */}
-        <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between px-6 lg:h-16 lg:px-8">
+        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 lg:h-16 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-baseline gap-1.5">
             <span
-              className={`text-2xl font-bold tracking-[0.15em] transition-colors duration-300 ${scrolled ? 'text-navy-900' : 'text-white'
+              className={`text-[1.1rem] font-bold tracking-[0.2em] transition-colors duration-300 lg:text-2xl lg:tracking-[0.15em] ${
+                isMobile ? 'text-white' : (scrolled ? 'text-navy-900' : 'text-white')
                 }`}
             >
               SKYW
@@ -142,20 +154,17 @@ export default function Header() {
           </nav>
 
           {/* Right side */}
-          <div className="flex items-center gap-4">
-            <div className="lg:hidden">
-              <LanguageSwitcher light={!scrolled} />
-            </div>
+          <div className="flex items-center gap-2 lg:gap-4">
 
             {/* Mobile burger */}
             <button
-              className="p-2 lg:hidden"
+              className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white lg:hidden"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
+              <span>Menu</span>
               <Menu
-                className={`h-6 w-6 transition-colors ${scrolled ? 'text-navy-900' : 'text-white'
-                  }`}
+                className="h-4 w-4"
               />
             </button>
           </div>

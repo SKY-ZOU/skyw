@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import NextLink from 'next/link';
-import { X, ChevronDown } from 'lucide-react';
+import { X, ChevronDown, Globe } from 'lucide-react';
 import { useSiteData } from '@/components/providers/SiteDataProvider';
 import { loc } from '@/lib/locale-utils';
 
@@ -22,75 +22,34 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
   const pathname = usePathname();
   const [bizOpen, setBizOpen] = useState(false);
 
+  useEffect(() => {
+    const original = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-50 bg-white">
-      <div className="flex h-16 items-center justify-between px-4">
-        <span className="text-lg font-bold tracking-wider text-navy-900">SKYW</span>
-        <button onClick={onClose} className="p-2" aria-label="Close menu">
-          <X className="h-6 w-6 text-[#212529]" />
-        </button>
-      </div>
-
-      <nav className="px-4 py-6">
-        <Link href="/" onClick={onClose} className="block border-b border-[#E9ECEF] py-4 text-lg font-medium text-[#212529]">
-          {t('home')}
-        </Link>
-        <Link href="/about" onClick={onClose} className="block border-b border-[#E9ECEF] py-4 text-lg font-medium text-[#212529]">
-          {t('about')}
-        </Link>
-
-        <div className="border-b border-[#E9ECEF]">
+    <div className="fixed inset-0 z-50 bg-navy-950 text-white">
+      <div className="flex h-full flex-col overflow-y-auto">
+        <div className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-white/10 bg-navy-950/95 px-4 backdrop-blur-md">
+          <span className="text-[1.05rem] font-bold tracking-[0.2em] text-white">SKYW</span>
           <button
-            onClick={() => setBizOpen(!bizOpen)}
-            className="flex w-full items-center justify-between py-4 text-lg font-medium text-[#212529]"
-          >
-            {t('business')}
-            <ChevronDown className={`h-5 w-5 transition-transform ${bizOpen ? 'rotate-180' : ''}`} />
-          </button>
-          {bizOpen && (
-            <div className="pb-4 pl-4">
-              <Link href="/business" onClick={onClose} className="block py-2 text-[#495057]">
-                {t('business')}
-              </Link>
-              {divisions.map((div) => (
-                <Link
-                  key={div.divisionId}
-                  href={`/business/${div.slug}`}
-                  onClick={onClose}
-                  className="block py-2 text-[#495057]"
-                >
-                  {loc(div, 'title', locale)}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <Link href="/insights" onClick={onClose} className="block border-b border-[#E9ECEF] py-4 text-lg font-medium text-[#212529]">
-          {t('insights')}
-        </Link>
-        <Link href="/contact" onClick={onClose} className="block border-b border-[#E9ECEF] py-4 text-lg font-medium text-[#212529]">
-          {t('contact')}
-        </Link>
-        <Link href="/partnership" onClick={onClose} className="block border-b border-[#E9ECEF] py-4 text-lg font-medium text-[#212529]">
-          {t('partnership')}
-        </Link>
-
-        {/* Investor Portal */}
-        <div className="pt-6">
-          <NextLink
-            href="/lp/login"
             onClick={onClose}
-            className="flex w-full items-center justify-center rounded-sm border border-[#D4AF37] py-3 text-base font-medium tracking-wider text-[#D4AF37]"
+            className="inline-flex items-center justify-center rounded-md border border-white/15 p-2"
+            aria-label="Close menu"
           >
-            {t('investorPortal')}
-          </NextLink>
+            <X className="h-5 w-5 text-white" />
+          </button>
         </div>
 
-        {/* Language selector */}
-        <div className="mt-8">
-          <p className="mb-3 text-sm font-medium text-[#6C757D]">{t('language')}</p>
-          <div className="flex gap-2">
+        <div className="border-b border-white/10 px-4 py-4">
+          <p className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
+            <Globe className="h-3.5 w-3.5" />
+            {t('language')}
+          </p>
+          <div className="grid grid-cols-3 gap-2">
             {LOCALES.map((l) => (
               <button
                 key={l.code}
@@ -98,10 +57,10 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
                   router.replace(pathname, { locale: l.code as 'zh-CN' | 'zh-TW' | 'en' });
                   onClose();
                 }}
-                className={`rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-md border px-3 py-2 text-xs font-semibold transition-colors ${
                   locale === l.code
-                    ? 'bg-gold-400 text-white'
-                    : 'bg-[#F8F9FA] text-[#495057] hover:bg-[#E9ECEF]'
+                    ? 'border-gold-400 bg-gold-400/15 text-gold-300'
+                    : 'border-white/10 bg-white/5 text-white/75'
                 }`}
               >
                 {l.label}
@@ -109,7 +68,63 @@ export default function MobileNav({ onClose }: { onClose: () => void }) {
             ))}
           </div>
         </div>
-      </nav>
+
+        <nav className="px-4 py-3">
+          <Link href="/" onClick={onClose} className="block border-b border-white/10 py-4 text-lg font-medium text-white/92">
+            {t('home')}
+          </Link>
+          <Link href="/about" onClick={onClose} className="block border-b border-white/10 py-4 text-lg font-medium text-white/92">
+            {t('about')}
+          </Link>
+
+          <div className="border-b border-white/10">
+            <button
+              onClick={() => setBizOpen(!bizOpen)}
+              className="flex w-full items-center justify-between py-4 text-lg font-medium text-white/92"
+            >
+              {t('business')}
+              <ChevronDown className={`h-5 w-5 text-white/70 transition-transform ${bizOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {bizOpen && (
+              <div className="space-y-1 pb-4 pl-1">
+                <Link href="/business" onClick={onClose} className="block rounded-md px-2 py-2 text-[15px] text-white/70">
+                  {t('business')}
+                </Link>
+                {divisions.map((div) => (
+                  <Link
+                    key={div.divisionId}
+                    href={`/business/${div.slug}`}
+                    onClick={onClose}
+                    className="block rounded-md px-2 py-2 text-[15px] text-white/70"
+                  >
+                    {loc(div, 'title', locale)}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <Link href="/insights" onClick={onClose} className="block border-b border-white/10 py-4 text-lg font-medium text-white/92">
+            {t('insights')}
+          </Link>
+          <Link href="/contact" onClick={onClose} className="block border-b border-white/10 py-4 text-lg font-medium text-white/92">
+            {t('contact')}
+          </Link>
+          <Link href="/partnership" onClick={onClose} className="block border-b border-white/10 py-4 text-lg font-medium text-white/92">
+            {t('partnership')}
+          </Link>
+
+          <div className="pt-6">
+            <NextLink
+              href="/lp/login"
+              onClick={onClose}
+              className="flex w-full items-center justify-center rounded-md border border-gold-400 bg-gold-400/10 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold-300"
+            >
+              {t('investorPortal')}
+            </NextLink>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }

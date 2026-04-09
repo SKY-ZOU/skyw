@@ -45,7 +45,8 @@ function BRIHero() {
   const t = useTranslations('Home');
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const heroLine1 = t('heroTitle').replace(/\s+/g, ' ').trim();
+  const heroLine2 = t('heroTitleLine2');
 
   const kpis = [
     { value: t('kpi1Value'), label: t('kpi1Label') },
@@ -55,7 +56,7 @@ function BRIHero() {
   ];
 
   return (
-    <section className="relative min-h-[110vh] flex items-center bg-navy-950 overflow-hidden">
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-navy-950 lg:min-h-[110vh]">
       {/* Immersive Background Image */}
       <motion.div 
         style={{ y: y1 }}
@@ -89,7 +90,7 @@ function BRIHero() {
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-8 pt-36 pb-24">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 pt-28 pb-20 lg:px-8 lg:pt-36 lg:pb-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Left: copy */}
@@ -107,11 +108,16 @@ function BRIHero() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-[clamp(2.2rem,4.8vw,4.2rem)] font-extralight leading-[1.06] tracking-tight text-white">
-              {t('heroTitle')}
-              <br />
-              <span className="font-light text-gold-400">{t('heroTitleLine2')}</span>
+            <h1 className="text-[clamp(1.9rem,8vw,4.2rem)] font-extralight leading-[1.16] tracking-tight text-white lg:text-[clamp(2.2rem,4.8vw,4.2rem)] lg:leading-[1.08]">
+              <span className="block whitespace-nowrap">{heroLine1}</span>
+              <span className="block whitespace-nowrap font-light text-gold-400">{heroLine2}</span>
             </h1>
+
+            {/* Mobile: move network visual below headline */}
+            <div className="relative mt-7 lg:hidden">
+              <div className="absolute inset-0 rounded-full bg-gold-400/5 blur-[45px] pointer-events-none" />
+              <GlobalNetworkPulse />
+            </div>
 
             {/* Subtitle */}
             <p className="mt-8 max-w-[500px] text-[1.05rem] font-light leading-relaxed text-white/50">
@@ -157,7 +163,7 @@ function BRIHero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="flex items-center justify-center order-first lg:order-last"
+            className="hidden items-center justify-center lg:flex"
           >
             <div className="w-full max-w-[450px] lg:max-w-[800px] relative">
               {/* Subtle backglow */}
@@ -340,14 +346,14 @@ function CorridorSection() {
 
           {/* Right: corridor images grid with premium reveal */}
           <AnimatedSection delay={0.2}>
-            <div className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 gap-px bg-[#e5e7eb] border border-[#e5e7eb] shadow-2xl shadow-navy-950/20 hide-scrollbar">
+            <div className="-mx-6 flex w-auto snap-x snap-mandatory gap-px overflow-x-auto border border-[#e5e7eb] bg-[#e5e7eb] px-6 shadow-2xl shadow-navy-950/20 hide-scrollbar sm:mx-0 sm:grid sm:w-full sm:grid-cols-2 sm:px-0">
               {[
                 { img: '/images/home/corridor-dubai.png', label: 'Dubai' },
                 { img: '/images/home/corridor-singapore.png', label: 'Singapore' },
                 { img: '/images/home/corridor-shenzhen.png', label: 'Shenzhen' },
                 { img: '/images/home/corridor-london.png', label: 'London' },
               ].map((item, idx) => (
-                <div key={item.label} className="relative overflow-hidden group bg-[#f0f0f0] min-w-[85vw] sm:min-w-0 flex-shrink-0 snap-center sm:snap-align-none" style={{ aspectRatio: '4/3' }}>
+                <div key={item.label} className="group relative w-[82vw] max-w-[340px] flex-shrink-0 snap-start overflow-hidden bg-[#f0f0f0] sm:w-auto sm:max-w-none sm:min-w-0 sm:snap-none" style={{ aspectRatio: '4/3' }}>
                   <motion.div
                     initial={{ scale: 1.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
@@ -759,28 +765,28 @@ function TrackRecordSection() {
         </div>
 
         {/* Portfolio grid */}
-        <div className="mt-8 flex overflow-x-auto snap-x snap-mandatory sm:grid gap-px bg-[#e5e7eb] sm:grid-cols-3 lg:grid-cols-4 hide-scrollbar">
+        <div className="mt-8 grid grid-cols-2 gap-px bg-[#e5e7eb] sm:grid-cols-3 lg:grid-cols-4">
           {portfolio.map((item, i) => {
             const s = sectorStyle[item.sector];
             return (
-              <AnimatedSection key={i} delay={i * 0.04} className="min-w-[70vw] sm:min-w-0 snap-center sm:snap-align-none flex-shrink-0 h-full">
-                <div className="bg-white px-6 py-5 h-full flex flex-col justify-between">
+              <AnimatedSection key={i} delay={i * 0.04} className="h-full">
+                <div className="flex h-full flex-col justify-between bg-white px-4 py-4 sm:px-6 sm:py-5">
                   <div>
-                    <div className="text-[15.5px] font-semibold text-[#1a1a2e]">
+                    <div className="text-[14px] font-semibold leading-snug text-[#1a1a2e] sm:text-[15.5px]">
                       {locale === 'en' ? item.en : item.zh}
                     </div>
-                    <div className="text-[12px] text-[#adb5bd] mt-0.5">
+                    <div className="mt-0.5 text-[11px] text-[#adb5bd] sm:text-[12px]">
                       {locale === 'en' ? item.zh : item.en}
                     </div>
                   </div>
-                  <div className="mt-3 flex items-center justify-between">
+                  <div className="mt-2.5 flex items-center justify-between sm:mt-3">
                     <span
-                      className="text-[10px] font-semibold px-2 py-0.5 border"
+                      className="border px-2 py-0.5 text-[9px] font-semibold sm:text-[10px]"
                       style={{ background: s.bg, color: s.text, borderColor: s.border }}
                     >
                       {sectorLabels[item.sector]}
                     </span>
-                    <span className="text-[10px] font-medium uppercase tracking-wider text-[#adb5bd]">
+                    <span className="text-[9px] font-medium uppercase tracking-wider text-[#adb5bd] sm:text-[10px]">
                       {item.exchange}
                     </span>
                   </div>
