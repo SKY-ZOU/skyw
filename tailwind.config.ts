@@ -40,6 +40,8 @@ const config: Config = {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Playfair Display', 'serif'],
+        serifSC: ['var(--font-noto-serif-sc)', 'Source Han Serif SC', 'Noto Serif SC', 'Georgia', 'serif'],
+        monoDisp: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'IBM Plex Mono', 'ui-monospace', 'monospace'],
       },
       backgroundImage: {
         'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #B8860B 100%)',

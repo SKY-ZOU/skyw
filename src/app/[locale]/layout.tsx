@@ -4,7 +4,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { Inter } from 'next/font/google';
+import { Inter, Noto_Serif_SC, JetBrains_Mono } from 'next/font/google';
 import { getDivisions } from '@/lib/data';
 import { SiteDataProvider } from '@/components/providers/SiteDataProvider';
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
@@ -12,7 +12,19 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import '../globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const notoSerifSC = Noto_Serif_SC({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-noto-serif-sc',
+  display: 'swap',
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -59,8 +71,8 @@ export default async function LocaleLayout({
   ]);
 
   return (
-    <html lang={locale} className={inter.className}>
-      <body className="antialiased">
+    <html lang={locale} className={`${inter.variable} ${notoSerifSC.variable} ${jetbrainsMono.variable}`}>
+      <body className="antialiased font-sans">
         <NextIntlClientProvider messages={messages}>
           <SiteDataProvider divisions={divisions}>
             <SmoothScrollProvider>
