@@ -212,7 +212,7 @@ function BRIHero() {
               <Seal size={40} />
               <div>
                 <div className="font-serifSC" style={{ fontSize: 16, letterSpacing: '.15em', color: 'var(--color-cream)' }}>
-                  {isZh ? '天汇基金 · 香港' : 'SKYW Fund · Hong Kong'}
+                  {isZh ? '天際控股 · 香港' : 'SKYW Group · Hong Kong'}
                 </div>
                 <Mono color="rgba(212,175,95,.75)" size={10}>EST. 2018 · BBM628 · BOP785</Mono>
               </div>
@@ -222,7 +222,7 @@ function BRIHero() {
               className="font-serifSC"
               style={{
                 marginTop: 44,
-                fontSize: 'clamp(44px, 6.2vw, 96px)',
+                fontSize: 'clamp(34px, 7.5vw, 96px)',
                 fontWeight: 500,
                 lineHeight: 1.02,
                 letterSpacing: '-0.025em',
@@ -473,7 +473,7 @@ function GatewaySection() {
               </div>
             </div>
             <div className="relative">
-              <div aria-hidden className="absolute" style={{ top: 11, left: 6, right: 6, height: 1, background: 'rgba(245,241,230,.1)' }} />
+              <div aria-hidden className="hidden lg:block absolute" style={{ top: 11, left: 6, right: 6, height: 1, background: 'rgba(245,241,230,.1)' }} />
               <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
                 {REGULATORY_TIMELINE.map((s, i) => (
                   <div key={i} className="relative" style={{ paddingTop: 36 }}>
@@ -626,22 +626,22 @@ function CorridorSection() {
               <div style={{ width: 1, height: 36, background: 'linear-gradient(to bottom, rgba(212,175,95,.3), transparent)' }} />
             </div>
 
-            {/* ── Top-left: network identifier + sub-mono ── */}
-            <div className="absolute z-[3]" style={{ top: 18, left: 18 }}>
+            {/* ── Top-left: network identifier + sub-mono (subs hidden on mobile) ── */}
+            <div className="absolute z-[3]" style={{ top: 14, left: 14 }}>
               <div className="flex items-center gap-3.5">
                 <Mono color={GOLD_SOFT} size={10}>EURASIA NETWORK</Mono>
               </div>
-              <div className="mt-1.5 font-monoDisp" style={{ fontSize: 9, color: 'rgba(245,241,230,.35)', letterSpacing: '.18em' }}>
+              <div className="hidden md:block mt-1.5 font-monoDisp" style={{ fontSize: 9, color: 'rgba(245,241,230,.35)', letterSpacing: '.18em' }}>
                 B&R CORRIDOR · 26,000 KM · 5 HUBS
               </div>
-              <div className="mt-0.5 font-monoDisp" style={{ fontSize: 8.5, color: 'rgba(212,175,95,.3)', letterSpacing: '.22em' }}>
+              <div className="hidden md:block mt-0.5 font-monoDisp" style={{ fontSize: 8.5, color: 'rgba(212,175,95,.3)', letterSpacing: '.22em' }}>
                 LAT 22°19′N · LNG 114°10′E · HK HQ
               </div>
             </div>
 
-            {/* ── Top-right: HQ / HUB legend + active bearing ── */}
-            <div className="absolute z-[3] flex flex-col items-end gap-1.5" style={{ top: 18, right: 18 }}>
-              <div className="flex items-center gap-3.5 font-monoDisp" style={{ fontSize: 9, color: 'rgba(245,241,230,.55)', letterSpacing: '.12em' }}>
+            {/* ── Top-right: HQ / HUB legend + active bearing (bearing hidden on mobile) ── */}
+            <div className="absolute z-[3] flex flex-col items-end gap-1.5" style={{ top: 14, right: 14 }}>
+              <div className="flex items-center gap-2.5 sm:gap-3.5 font-monoDisp" style={{ fontSize: 9, color: 'rgba(245,241,230,.55)', letterSpacing: '.12em' }}>
                 <span className="inline-flex items-center gap-1.5">
                   <span style={{ width: 8, height: 8, background: CINNABAR, transform: 'rotate(45deg)' }} /> HQ
                 </span>
@@ -649,23 +649,23 @@ function CorridorSection() {
                   <span style={{ width: 7, height: 7, border: `1px solid ${GOLD_SOFT}`, borderRadius: '50%' }} /> HUB
                 </span>
               </div>
-              <div className="font-monoDisp" style={{ fontSize: 8.5, color: 'rgba(212,175,95,.32)', letterSpacing: '.2em' }}>
+              <div className="hidden md:block font-monoDisp" style={{ fontSize: 8.5, color: 'rgba(212,175,95,.32)', letterSpacing: '.2em' }}>
                 SIGNAL · ACTIVE · Q1 2026
               </div>
             </div>
 
-            {/* ── Bottom-left: hub codes + network stats ── */}
-            <div className="absolute z-[3] font-monoDisp" style={{ bottom: 18, left: 18, fontSize: 9, color: 'rgba(245,241,230,.4)', letterSpacing: '.15em' }}>
+            {/* ── Bottom-left: hub codes (sub hidden on mobile) ── */}
+            <div className="absolute z-[3] font-monoDisp" style={{ bottom: 14, left: 14, fontSize: 9, color: 'rgba(245,241,230,.4)', letterSpacing: '.15em' }}>
               <div>LON · DXB · KHI · SZX · HK · SGP</div>
-              <div className="mt-1" style={{ color: 'rgba(212,175,95,.3)', fontSize: 8.5, letterSpacing: '.22em' }}>
+              <div className="hidden md:block mt-1" style={{ color: 'rgba(212,175,95,.3)', fontSize: 8.5, letterSpacing: '.22em' }}>
                 GREAT-CIRCLE ROUTES · AZIMUTHAL
               </div>
             </div>
 
-            {/* ── Bottom-right: frame identifier ── */}
-            <div className="absolute z-[3] flex flex-col items-end gap-1" style={{ bottom: 18, right: 18 }}>
+            {/* ── Bottom-right: frame identifier (sub hidden on mobile) ── */}
+            <div className="absolute z-[3] flex flex-col items-end gap-1" style={{ bottom: 14, right: 14 }}>
               <Mono color="rgba(245,241,230,.35)" size={9}>MAP · Q1 2026</Mono>
-              <div className="font-monoDisp" style={{ fontSize: 8.5, color: 'rgba(212,175,95,.3)', letterSpacing: '.22em' }}>
+              <div className="hidden md:block font-monoDisp" style={{ fontSize: 8.5, color: 'rgba(212,175,95,.3)', letterSpacing: '.22em' }}>
                 PROJECTION · ORTHOGRAPHIC
               </div>
             </div>
@@ -810,8 +810,8 @@ function InstitutionalSection() {
           title={isZh ? '股東 · 夥伴 · 三平臺聯動' : 'Shareholders, Partners, Three Platforms.'}
           subtitle={
             isZh
-              ? 'SKYW 天匯(香港 OFC 自持) 與恒邦資本(深圳 QFLP 內地股東)構成兩大股東基礎;中銀資管(新加坡 VCC 基金合作夥伴)與 AKJ 集團(歐洲分銷夥伴)為戰略合作方——四方共同搭建覆蓋港、新、深、歐的一體化資產架構。'
-              : "Two shareholders — SKYW (HK OFC, self-operated) and Hengbang Capital (Shenzhen QFLP, Mainland shareholder) — plus two strategic partners: BOCAM Singapore (Singapore VCC fund partner) and AKJ Group (European distribution). Together they form an integrated HK–SG–SZX–EU asset architecture."
+              ? 'SKYW 天際控股(香港 OFC 自持) 與恒邦資本(深圳 QFLP 內地股東)構成兩大股東基礎;中銀資管(新加坡 VCC 基金合作夥伴)與 AKJ 集團(歐洲分銷夥伴)為戰略合作方——四方共同搭建覆蓋港、新、深、歐的一體化資產架構。'
+              : "Two shareholders — SKYW Group (HK OFC, self-operated) and Hengbang Capital (Shenzhen QFLP, Mainland shareholder) — plus two strategic partners: BOCAM Singapore (Singapore VCC fund partner) and AKJ Group (European distribution). Together they form an integrated HK–SG–SZX–EU asset architecture."
           }
         />
 
@@ -822,7 +822,7 @@ function InstitutionalSection() {
               <div
                 className="relative"
                 style={{
-                  padding: '36px 36px 40px',
+                  padding: 'clamp(24px, 5vw, 36px) clamp(18px, 5vw, 36px) clamp(28px, 6vw, 40px)',
                   borderBottom: i < INSTITUTIONAL_UNITS.length - 1 ? '1px solid rgba(11,17,30,.1)' : undefined,
                 }}
               >
@@ -982,7 +982,7 @@ function InstitutionalSection() {
               background: 'var(--color-ink)',
               color: 'var(--color-cream)',
               border: `1px solid ${EUROPEAN_DISTRIBUTION.accent}55`,
-              padding: '32px 36px',
+              padding: 'clamp(22px, 5vw, 32px) clamp(20px, 5vw, 36px)',
             }}
           >
             <div className="grid gap-6 items-center grid-cols-1 lg:grid-cols-[auto_1fr_1.5fr_1fr]">
@@ -1136,13 +1136,13 @@ function TrackRecordSection() {
             return (
               <div
                 key={`${p.en}-${i}`}
-                className="grid gap-3 items-center grid-cols-2 lg:grid-cols-[60px_2fr_1fr_1fr_1fr]"
+                className="grid items-start lg:items-center gap-x-3 gap-y-1.5 lg:gap-3 grid-cols-[auto_1fr] lg:grid-cols-[60px_2fr_1fr_1fr_1fr]"
                 style={{
-                  padding: '18px 24px',
+                  padding: '16px 20px',
                   borderBottom: i < filtered.length - 1 ? '1px solid rgba(11,17,30,.06)' : 'none',
                 }}
               >
-                <span className="font-monoDisp" style={{ fontSize: 11, color: 'var(--color-muted-warm)', letterSpacing: '.1em' }}>
+                <span className="font-monoDisp self-center" style={{ fontSize: 11, color: 'var(--color-muted-warm)', letterSpacing: '.1em' }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
@@ -1153,26 +1153,30 @@ function TrackRecordSection() {
                     {isZh ? p.en : p.zh}
                   </div>
                 </div>
-                <span>
-                  <span
-                    style={{
-                      padding: '3px 10px',
-                      fontSize: 10.5,
-                      fontWeight: 600,
-                      background: s.bg,
-                      color: s.text,
-                      border: `1px solid ${s.border}`,
-                    }}
-                  >
-                    {pickL(SECTOR_LABELS[p.sector], locale)}
+                {/* Meta: stacked on mobile (col-span-2), inline on desktop via lg:contents */}
+                <div className="col-span-2 lg:col-span-1 flex flex-wrap items-center gap-x-3 gap-y-1 lg:contents">
+                  <span>
+                    <span
+                      style={{
+                        padding: '3px 10px',
+                        fontSize: 10.5,
+                        fontWeight: 600,
+                        background: s.bg,
+                        color: s.text,
+                        border: `1px solid ${s.border}`,
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {pickL(SECTOR_LABELS[p.sector], locale)}
+                    </span>
                   </span>
-                </span>
-                <span className="font-monoDisp" style={{ fontSize: 11.5, color: 'var(--color-muted-warm)', letterSpacing: '.05em' }}>
-                  {p.ex}
-                </span>
-                <Mono color="var(--color-cinnabar)" size={10}>
-                  {i % 3 === 0 ? 'Cornerstone' : i % 3 === 1 ? 'Anchor' : 'Strategic'}
-                </Mono>
+                  <span className="font-monoDisp" style={{ fontSize: 11.5, color: 'var(--color-muted-warm)', letterSpacing: '.05em' }}>
+                    {p.ex}
+                  </span>
+                  <Mono color="var(--color-cinnabar)" size={10}>
+                    {i % 3 === 0 ? 'Cornerstone' : i % 3 === 1 ? 'Anchor' : 'Strategic'}
+                  </Mono>
+                </div>
               </div>
             );
           })}
@@ -1382,7 +1386,7 @@ function AboutPreview() {
           <AnimatedSection>
             <div className="flex items-start gap-5">
               <div className="hidden lg:block">
-                <VerticalCN color="rgba(11,17,30,.45)" size={13}>關於天汇</VerticalCN>
+                <VerticalCN color="rgba(11,17,30,.45)" size={13}>關於天際</VerticalCN>
               </div>
               <div>
                 <Mono color="var(--color-gold-antique)">{t('aboutTitle')}</Mono>
@@ -1464,38 +1468,42 @@ function InsightsSection({ articles }: { articles: ArticleRow[] }) {
             <AnimatedSection key={article.slug} delay={i * 0.06}>
               <Link
                 href={`/insights/${article.slug}`}
-                className="grid gap-4 items-center grid-cols-2 lg:grid-cols-[60px_130px_130px_1fr_110px] transition-colors hover:bg-[rgba(11,17,30,.02)]"
+                className="flex flex-col gap-2 lg:grid lg:grid-cols-[60px_130px_130px_1fr_110px] lg:gap-4 lg:items-center transition-colors hover:bg-[rgba(11,17,30,.02)]"
                 style={{
-                  padding: '26px 28px',
+                  padding: '22px 20px',
                   borderBottom: i < latest.length - 1 ? '1px solid rgba(11,17,30,.06)' : 'none',
                   textDecoration: 'none',
                   color: 'inherit',
                 }}
               >
-                <span className="font-serifSC" style={{ fontSize: 22, color: 'var(--color-gold-antique)', fontWeight: 500 }}>
-                  {CN_NUM[i] ?? (i + 1)}
-                </span>
-                <span className="font-monoDisp" style={{ fontSize: 12, color: 'var(--color-muted-warm)', letterSpacing: '.1em' }}>
-                  {article.date}
-                </span>
-                <span>
-                  <span
-                    style={{
-                      padding: '4px 10px',
-                      fontSize: 10.5,
-                      fontWeight: 700,
-                      background: 'var(--color-ink)',
-                      color: 'var(--color-gold-soft)',
-                      letterSpacing: '.15em',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    {categoryLabels[article.category] ?? article.category}
+                {/* Mobile meta line: CN + date + category (desktop: first 3 grid cells via contents) */}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 lg:contents">
+                  <span className="font-serifSC" style={{ fontSize: 22, color: 'var(--color-gold-antique)', fontWeight: 500 }}>
+                    {CN_NUM[i] ?? (i + 1)}
                   </span>
-                </span>
+                  <span className="font-monoDisp" style={{ fontSize: 12, color: 'var(--color-muted-warm)', letterSpacing: '.1em' }}>
+                    {article.date}
+                  </span>
+                  <span>
+                    <span
+                      style={{
+                        padding: '4px 10px',
+                        fontSize: 10.5,
+                        fontWeight: 700,
+                        background: 'var(--color-ink)',
+                        color: 'var(--color-gold-soft)',
+                        letterSpacing: '.15em',
+                        textTransform: 'uppercase',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {categoryLabels[article.category] ?? article.category}
+                    </span>
+                  </span>
+                </div>
                 <h3
                   className="font-serifSC m-0"
-                  style={{ fontSize: 17, fontWeight: 500, lineHeight: 1.45, color: 'var(--color-ink)' }}
+                  style={{ fontSize: 16.5, fontWeight: 500, lineHeight: 1.45, color: 'var(--color-ink)' }}
                 >
                   {loc(article, 'title', locale)}
                 </h3>
@@ -1551,7 +1559,7 @@ function CtaBanner() {
           />
           <div
             className="relative grid gap-10 items-center grid-cols-1 lg:grid-cols-[1fr_auto]"
-            style={{ padding: '80px 60px', color: 'var(--color-cream)' }}
+            style={{ padding: 'clamp(40px, 7vw, 80px) clamp(24px, 6vw, 60px)', color: 'var(--color-cream)' }}
           >
             <div>
               <div className="flex items-center gap-3.5">

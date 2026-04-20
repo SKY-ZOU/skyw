@@ -308,7 +308,7 @@ export const INSTITUTIONAL_UNITS: InstitutionalUnit[] = [
     hubEn: 'Hong Kong',
     relationship: 'shareholder',
     relationshipLabel: { zh: '自持 · 持牌主體', en: 'Self-Operated · Licensed Principal' },
-    owner: { zh: 'SKYW 天汇基金', en: 'SKYW Group' },
+    owner: { zh: 'SKYW 天際控股', en: 'SKYW Group' },
     ownerBadge: 'SFC Type 6 · BBM628 + Type 9 · BOP785',
     ownerHighlight: {
       zh: '香港總部 · 證監會持牌資產管理人',

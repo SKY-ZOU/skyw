@@ -3,7 +3,7 @@ interface SealProps {
   size?: number;
 }
 
-export default function Seal({ text = '天汇', size = 44 }: SealProps) {
+export default function Seal({ text = '天際', size = 44 }: SealProps) {
   return (
     <div
       className="font-serifSC shrink-0 flex items-center justify-center"
