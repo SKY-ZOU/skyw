@@ -27,11 +27,25 @@ const config: Config = {
           700: 'var(--color-gold-700)',
           800: 'var(--color-gold-800)',
           900: 'var(--color-gold-900)',
+          antique: 'var(--color-gold-antique)',
+          soft: 'var(--color-gold-soft)',
         },
+        ink: {
+          DEFAULT: 'var(--color-ink)',
+          2: 'var(--color-ink-2)',
+        },
+        cream: {
+          DEFAULT: 'var(--color-cream)',
+          2: 'var(--color-cream-2)',
+        },
+        cinnabar: 'var(--color-cinnabar)',
+        mutedWarm: 'var(--color-muted-warm)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Playfair Display', 'serif'],
+        serifSC: ['var(--font-noto-serif-sc)', 'Source Han Serif SC', 'Noto Serif SC', 'Georgia', 'serif'],
+        monoDisp: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'IBM Plex Mono', 'ui-monospace', 'monospace'],
       },
       backgroundImage: {
         'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #B8860B 100%)',
