@@ -208,13 +208,18 @@ function BRIHero() {
         <div className="grid gap-12 lg:gap-20 items-start lg:grid-cols-[1.4fr_1fr]">
           {/* Left editorial */}
           <AnimatedSection>
-            <div className="flex items-center gap-3.5">
-              <Seal size={40} />
-              <div>
+            <div className="flex items-start gap-3.5">
+              <Seal size={44} />
+              <div className="flex flex-col gap-0.5">
                 <div className="font-serifSC" style={{ fontSize: 16, letterSpacing: '.15em', color: 'var(--color-cream)' }}>
-                  {isZh ? '天際控股 · 香港' : 'SKYW Group · Hong Kong'}
+                  {isZh ? '天際控股集團 · 開曼' : 'SKYW Group · Cayman Holding'}
                 </div>
-                <Mono color="rgba(212,175,95,.75)" size={10}>EST. 2018 · BBM628 · BOP785</Mono>
+                <Mono color="rgba(212,175,95,.75)" size={10}>
+                  {isZh ? '旗下 · 天汇基金 香港 SFC Type 4 · 9 · BOP785' : 'Subsidiary · SKYW Fund HK · SFC Type 4 & 9 · BOP785'}
+                </Mono>
+                <Mono color="rgba(245,241,230,.35)" size={9}>
+                  HK OFC · SG VCC · CAYMAN SPC · CN QFLP
+                </Mono>
               </div>
             </div>
 
@@ -807,11 +812,11 @@ function InstitutionalSection() {
         <SectionHead
           cn="機構架構"
           en="Institutional Architecture"
-          title={isZh ? '股東 · 夥伴 · 三平臺聯動' : 'Shareholders, Partners, Three Platforms.'}
+          title={isZh ? '開曼控股 · 四地平臺 · 戰略夥伴' : 'Cayman Holding · Four Jurisdictions · Strategic Partners.'}
           subtitle={
             isZh
-              ? 'SKYW 天際控股(香港 OFC 自持) 與恒邦資本(深圳 QFLP 內地股東)構成兩大股東基礎;中銀資管(新加坡 VCC 基金合作夥伴)與 AKJ 集團(歐洲分銷夥伴)為戰略合作方——四方共同搭建覆蓋港、新、深、歐的一體化資產架構。'
-              : "Two shareholders — SKYW Group (HK OFC, self-operated) and Hengbang Capital (Shenzhen QFLP, Mainland shareholder) — plus two strategic partners: BOCAM Singapore (Singapore VCC fund partner) and AKJ Group (European distribution). Together they form an integrated HK–SG–SZX–EU asset architecture."
+              ? '天際控股集團(開曼註冊)為全球控股平臺,旗下覆蓋四地基金牌照架構——香港 OFC(天汇基金自持 · SFC Type 4/9 持牌管理人)、新加坡 VCC(中銀資管基金合作)、開曼 SPC、中國內地 QFLP / 私募(恒邦資本內地股東);AKJ 集團在歐洲為戰略分銷夥伴,共同構成覆蓋亞歐的一體化資產架構。'
+              : "SKYW Group, a Cayman-registered holding platform, operates four jurisdictional fund structures — Hong Kong OFC (SKYW Fund, SFC Type 4/9 licensed), Singapore VCC (BOCAM fund partner), Cayman SPC, and China Mainland QFLP / private fund (Hengbang shareholder). AKJ Group serves as European distribution partner — together forming an integrated Asia–Europe asset architecture."
           }
         />
 
